@@ -1,0 +1,54 @@
+﻿@model AccountUpdateViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h2>Update</h2>
+
+<form asp-controller="Account" asp-action="Update" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+        <span asp-validation-for="Username"></span>
+    </div>
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div>
+        <label asp-for="DOB"></label>
+        <input asp-for="DOB" type="date" />
+        <span asp-validation-for="DOB"></span>
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="ConfirmEmail"></label>
+        <input asp-for="ConfirmEmail" />
+        <span asp-validation-for="ConfirmEmail"></span>
+    </div>
+    @*<div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <label asp-for="ConfirmPassword">Confirm Password</label>
+        <input asp-for="ConfirmPassword" />
+        <span asp-validation-for="ConfirmPassword"></span>
+    </div>*@
+    <div>
+        <input type="submit" value="Register" />
+    </div>
+</form>
