@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore; //Isn't used...
 using Luu_DiplomaProject.ViewModels;
 using Luu_DiplomaProject.Models;
 using Luu_DiplomaProject.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Luu_DiplomaProject.Controllers
 {
@@ -116,41 +117,51 @@ namespace Luu_DiplomaProject.Controllers
 
         #region Update
 
-        //[HttpGet]
-        //public IActionResult Update(string id)
-        //{
-        //    //Customer customer = _userManagerService.GetUserId(c => c.UserId);
-        //    //IdentityUser user = _userManagerService.GetUserIdAsync(id);
-        //    Customer customer = _customerService.GetSingle(c => c.CustomerId == id);
+        [HttpGet]
+        [Authorize]
+        public IActionResult Update()
+        {
+            //string id = User.Identity.Name;
+            string id = _userManagerService.GetUserId(User);
+            Customer customer = _customerService.GetSingle(c => c.UserId == id);
 
-        //    AccountUpdateViewModel vm = new AccountUpdateViewModel
-        //    {
+            if (customer != null)
+            {
+                AccountUpdateViewModel vm = new AccountUpdateViewModel
+                {
+                    FirstName = customer.FirstName,
+                    LastName = customer.LastName,
+                    DOB = customer.DOB
+                };
 
-        //    };
+                return View(vm);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            //return View(vm);
+        }
 
-        //    return View(vm);
-        //}
+        [HttpPost]
+        public IActionResult Update(AccountUpdateViewModel vm)
+        {
+            string id = _userManagerService.GetUserId(User);
 
-        //[HttpPost]
-        //public IActionResult Update(AccountUpdateViewModel vm)
-        //{
-        //    //Customer customer = _userManagerService.GetUserId(c => c.UserId);
-        //    Customer customer = _customerService.GetSingle(c => c.CustomerId == vm.id);
+            Customer customer = _customerService.GetSingle(c => c.UserId == id);
 
-        //    if (ModelState.IsValid && customer != null)
-        //    {
-        //        //customer.CustomerId;
-        //        customer.FirstName = vm.FirstName;
-        //        customer.LastName = vm.LastName;
-        //        customer.DOB = vm.DOB;
+            if (ModelState.IsValid && customer != null)
+            {
+                customer.FirstName = vm.FirstName;
+                customer.LastName = vm.LastName;
+                customer.DOB = vm.DOB;
 
-        //        _customerService.Update(customer);
+                _customerService.Update(customer);
 
-        //        return RedirectToAction("", "", new { id = customer.CustomerId });
-        //    }
-
-        //    return View(vm);
-        //}
+                return RedirectToAction("Index", "Home");
+            }
+            return View(vm);
+        }
 
         #endregion
     }

@@ -19,12 +19,26 @@ namespace Luu_DiplomaProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Luu_DiplomaProject.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("TblCategory");
+                });
+
             modelBuilder.Entity("Luu_DiplomaProject.Models.Customer", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CustomerId");
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DOB");
 
@@ -34,9 +48,54 @@ namespace Luu_DiplomaProject.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("CustomerId");
 
                     b.ToTable("TblCustomer");
+                });
+
+            modelBuilder.Entity("Luu_DiplomaProject.Models.CustomerHamper", b =>
+                {
+                    b.Property<int>("CustomerHamperId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CustomerId");
+
+                    b.Property<int>("HamperId");
+
+                    b.HasKey("CustomerHamperId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("HamperId");
+
+                    b.ToTable("TblCustomerHamper");
+                });
+
+            modelBuilder.Entity("Luu_DiplomaProject.Models.Hamper", b =>
+                {
+                    b.Property<int>("HamperId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<string>("Details");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Picture");
+
+                    b.Property<decimal>("Price");
+
+                    b.HasKey("HamperId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("TblHamper");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -198,6 +257,27 @@ namespace Luu_DiplomaProject.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Luu_DiplomaProject.Models.CustomerHamper", b =>
+                {
+                    b.HasOne("Luu_DiplomaProject.Models.Customer")
+                        .WithMany("CustomerHampers")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Luu_DiplomaProject.Models.Hamper")
+                        .WithMany("CustomerHampers")
+                        .HasForeignKey("HamperId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Luu_DiplomaProject.Models.Hamper", b =>
+                {
+                    b.HasOne("Luu_DiplomaProject.Models.Category")
+                        .WithMany("Hampers")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -50,9 +50,6 @@
     </style>
 </head>
 <body>
-    <div class="row bg-info">
-        <h1 class="mx-auto">Grande Gift</h1>
-    </div>
     @*<div class="row bg-dark">
             <div class="col-md-4 justify-content-start justify-content-md-center">
                 <a href="#" class="fa fa-facebook"></a>
@@ -118,9 +115,8 @@
             <div class="float-right justify-content-center pt-3">
                 @if (User.Identity.IsAuthenticated)
                 {
-                        <h6>Welcome: @User.Identity.Name</h6>
-                        <a href="@Url.Action("Logout", "Account")">Logout</a>
-                        //<a href="@Url.Action("Update","Account", new {id = Model.StudentId})>Update</a>
+                    <h4>Welcome: @User.Identity.Name</h4>
+                    <a class="nav-link float-right" href="@Url.Action("Logout", "Account")">Logout</a>
                 }
                 else
                 {
@@ -130,28 +126,29 @@
                 }
             </div>
         </div>
-
         @*<div class="col-md-4">
-            <div class="col d-flex justify-content-md-end justify-content-center pt-3">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="row float-right float-md-none">
-                        <h6>Welcome: @User.Identity.Name</h6>
-                    </div>
-                    <div class="row float-right float-md-none">
-                            <a href="@Url.Action("Logout", "Logout", "Account")">Logout</a>
-                    </div>
-                }
-                else
-                {
-                    <a class="nav-link float-right" href="@Url.Action("Login", "Account")">Login</a>
-                    <h6 class="float-right py-2">|</h6>
-                    <a class="nav-link float-right" href="@Url.Action("Register", "Account")">Register</a>
-                }
-            </div>
-        </div>*@
+                <div class="col d-flex justify-content-md-end justify-content-center pt-3">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="row float-right float-md-none">
+                            <h6>Welcome: @User.Identity.Name</h6>
+                        </div>
+                        <div class="row float-right float-md-none">
+                                <a href="@Url.Action("Logout", "Logout", "Account")">Logout</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="nav-link float-right" href="@Url.Action("Login", "Account")">Login</a>
+                        <h6 class="float-right py-2">|</h6>
+                        <a class="nav-link float-right" href="@Url.Action("Register", "Account")">Register</a>
+                    }
+                </div>
+            </div>*@
     </div>
-
+    <div class="row bg-info">
+        <h1 class="mx-auto">Grande Gift</h1>
+    </div>
 
     @*<div class="col-md-4">
                     <div class="d-flex justify-content-md-end justify-content-center pt-3">
@@ -227,15 +224,42 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="@Url.Action("Index", "Home")">Home <!--<span class="sr-only">(current)</span>--></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Link1</a>
+                <li class="nav-item dropdown d-inline bg-info">
+                    <a class="nav-link dropdown-toggle" href="@Url.Action("","")" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Shop
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <!--Top 10 Categories-->
+                        <a class="dropdown-item" href="@Url.Action("","")"></a>
+                        @*<div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">LOGOUT</a>*@
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Link2</a>
+                    <a class="nav-link disabled" href="#">About Us</a> <!--Which folder does this page fall under-->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Link3</a>
+                    <a class="nav-link disabled" href="#">Contact Us</a> <!--Which folder does this page fall under-->
                 </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item dropdown d-inline bg-danger">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Account
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="@Url.Action("Update","Account")">Profile</a>
+                            <a class="dropdown-item disabled" href="#">Change Password</a>
+                            <a class="dropdown-item disabled" href="#">Payment Details</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("Logout", "Account")">Logout</a>
+                        </div>
+                    </li>
+                }
+                else
+                {
+
+                }
             </ul>
             @*<form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

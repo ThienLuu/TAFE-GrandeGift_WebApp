@@ -19,5 +19,6 @@ namespace Luu_DiplomaProject.Models
         [Required]
         public DateTime DOB { get; set; }
         //public string Country { get; set; }
+        public ICollection<CustomerHamper> CustomerHampers { get; set; }
     }
 }

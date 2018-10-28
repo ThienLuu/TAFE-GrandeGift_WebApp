@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Luu_DiplomaProject.Migrations
 {
-    public partial class identityDb : Migration
+    public partial class customerHamper : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,36 @@ namespace Luu_DiplomaProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblCategory",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblCategory", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblCustomer",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    DOB = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblCustomer", x => x.CustomerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,6 +183,55 @@ namespace Luu_DiplomaProject.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TblHamper",
+                columns: table => new
+                {
+                    HamperId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    Picture = table.Column<string>(nullable: true),
+                    Details = table.Column<string>(nullable: true),
+                    CategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblHamper", x => x.HamperId);
+                    table.ForeignKey(
+                        name: "FK_TblHamper_TblCategory_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "TblCategory",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblCustomerHamper",
+                columns: table => new
+                {
+                    CustomerHamperId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    HamperId = table.Column<int>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblCustomerHamper", x => x.CustomerHamperId);
+                    table.ForeignKey(
+                        name: "FK_TblCustomerHamper_TblCustomer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "TblCustomer",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TblCustomerHamper_TblHamper_HamperId",
+                        column: x => x.HamperId,
+                        principalTable: "TblHamper",
+                        principalColumn: "HamperId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +270,21 @@ namespace Luu_DiplomaProject.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TblCustomerHamper_CustomerId",
+                table: "TblCustomerHamper",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TblCustomerHamper_HamperId",
+                table: "TblCustomerHamper",
+                column: "HamperId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TblHamper_CategoryId",
+                table: "TblHamper",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -211,10 +305,22 @@ namespace Luu_DiplomaProject.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "TblCustomerHamper");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "TblCustomer");
+
+            migrationBuilder.DropTable(
+                name: "TblHamper");
+
+            migrationBuilder.DropTable(
+                name: "TblCategory");
         }
     }
 }

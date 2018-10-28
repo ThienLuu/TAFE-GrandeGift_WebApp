@@ -12,6 +12,9 @@ namespace Luu_DiplomaProject.Services
     public class MyDbContext : IdentityDbContext
     {
         public DbSet<Customer> TblCustomer { get; set; }
+        public DbSet<Hamper> TblHamper { get; set; }
+        public DbSet<Category> TblCategory { get; set; }
+        public DbSet<CustomerHamper> TblCustomerHamper { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder option)
         {
             option.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB ; Database=GrandeGift; Trusted_Connection=True");
