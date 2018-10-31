@@ -17,19 +17,19 @@
             <span asp-validation-for="Username"></span>
         </div>*@
     <div>
-        <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" />
-        <span asp-validation-for="FirstName"></span>
+        <label asp-for="FirstName">First Name</label>
+        <input asp-for="FirstName" class="form-control"/>
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div>
-        <label asp-for="LastName"></label>
-        <input asp-for="LastName" />
-        <span asp-validation-for="LastName"></span>
+        <label asp-for="LastName">Last Name</label>
+        <input asp-for="LastName" class="form-control"/>
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="DOB"></label>
-        <input asp-for="DOB" type="date" />
-        <span asp-validation-for="DOB"></span>
+        <input asp-for="DOB" type="date" class="form-control"/>
+        <span asp-validation-for="DOB" class="text-danger"></span>
     </div>
     @*<div>
             <label asp-for="Email"></label>
@@ -52,6 +52,6 @@
             <span asp-validation-for="ConfirmPassword"></span>
         </div>*@
     <div>
-        <input type="submit" value="Update" />
+        <input type="submit" value="Update" class="btn"/>
     </div>
 </form>

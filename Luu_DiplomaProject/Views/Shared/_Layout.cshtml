@@ -103,7 +103,7 @@
                 <a href="#">
                     <img src="#" alt="Truck image" />
                 </a>
-                <h6>Free Delivery for over $99 Australia wide</h6>
+                <h6>$7.50 Flat delivery rate</h6>
                 <a href="#">
                     <img src="#" alt="Time image" />
                 </a>
@@ -112,7 +112,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="float-right justify-content-center pt-3">
+            <div class="float-right justify-content-md-end justify-content-center pt-3">
                 @if (User.Identity.IsAuthenticated)
                 {
                     <h4>Welcome: @User.Identity.Name</h4>
@@ -175,8 +175,6 @@
                 </div>
         </div>*@
 
-
-
     <!--CAROUSEL-->
     @*<div style="height:250px; z-index:-1" id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -196,7 +194,7 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>*@
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    @*<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img class="mx-auto d-block img-fluid" width="220" src="~/Images/hamperSample.jpg" alt="First slide">
@@ -213,7 +211,7 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-    </div>
+    </div>*@
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -230,7 +228,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <!--Top 10 Categories-->
-                        <a class="dropdown-item" href="@Url.Action("","")"></a>
+                        <a class="dropdown-item" href="@Url.Action("","")">Test</a>
                         @*<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">LOGOUT</a>*@
                     </div>
@@ -268,7 +266,7 @@
         </div>
     </nav>
     <!--CONTENT-->
-    <div class="container bg-light">
+    <div class="container bg-light p-4">
         @RenderBody()
     </div>
     <!--FOOTER-->
@@ -303,10 +301,6 @@
         </div>
         <div class="row bg-info p-1">
             <h6 class="mx-auto">Copyright 2018</h6>
-        </div>
-        <div class="row bg-dark">
-            <!--TAFE LOGO IMAGE-->
-            <img class="mx-auto" src="#" alt="TAFE STUDENT PROJECT" />
         </div>
     </div>
     <script src="~/node_modules/jquery/dist/jquery.js"></script>

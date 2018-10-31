@@ -1,0 +1,25 @@
+﻿@model CategoryCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create Category</h2>
+
+<form asp-controller="Category" asp-action="Register" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="row">
+        <div class="col">
+            <label asp-for="Name">Category Name</label>
+            <input asp-for="Name" class="form-control" placeholder="Category Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" placeholder="Description" rows="3" cols="100"></textarea>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Register" class="btn" />
+    </div>
+</form>

@@ -96,6 +96,14 @@ namespace Luu_DiplomaProject.Controllers
                     if (string.IsNullOrEmpty(vm.ReturnUrl))
                     {
                         return RedirectToAction("Index", "Home");
+                        //if (User.IsInRole("Admin"))
+                        //{
+                        //    return RedirectToAction("Admin", "Home", new { area = "Admin" });
+                        //}
+                        //else
+                        //{
+                        //    return RedirectToAction("Index", "Home");
+                        //}
                     }
                     else
                     {

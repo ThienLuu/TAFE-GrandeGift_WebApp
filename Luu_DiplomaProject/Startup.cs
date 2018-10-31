@@ -22,8 +22,8 @@ namespace Luu_DiplomaProject
         {
             services.AddMvc();
             services.AddScoped<IDataService<Customer>, DataService<Customer>>();
-            //services.AddScoped<IDataService<Customer>, DataService<Customer>>();
-            //services.AddScoped<IDataService<Hamper>, DataService<Hamper>>();
+            services.AddScoped<IDataService<Category>, DataService<Category>>();
+            services.AddScoped<IDataService<Hamper>, DataService<Hamper>>();
             services.AddIdentity<IdentityUser, IdentityRole>
             (
                 config =>

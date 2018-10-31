@@ -23,8 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Hamper\" />
-    <Folder Include="Views\Category\" />
     <Folder Include="wwwroot\JS\" />
   </ItemGroup>
 
