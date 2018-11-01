@@ -1,0 +1,45 @@
+﻿@model HamperDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Hampers</h2>
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Pictures</th>
+            <th>Details</th>
+            <th>Discontinued</th>
+            <th>Category</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var hamper in Model.Hampers)
+    {
+    <tr>
+        <td>@hamper.Name</td>
+        <td>@hamper.Price</td>
+        <td>@hamper.Picture</td>
+        <td>@hamper.Details</td>
+        <td>@hamper.Discontinued</td>
+        @*-=- OVER HERE -=-*@
+        @foreach (var category in Model.Categories)
+        {
+            if (hamper.CategoryId == category.CategoryId)
+            {
+                <td>@category.Name</td>
+            }
+        }
+
+        <td>
+            <a class="btn btn-primary w-100" role="button" href="@Url.Action("Update", "Hamper", new { id = hamper.HamperId })">Update Hamper</a>
+        </td>
+
+    </tr>
+    }
+</table>
+<a class="btn btn-primary w-100" role="button" href="@Url.Action("Admin", "Home")">Admin Home</a>

@@ -95,15 +95,19 @@ namespace Luu_DiplomaProject.Controllers
                 {
                     if (string.IsNullOrEmpty(vm.ReturnUrl))
                     {
-                        return RedirectToAction("Index", "Home");
-                        //if (User.IsInRole("Admin"))
-                        //{
-                        //    return RedirectToAction("Admin", "Home", new { area = "Admin" });
-                        //}
-                        //else
-                        //{
-                        //    return RedirectToAction("Index", "Home");
-                        //}
+                        var user = await _userManagerService.FindByNameAsync(vm.Username);
+
+                        bool isAdmin = await _userManagerService.IsInRoleAsync(user, "Admin");
+
+                        //return RedirectToAction("Index", "Home");
+                        if (isAdmin)
+                        {
+                            return RedirectToAction("Admin", "Home");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                     else
                     {

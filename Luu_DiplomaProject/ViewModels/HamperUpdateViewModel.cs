@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace Luu_DiplomaProject.Models
+//..
+using System.ComponentModel.DataAnnotations;
+using Luu_DiplomaProject.Models;
+namespace Luu_DiplomaProject.ViewModels
 {
-    public class Hamper
+    public class HamperUpdateViewModel
     {
         public int HamperId { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public decimal Price { get; set; }
         public string Picture { get; set; }     //Datatype for image????
         public string Details { get; set; }
         public bool Discontinued { get; set; }
 
         public int CategoryId { get; set; }
-        public ICollection<CustomerHamper> CustomerHampers { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
     }
 }

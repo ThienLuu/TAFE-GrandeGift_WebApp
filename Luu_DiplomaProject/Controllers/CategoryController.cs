@@ -44,17 +44,38 @@ namespace Luu_DiplomaProject.Controllers
 
                 _categoryService.Create(category);
 
-                //REDIRECT TO WHERE?
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Details", "Category");
             }
+
+            return View(vm);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Details()
+        {
+            IEnumerable<Category> list = _categoryService.GetAll();
+
+            CategoryDetailsViewModel vm = new CategoryDetailsViewModel
+            {
+                Categories = list
+            };
             return View(vm);
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
-            return View();
+            Category category = _categoryService.GetSingle(c => c.CategoryId == id);
+
+            CategoryUpdateViewModel vm = new CategoryUpdateViewModel
+            {
+                CategoryId = category.CategoryId,
+                Name = category.Name,
+                Description = category.Description
+            };
+
+            return View(vm);
         }
 
         [HttpPost]
@@ -71,7 +92,7 @@ namespace Luu_DiplomaProject.Controllers
 
                 _categoryService.Update(category);
 
-                return RedirectToAction("Index", "Home", new { id = category.CategoryId });
+                return RedirectToAction("Details", "Category");
             }
 
             return View(vm);
