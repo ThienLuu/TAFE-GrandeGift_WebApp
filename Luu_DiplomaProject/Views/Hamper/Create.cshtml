@@ -36,6 +36,7 @@
         <div>
             <label>Category:</label>
             <select asp-for="CategoryId">
+                <option value="" disabled selected>Select Category</option>
                 @foreach (var category in Model.Categories)
                 {
                     <option value="@category.CategoryId">@category.Name</option>

@@ -99,7 +99,6 @@ namespace Luu_DiplomaProject.Controllers
 
                         bool isAdmin = await _userManagerService.IsInRoleAsync(user, "Admin");
 
-                        //return RedirectToAction("Index", "Home");
                         if (isAdmin)
                         {
                             return RedirectToAction("Admin", "Home");
@@ -156,6 +155,7 @@ namespace Luu_DiplomaProject.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Update(AccountUpdateViewModel vm)
         {
             string id = _userManagerService.GetUserId(User);

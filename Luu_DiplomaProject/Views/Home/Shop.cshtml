@@ -1,0 +1,79 @@
+﻿@model HomeShopViewModel
+
+@{
+    ViewData["Title"] = "Shop";
+}
+
+<h2>Shop</h2>
+
+<div class="row m-4">
+    <div class="col-md-4">
+        <label>Category:</label>
+
+        <select>
+            <option value="" disabled selected>Select Category</option>
+            @foreach (var category in Model.Categories)
+            {
+                <option>@category.Name</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-5">
+        <div class="row"><label>Price Range:</label></div>
+        <div class="row justify-content-center">
+            <label>Min:</label>
+            <input size="10" />
+            <label>Max:</label>
+            <input size="10" />
+        </div>
+    </div>
+    @*<div class="col-2">
+            <label>Category:</label>
+            <select>
+                <option value="" disabled selected>Category</option>
+            </select>
+        </div>*@
+    <!--EXTRA IDEA SEARCH-->
+    <div class="col-md-3">
+        @*<form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>*@
+    </div>
+</div>
+<div class="row justify-content-center">
+    @{
+        @foreach (var hamper in Model.Hampers)
+        {
+            <div class="col-md-3 m-2 text-center border border-dark" style="height: 400px; width:300px">
+                <img src="#" alt="@hamper.HamperId" />
+                <h3>@hamper.Name</h3>
+                <h5>@hamper.Price</h5>
+                <p>@hamper.Details</p>
+            </div>
+        }
+    }
+    @*@{
+        int col = 1;
+        int row = 0;
+
+        for (int i = 0; i <= row; i++)
+        {
+            <div class="row">
+                @if (col == 3)
+                {
+                    col = 0;
+                    row++;
+                }
+                else
+                {
+                    @foreach (var item in Model.Hampers)
+                    {
+                        <div class="col-4">TEST</div>
+                        col++;
+                    }
+                }
+            </div>
+        }
+    }*@
+</div>

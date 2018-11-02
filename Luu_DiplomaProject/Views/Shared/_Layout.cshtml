@@ -227,7 +227,7 @@
                     <a class="nav-link" href="@Url.Action("Index", "Home")">Home <!--<span class="sr-only">(current)</span>--></a>
                 </li>
                 <li class="nav-item dropdown d-inline bg-info">
-                    <a class="nav-link dropdown-toggle" href="@Url.Action("","")" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="@Url.Action("Shop","Home")" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Shop
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -238,10 +238,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">About Us</a> <!--Which folder does this page fall under-->
+                    <a class="nav-link" href="@Url.Action("About","Home")">About Us</a> <!--Which folder does this page fall under-->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Contact Us</a> <!--Which folder does this page fall under-->
+                    <a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a> <!--Which folder does this page fall under-->
                 </li>
                 @if (User.Identity.IsAuthenticated)
                 {

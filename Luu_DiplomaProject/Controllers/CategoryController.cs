@@ -50,6 +50,7 @@ namespace Luu_DiplomaProject.Controllers
             return View(vm);
         }
 
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult Details()
         {

@@ -63,17 +63,17 @@ namespace Luu_DiplomaProject.Controllers
             return View(vm);
         }
 
-
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult Details()
         {
-            IEnumerable<Hamper> list = _hamperService.GetAll();
-            IEnumerable<Category> list2 = _categoryService.GetAll();
+            IEnumerable<Hamper> hamList = _hamperService.GetAll();
+            IEnumerable<Category> catList = _categoryService.GetAll();
 
             HamperDetailsViewModel vm = new HamperDetailsViewModel
             {
-                Hampers = list,
-                Categories = list2
+                Hampers = hamList,
+                Categories = catList
             };
             return View(vm);
         }
