@@ -4,48 +4,22 @@ using Luu_DiplomaProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Luu_DiplomaProject.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181103130505_addressTable2")]
+    partial class addressTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Luu_DiplomaProject.Models.Address", b =>
-                {
-                    b.Property<int>("AddressId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<string>("Country")
-                        .IsRequired();
-
-                    b.Property<bool>("Favourite");
-
-                    b.Property<string>("Postcode")
-                        .IsRequired();
-
-                    b.Property<string>("State")
-                        .IsRequired();
-
-                    b.Property<string>("StreetAddress")
-                        .IsRequired();
-
-                    b.HasKey("AddressId");
-
-                    b.ToTable("TblAddress");
-                });
 
             modelBuilder.Entity("Luu_DiplomaProject.Models.Category", b =>
                 {
@@ -82,8 +56,6 @@ namespace Luu_DiplomaProject.Migrations
                         .IsRequired();
 
                     b.HasKey("CustomerId");
-
-                    b.HasIndex("AddressId");
 
                     b.ToTable("TblCustomer");
                 });
@@ -291,14 +263,6 @@ namespace Luu_DiplomaProject.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Luu_DiplomaProject.Models.Customer", b =>
-                {
-                    b.HasOne("Luu_DiplomaProject.Models.Address")
-                        .WithMany("Customers")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Luu_DiplomaProject.Models.CustomerHamper", b =>

@@ -1,0 +1,48 @@
+﻿@model AddressUpdateViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h2>Edit Address</h2>
+
+<form asp-controller="Address" asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="row">
+        <input asp-for="AddressId" hidden="hidden" />
+        <div>
+            <label asp-for="City">City:</label>
+            <input asp-for="City" class="form-control" placeholder="City" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="State">State:</label>
+            <input asp-for="State" class="form-control" placeholder="State" />
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Postcode">Postcode:</label>
+            <input asp-for="Postcode" class="form-control" placeholder="Postcode" />
+            <span asp-validation-for="Postcode" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Country">Country:</label>
+            <input asp-for="Country" class="form-control" placeholder="Country" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="StreetAddress">Address:</label>
+            <input asp-for="StreetAddress" class="form-control" placeholder="Address" />
+            <span asp-validation-for="StreetAddress" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Favourite">Favourite</label>
+            <input asp-for="Favourite" class="form-control" />
+            <span asp-validation-for="Favourite" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Create Category" class="btn" />
+    </div>
+</form>
+
+<a class="btn btn-primary w-100" role="button" href="@Url.Action("Update", "Account")">Admin Home</a>

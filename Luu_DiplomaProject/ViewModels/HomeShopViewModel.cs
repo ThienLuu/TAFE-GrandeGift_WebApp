@@ -9,6 +9,7 @@ namespace Luu_DiplomaProject.ViewModels
 {
     public class HomeShopViewModel
     {
+        public int CategoryId { get; set; }
         public string Search { get; set; }
         public decimal Min { get; set; }
         public decimal Max { get; set; }

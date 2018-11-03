@@ -7,26 +7,58 @@
 <h2>Shop</h2>
 
 <div class="row m-4">
-    <div class="col-md-4">
-        <label>Category:</label>
-
-        <select>
-            <option value="" disabled selected>Select Category</option>
-            @foreach (var category in Model.Categories)
-            {
-                <option>@category.Name</option>
-            }
-        </select>
-    </div>
-    <div class="col-md-5">
-        <div class="row"><label>Price Range:</label></div>
-        <div class="row justify-content-center">
-            <label>Min:</label>
-            <input size="10" />
-            <label>Max:</label>
-            <input size="10" />
+    <form asp-controller="Home" asp-action="Shop" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <label asp-for="Min">Minimum Value</label>
+            <input asp-for="Min" size="10" class="form-control" placeholder="Min" />
+            <span asp-validation-for="Min" class="text-danger"></span>
         </div>
-    </div>
+        <div>
+            <label asp-for="Max">Maximum Value</label>
+            <input asp-for="Max" size="10" class="form-control" placeholder="Max" />
+            <span asp-validation-for="Max" class="text-danger"></span>
+        </div>
+        <div>
+            <label>Category:</label>
+            <select asp-for="CategoryId">
+                <option value="" disabled selected>Select Category</option>
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.CategoryId">@category.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        @*<div>
+            <label asp-for="Search">Search Hamper:</label>
+            <input asp-for="Search" class="form-control" placeholder="Hamper Name" />
+            <span asp-validation-for="Search" class="text-danger"></span>
+        </div>*@
+        <div>
+            <input type="submit" value="Create Category" class="btn" />
+        </div>
+    </form>
+    @*<div class="col-md-4">
+            <label>Category:</label>
+
+            <select>
+                <option value="" disabled selected>Select Category</option>
+                @foreach (var category in Model.Categories)
+                {
+                    <option>@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-5">
+            <div class="row"><label>Price Range:</label></div>
+            <div class="row justify-content-center">
+                <label>Min:</label>
+                <input size="10" />
+                <label>Max:</label>
+                <input size="10" />
+            </div>
+        </div>*@
     @*<div class="col-2">
             <label>Category:</label>
             <select>
@@ -34,12 +66,12 @@
             </select>
         </div>*@
     <!--EXTRA IDEA SEARCH-->
-    <div class="col-md-3">
-        @*<form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>*@
-    </div>
+    @*<div class="col-md-3">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>*@
 </div>
 <div class="row justify-content-center">
     @{

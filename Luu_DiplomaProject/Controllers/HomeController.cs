@@ -44,22 +44,70 @@ namespace Luu_DiplomaProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Shop()
+        public IActionResult Shop(int id, string search, decimal min, decimal max)
         {
-            IEnumerable<Hamper> hamList = _hamperService.GetAll();
             IEnumerable<Category> catList = _categoryService.GetAll();
+            IEnumerable<Hamper> hamList = _hamperService.GetAll();
 
-            HomeShopViewModel vm = new HomeShopViewModel
+            IEnumerable<Hamper> hamSearch = _hamperService.Query(h => h.Name == search);
+            IEnumerable<Hamper> hamMinMax = _hamperService.Query(h => h.Price >= min && h.Price <= max);
+            IEnumerable<Hamper> hamCat = _hamperService.Query(h => h.CategoryId == id);
+
+            if (min < max || max != 0)
             {
-                Hampers = hamList,
-                Categories = catList
-            };
-            return View(vm);
+                HomeShopViewModel vm = new HomeShopViewModel
+                {
+                    Hampers = hamMinMax,
+                    Categories = catList
+                };
+                return View(vm);
+            }
+
+            //else if (id != 0)
+            //{
+            //    HomeShopViewModel vm = new HomeShopViewModel
+            //    {
+            //        Hampers = hamCat,
+            //        Categories = catList
+            //    };
+            //    return View(vm);
+            //}
+
+            //else if (search != null)
+            //{
+            //    HomeShopViewModel vm = new HomeShopViewModel
+            //    {
+            //        Hampers = hamSearch,
+            //        Categories = catList
+            //    };
+            //    return View(vm);
+            //}
+
+            else
+            {
+                HomeShopViewModel vm = new HomeShopViewModel
+                {
+                    Hampers = hamList,
+                    Categories = catList
+                };
+                return View(vm);
+            }
+
+            //HomeShopViewModel vm = new HomeShopViewModel
+            //{
+            //    Hampers = hamList,
+            //    Categories = catList
+            //};
+            //return View(vm);
         }
 
         //[HttpPost]
-        //public IActionResult Shop(string search)
+        //public IActionResult Shop(HomeShopViewModel vm)
         //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        IEnumerable<Hamper> hamper = _hamperService.Query(h => h.CategoryId == vm.CategoryId)
+        //    }
         //    return View();
         //}
     }

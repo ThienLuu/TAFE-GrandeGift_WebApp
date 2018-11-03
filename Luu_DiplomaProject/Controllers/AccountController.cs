@@ -18,9 +18,12 @@ namespace Luu_DiplomaProject.Controllers
         private UserManager<IdentityUser> _userManagerService;
         private SignInManager<IdentityUser> _signInManagerService;
         private IDataService<Customer> _customerService;
+        private IDataService<Address> _addressService;
+
         public AccountController(UserManager<IdentityUser> userManager,
                                  SignInManager<IdentityUser> signinManger,
-                                 IDataService<Customer> customerService)
+                                 IDataService<Customer> customerService,
+                                 IDataService<Address> addressService)
         {
             _userManagerService = userManager;
             _signInManagerService = signinManger;
@@ -134,6 +137,7 @@ namespace Luu_DiplomaProject.Controllers
         {
             //string id = User.Identity.Name;
             string id = _userManagerService.GetUserId(User);
+            IEnumerable<Address> addList = _addressService.GetAll();
             Customer customer = _customerService.GetSingle(c => c.UserId == id);
 
             if (customer != null)
@@ -142,7 +146,8 @@ namespace Luu_DiplomaProject.Controllers
                 {
                     FirstName = customer.FirstName,
                     LastName = customer.LastName,
-                    DOB = customer.DOB
+                    DOB = customer.DOB,
+                    Addresses = addList
                 };
 
                 return View(vm);
@@ -151,7 +156,6 @@ namespace Luu_DiplomaProject.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            //return View(vm);
         }
 
         [HttpPost]
