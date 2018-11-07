@@ -43,17 +43,100 @@ namespace Luu_DiplomaProject.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Shop(int id, string search, decimal min, decimal max)
+        #region Attempt 1
+
+        //[HttpGet]
+        //public IActionResult Shop(int id, string search, decimal min, decimal max)
+        //{
+        //    IEnumerable<Category> catList = _categoryService.GetAll();
+        //    IEnumerable<Hamper> hamList = _hamperService.GetAll();
+
+        //    IEnumerable<Hamper> hamSearch = _hamperService.Query(h => h.Name == search);
+        //    IEnumerable<Hamper> hamMinMax = _hamperService.Query(h => h.Price >= min && h.Price <= max);
+        //    IEnumerable<Hamper> hamCat = _hamperService.Query(h => h.CategoryId == id);
+
+        //    if (min < max || max != 0)
+        //    {
+        //        HomeShopViewModel vm = new HomeShopViewModel
+        //        {
+        //            Hampers = hamMinMax,
+        //            Categories = catList
+        //        };
+        //        return View(vm);
+        //    }
+
+        //    //else if (id != 0)
+        //    //{
+        //    //    HomeShopViewModel vm = new HomeShopViewModel
+        //    //    {
+        //    //        Hampers = hamCat,
+        //    //        Categories = catList
+        //    //    };
+        //    //    return View(vm);
+        //    //}
+
+        //    //else if (search != null)
+        //    //{
+        //    //    HomeShopViewModel vm = new HomeShopViewModel
+        //    //    {
+        //    //        Hampers = hamSearch,
+        //    //        Categories = catList
+        //    //    };
+        //    //    return View(vm);
+        //    //}
+
+        //    else
+        //    {
+        //        HomeShopViewModel vm = new HomeShopViewModel
+        //        {
+        //            Hampers = hamList,
+        //            Categories = catList
+        //        };
+        //        return View(vm);
+        //    }
+
+        //    //HomeShopViewModel vm = new HomeShopViewModel
+        //    //{
+        //    //    Hampers = hamList,
+        //    //    Categories = catList
+        //    //};
+        //    //return View(vm);
+        //}
+
+        ////[HttpPost]
+        ////public IActionResult Shop(HomeShopViewModel vm)
+        ////{
+        ////    if (ModelState.IsValid)
+        ////    {
+        ////        IEnumerable<Hamper> hamper = _hamperService.Query(h => h.CategoryId == vm.CategoryId)
+        ////    }
+        ////    return View();
+        ////}
+
+        #endregion
+
+        #region Attempt 2
+
+        [HttpPost]
+        public IActionResult Shop(int CatId, /*string search,*/ decimal min, decimal max)
         {
             IEnumerable<Category> catList = _categoryService.GetAll();
             IEnumerable<Hamper> hamList = _hamperService.GetAll();
 
-            IEnumerable<Hamper> hamSearch = _hamperService.Query(h => h.Name == search);
+            //IEnumerable<Hamper> hamSearch = _hamperService.Query(h => h.Name == search);
+            IEnumerable<Hamper> hamCat = _hamperService.Query(h => h.CategoryId == CatId);
             IEnumerable<Hamper> hamMinMax = _hamperService.Query(h => h.Price >= min && h.Price <= max);
-            IEnumerable<Hamper> hamCat = _hamperService.Query(h => h.CategoryId == id);
 
-            if (min < max || max != 0)
+            if (CatId > 0)
+            {
+                HomeShopViewModel vm = new HomeShopViewModel
+                {
+                    Hampers = hamCat,
+                    Categories = catList
+                };
+                return View(vm);
+            }
+            else if (min < max)
             {
                 HomeShopViewModel vm = new HomeShopViewModel
                 {
@@ -62,27 +145,6 @@ namespace Luu_DiplomaProject.Controllers
                 };
                 return View(vm);
             }
-
-            //else if (id != 0)
-            //{
-            //    HomeShopViewModel vm = new HomeShopViewModel
-            //    {
-            //        Hampers = hamCat,
-            //        Categories = catList
-            //    };
-            //    return View(vm);
-            //}
-
-            //else if (search != null)
-            //{
-            //    HomeShopViewModel vm = new HomeShopViewModel
-            //    {
-            //        Hampers = hamSearch,
-            //        Categories = catList
-            //    };
-            //    return View(vm);
-            //}
-
             else
             {
                 HomeShopViewModel vm = new HomeShopViewModel
@@ -92,23 +154,13 @@ namespace Luu_DiplomaProject.Controllers
                 };
                 return View(vm);
             }
-
-            //HomeShopViewModel vm = new HomeShopViewModel
-            //{
-            //    Hampers = hamList,
-            //    Categories = catList
-            //};
-            //return View(vm);
         }
 
-        //[HttpPost]
-        //public IActionResult Shop(HomeShopViewModel vm)
+        //[HttpGet]
+        //public IActionResult Shop()
         //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        IEnumerable<Hamper> hamper = _hamperService.Query(h => h.CategoryId == vm.CategoryId)
-        //    }
-        //    return View();
+        //    return RedirectToAction("Shop", "Home", new {  });
         //}
+        #endregion
     }
 }

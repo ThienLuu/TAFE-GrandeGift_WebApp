@@ -21,6 +21,6 @@ namespace Luu_DiplomaProject.Models
         [Required]
         public string StreetAddress { get; set; }
         public bool Favourite { get; set; }
-        public ICollection<Customer> Customers { get; set; }
+        public int CustomerId { get; set; }
     }
 }

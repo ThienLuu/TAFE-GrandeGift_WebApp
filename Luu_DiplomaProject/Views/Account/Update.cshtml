@@ -8,8 +8,8 @@
 
 <form asp-controller="Account" asp-action="Update" method="post">
     @*<div>
-        <label asp-for="UserId" hidden="hidden"></label>
-    </div>*@
+            <label asp-for="UserId" hidden="hidden"></label>
+        </div>*@
     <div asp-validation-summary="ModelOnly"></div>
     @*<div>
             <label asp-for="Username"></label>
@@ -18,17 +18,17 @@
         </div>*@
     <div>
         <label asp-for="FirstName">First Name</label>
-        <input asp-for="FirstName" class="form-control"/>
+        <input asp-for="FirstName" class="form-control" />
         <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="LastName">Last Name</label>
-        <input asp-for="LastName" class="form-control"/>
+        <input asp-for="LastName" class="form-control" />
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="DOB"></label>
-        <input asp-for="DOB" type="date" class="form-control"/>
+        <input asp-for="DOB" type="date" class="form-control" />
         <span asp-validation-for="DOB" class="text-danger"></span>
     </div>
     @*<div>
@@ -52,6 +52,38 @@
             <span asp-validation-for="ConfirmPassword"></span>
         </div>*@
     <div>
-        <input type="submit" value="Update" class="btn"/>
+        <input type="submit" value="Update Account" class="btn" />
     </div>
+    <br />
+    <br />
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>City</th>
+                <th>State</th>
+                <th>Postcode</th>
+                <th>Country</th>
+                <th>Street Address</th>
+                <th>Favourite</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var address in Model.Addresses)
+        {
+            <tr>
+                <td>@address.City</td>
+                <td>@address.State</td>
+                <td>@address.Postcode</td>
+                <td>@address.Country</td>
+                <td>@address.StreetAddress</td>
+                <td>@address.Favourite</td>
+                <td>
+                    <a class="btn btn-primary w-100" role="button" href="@Url.Action("Update", "Address", new { id = address.AddressId })">Update Hamper</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <a class="btn btn-primary w-100" role="button" href="@Url.Action("Create", "Address", new { id = Model.CustomerId})">Add Address</a>
 </form>

@@ -24,9 +24,13 @@ namespace Luu_DiplomaProject.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            return View();
+            AddressCreateViewModel vm = new AddressCreateViewModel
+            {
+                CustomerId = id
+            };
+            return View(vm);
         }
 
         [HttpPost]
@@ -37,6 +41,7 @@ namespace Luu_DiplomaProject.Controllers
             {
                 Address address = new Address
                 {
+                    CustomerId = vm.CustomerId,
                     City = vm.City,
                     State = vm.State,
                     Postcode = vm.Postcode,

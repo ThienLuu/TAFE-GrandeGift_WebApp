@@ -28,6 +28,7 @@ namespace Luu_DiplomaProject.Controllers
             _userManagerService = userManager;
             _signInManagerService = signinManger;
             _customerService = customerService;
+            _addressService = addressService;
         }
 
         #region Register
@@ -45,6 +46,7 @@ namespace Luu_DiplomaProject.Controllers
             {
                 //add a new user
                 IdentityUser user = new IdentityUser(vm.Username);
+
                 user.Email = vm.Email;
                 IdentityResult result = await _userManagerService.CreateAsync(user, vm.Password);
                 if (result.Succeeded)
@@ -55,10 +57,10 @@ namespace Luu_DiplomaProject.Controllers
                         FirstName = vm.FirstName,
                         LastName = vm.LastName,
                         DOB = vm.DOB,
-                        UserId = user.Id
+                        UserId = user.Id,
                     };
-
                     _customerService.Create(customer);
+
                     //go to Home/Index
                     return RedirectToAction("Index", "Home");
                 }
@@ -137,8 +139,8 @@ namespace Luu_DiplomaProject.Controllers
         {
             //string id = User.Identity.Name;
             string id = _userManagerService.GetUserId(User);
-            IEnumerable<Address> addList = _addressService.GetAll();
             Customer customer = _customerService.GetSingle(c => c.UserId == id);
+            IEnumerable<Address> list = _addressService.GetAll().Where(a => a.CustomerId == customer.CustomerId);
 
             if (customer != null)
             {
@@ -147,7 +149,8 @@ namespace Luu_DiplomaProject.Controllers
                     FirstName = customer.FirstName,
                     LastName = customer.LastName,
                     DOB = customer.DOB,
-                    Addresses = addList
+                    Addresses = list,
+                    CustomerId = customer.CustomerId
                 };
 
                 return View(vm);
@@ -174,7 +177,7 @@ namespace Luu_DiplomaProject.Controllers
 
                 _customerService.Update(customer);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Update", "Account");
             }
             return View(vm);
         }

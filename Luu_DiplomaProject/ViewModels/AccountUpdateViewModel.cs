@@ -23,6 +23,8 @@ namespace Luu_DiplomaProject.ViewModels
         [Required]
         public DateTime DOB { get; set; }
 
+        public int CustomerId { get; set; }
+
         public IEnumerable<Address> Addresses { get; set; }
         //[Required, DataType(DataType.EmailAddress)]
         //public string Email { get; set; }

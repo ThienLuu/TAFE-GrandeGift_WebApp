@@ -20,6 +20,6 @@ namespace Luu_DiplomaProject.Models
         public DateTime DOB { get; set; }
         //public string Country { get; set; }
         public ICollection<CustomerHamper> CustomerHampers { get; set; }
-        public int AddressId { get; set; }
+        public ICollection<Address> Addresses { get; set; }
     }
 }
