@@ -8,6 +8,8 @@ using Luu_DiplomaProject.ViewModels;
 using Luu_DiplomaProject.Models;
 using Luu_DiplomaProject.Services;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace Luu_DiplomaProject.Controllers
 {
@@ -38,8 +40,11 @@ namespace Luu_DiplomaProject.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult Create(HamperCreateViewModel vm)
+        public IActionResult Create(IFormFile upload, HamperCreateViewModel vm)
         {
+            BinaryReader binaryReader = new BinaryReader(upload.OpenReadStream());
+            byte[] fileData = binaryReader.ReadBytes((int)upload.Length);
+            var fileName = Path.GetFileName(upload.FileName);
             IEnumerable<Category> list = _categoryService.GetAll();
 
             if (ModelState.IsValid)
@@ -48,10 +53,14 @@ namespace Luu_DiplomaProject.Controllers
                 {
                     Name = vm.Name,
                     Price = vm.Price,
-                    Picture = vm.Picture,
                     Details = vm.Details,
                     Discontinued = vm.Discontinued,
-                    CategoryId = vm.CategoryId
+                    CategoryId = vm.CategoryId,
+                    //Image
+                    FileName = fileName,
+                    ContentSize = upload.Length,
+                    ContentType = upload.ContentType,
+                    FileContent = fileData
                 };
 
                 _hamperService.Create(hamper);
@@ -90,7 +99,6 @@ namespace Luu_DiplomaProject.Controllers
                 HamperId = hamper.HamperId,
                 Name = hamper.Name,
                 Price = hamper.Price,
-                Picture = hamper.Picture,
                 Details = hamper.Details,
                 Discontinued = hamper.Discontinued,
                 CategoryId = hamper.CategoryId,
@@ -112,7 +120,6 @@ namespace Luu_DiplomaProject.Controllers
                 hamper.HamperId = vm.HamperId;
                 hamper.Name = vm.Name;
                 hamper.Price = vm.Price;
-                hamper.Picture = vm.Picture;
                 hamper.Details = vm.Details;
                 hamper.Discontinued = vm.Discontinued;
                 hamper.CategoryId = vm.CategoryId;

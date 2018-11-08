@@ -4,14 +4,16 @@ using Luu_DiplomaProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Luu_DiplomaProject.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181108043050_imageColumn")]
+    partial class imageColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,6 +130,8 @@ namespace Luu_DiplomaProject.Migrations
                     b.Property<string>("FileName");
 
                     b.Property<string>("Name");
+
+                    b.Property<string>("Picture");
 
                     b.Property<decimal>("Price");
 

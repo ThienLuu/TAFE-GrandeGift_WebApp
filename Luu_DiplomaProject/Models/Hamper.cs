@@ -10,9 +10,14 @@ namespace Luu_DiplomaProject.Models
         public int HamperId { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public string Picture { get; set; }     //Datatype for image????
         public string Details { get; set; }
         public bool Discontinued { get; set; }
+
+        //Picture/Image
+        public string ContentType { get; set; }
+        public string FileName { get; set; }
+        public byte[] FileContent { get; set; }
+        public long ContentSize { get; set; }
 
         public int CategoryId { get; set; }
         public ICollection<CustomerHamper> CustomerHampers { get; set; }

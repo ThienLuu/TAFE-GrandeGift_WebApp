@@ -7,7 +7,7 @@
 <h2>Shop</h2>
 
 <div class="row m-4">
-    <form asp-controller="Home" asp-action="Shop" method="post">
+    <form asp-controller="Home" asp-action="Shop" method="get">
         <div asp-validation-summary="ModelOnly"></div>
         <div>
             <label asp-for="Min">Minimum Value</label>
@@ -36,7 +36,7 @@
             <span asp-validation-for="Search" class="text-danger"></span>
         </div>*@
         <div>
-            <input type="submit" value="Create Category" class="btn" />
+            <input type="submit" value="Filter Hampers" class="btn" />
         </div>
     </form>
     @*<div class="col-md-4">
@@ -80,6 +80,7 @@
             <div class="col-md-3 m-2 text-center border border-dark" style="height: 400px; width:300px">
                 <img src="#" alt="@hamper.HamperId" />
                 <h3>@hamper.Name</h3>
+                <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="200px"/>
                 <h5>@hamper.Price</h5>
                 <p>@hamper.Details</p>
             </div>
