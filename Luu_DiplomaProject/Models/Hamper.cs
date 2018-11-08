@@ -20,6 +20,7 @@ namespace Luu_DiplomaProject.Models
         public long ContentSize { get; set; }
 
         public int CategoryId { get; set; }
-        public ICollection<CustomerHamper> CustomerHampers { get; set; }
+        //public ICollection<CustomerHamper> CustomerHampers { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

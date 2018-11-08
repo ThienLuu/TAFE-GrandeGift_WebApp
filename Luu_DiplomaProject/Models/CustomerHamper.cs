@@ -8,8 +8,9 @@ namespace Luu_DiplomaProject.Models
 {
     public class CustomerHamper
     {
+        //DELETE TABLE???
         public int CustomerHamperId { get; set; }
-        public int HamperId { get; set; }
-        public int CustomerId { get; set; }
+        //public int HamperId { get; set; }
+        //public int CustomerId { get; set; }
     }
 }
