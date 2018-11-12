@@ -7,10 +7,10 @@ using Luu_DiplomaProject.Models;
 
 namespace Luu_DiplomaProject.ViewModels
 {
-    public class HamperDetailsViewModel
+    public class ItemDetailsViewModel
     {
-        public IEnumerable<Hamper> Hampers { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
+        public int HamperId { get; set; }
+        public int ItemId { get; set; }
         public IEnumerable<Item> Items { get; set; }
     }
 }

@@ -1,0 +1,22 @@
+﻿@model ItemUpdateViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h2>Update</h2>
+
+<form asp-action="Update" asp-controller="Item" method="post">
+    <input asp-for="HamperId" hidden="hidden" />
+    <input asp-for="ItemId" hidden="hidden" />
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Size"></label>
+        <input asp-for="Size" />
+    </div>
+    <button type="submit">Update Item</button>
+</form>

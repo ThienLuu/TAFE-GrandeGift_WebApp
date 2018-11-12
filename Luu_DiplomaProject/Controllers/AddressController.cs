@@ -101,14 +101,14 @@ namespace Luu_DiplomaProject.Controllers
             return View(vm);
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-            Address address = _addressService.GetSingle(a => a.AddressId == id);
+        //[HttpPost]
+        //public IActionResult Delete(int id)
+        //{
+        //    Address address = _addressService.GetSingle(a => a.AddressId == id);
 
-            _addressService.Delete(address);
+        //    _addressService.Delete(address);
 
-            return View();
-        }
+        //    return View();
+        //}
     }
 }

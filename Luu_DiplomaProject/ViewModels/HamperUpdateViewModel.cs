@@ -19,5 +19,6 @@ namespace Luu_DiplomaProject.ViewModels
 
         public int CategoryId { get; set; }
         public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<Item> Items { get; set; }
     }
 }

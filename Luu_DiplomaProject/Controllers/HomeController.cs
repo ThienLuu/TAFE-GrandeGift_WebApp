@@ -8,6 +8,7 @@ using Luu_DiplomaProject.ViewModels;
 using Luu_DiplomaProject.Models;
 using Luu_DiplomaProject.Services;
 using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Identity;
 
 namespace Luu_DiplomaProject.Controllers
 {
@@ -15,15 +16,52 @@ namespace Luu_DiplomaProject.Controllers
     {
         private IDataService<Category> _categoryService;
         private IDataService<Hamper> _hamperService;
+        //..
+        //private UserManager<IdentityUser> _userManagerService;
+        //private SignInManager<IdentityUser> _signInManagerService;
+        //private IDataService<Customer> _customerService;
+        //private IDataService<Address> _addressService;
 
         public HomeController(IDataService<Category> categoryService,
-                                    IDataService<Hamper> hamperService)
+                                IDataService<Hamper> hamperService
+                                //..
+                                //,UserManager<IdentityUser> userManager,
+                                //SignInManager<IdentityUser> signinManger,
+                                //IDataService<Customer> customerService,
+                                //IDataService<Address> addressService
+                                )
         {
             _categoryService = categoryService;
             _hamperService = hamperService;
+            //..
+            //_userManagerService = userManager;
+            //_signInManagerService = signinManger;
+            //_customerService = customerService;
+            //_addressService = addressService;
         }
         public IActionResult Index()
         {
+            //string id = _userManagerService.GetUserId(User);
+            //Customer customer = _customerService.GetSingle(c => c.UserId == id);
+            //IEnumerable<Address> list = _addressService.GetAll().Where(a => a.CustomerId == customer.CustomerId);
+
+            //if (customer != null)
+            //{
+            //    AccountUpdateViewModel vm = new AccountUpdateViewModel
+            //    {
+            //        FirstName = customer.FirstName,
+            //        LastName = customer.LastName,
+            //        DOB = customer.DOB,
+            //        Addresses = list,
+            //        CustomerId = customer.CustomerId
+            //    };
+
+            //    return View(vm);
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
             return View();
         }
 

@@ -20,10 +20,30 @@
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
     <div>
-        <label asp-for="Details"></label>
-        <textarea asp-for="Details" class="form-control" placeholder="Details" rows="3" cols="100"></textarea>
-        <span asp-validation-for="Details" class="text-danger"></span>
+        <label>Hamper Items</label>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Size</td>
+                </tr>
+            }
+        </table>
+        <a class="btn btn-primary w-50" role="button" href="@Url.Action("Create", "Item", new { id = Model.HamperId })">Add Item</a>
+        <a class="btn btn-primary w-50" role="button" href="@Url.Action("Details", "Item", new { id = Model.HamperId })">Edit Item</a>
     </div>
+    @*<div>
+            <label asp-for="Details"></label>
+            <textarea asp-for="Details" class="form-control" placeholder="Details" rows="3" cols="100"></textarea>
+            <span asp-validation-for="Details" class="text-danger"></span>
+        </div>*@
     <div>
         <label asp-for="Discontinued">Discontinued:</label>
         <input asp-for="Discontinued" class="form-control" placeholder="Discontinued" />

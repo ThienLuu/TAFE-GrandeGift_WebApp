@@ -1,0 +1,39 @@
+﻿@model ItemDetailsViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete Items</h2>
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                Name:
+            </th>
+            <th>
+                Size:
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Size</td>
+            <td>
+                <a class="btn btn-primary w-50" role="button" href="@Url.Action("Update", "Item", new { id = item.ItemId})">Edit Item</a>
+            </td>
+            <td>
+                <form asp-action="Delete" asp-controller="Item" method="post">
+                    <input asp-for="HamperId" hidden="hidden" />
+                    <input asp-for="ItemId" hidden="hidden" value="@item.ItemId" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<a class="btn btn-primary w-50" role="button" href="@Url.Action("Create", "Item", new { id = Model.HamperId })">Add Item</a>

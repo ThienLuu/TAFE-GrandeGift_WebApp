@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\node_modules\bootstrap\dist\css\bootstrap-grid.css" />
     <Content Include="wwwroot\node_modules\bootstrap\dist\css\bootstrap-grid.min.css" />
     <Content Include="wwwroot\node_modules\bootstrap\dist\css\bootstrap-reboot.css" />
@@ -27,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="compilerconfig.json" />
     <None Include="wwwroot\node_modules\bootstrap\dist\.DS_Store" />
     <None Include="wwwroot\node_modules\bootstrap\dist\css\.DS_Store" />
     <None Include="wwwroot\node_modules\bootstrap\dist\css\bootstrap-grid.css.map" />

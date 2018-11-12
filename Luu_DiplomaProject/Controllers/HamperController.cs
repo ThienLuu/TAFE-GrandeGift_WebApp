@@ -17,12 +17,15 @@ namespace Luu_DiplomaProject.Controllers
     {
         private IDataService<Category> _categoryService;
         private IDataService<Hamper> _hamperService;
+        private IDataService<Item> _itemService;
 
         public HamperController(IDataService<Category> categoryService,
-                                    IDataService<Hamper> hamperService)
+                                    IDataService<Hamper> hamperService,
+                                    IDataService<Item> itemService)
         {
             _categoryService = categoryService;
             _hamperService = hamperService;
+            _itemService = itemService;
         }
 
         [HttpGet]
@@ -65,7 +68,10 @@ namespace Luu_DiplomaProject.Controllers
 
                 _hamperService.Create(hamper);
 
-                return RedirectToAction("Details", "Hamper");
+                //IEnumerable<Hamper> hamperId = _hamperService.GetSingle(h => h.HamperId == );
+
+                //return RedirectToAction("Details", "Hamper");
+                return RedirectToAction("Create", "Item", new { id = hamper.HamperId });
             }
             vm.Categories = list;
 
@@ -78,11 +84,13 @@ namespace Luu_DiplomaProject.Controllers
         {
             IEnumerable<Hamper> hamList = _hamperService.GetAll();
             IEnumerable<Category> catList = _categoryService.GetAll();
+            IEnumerable<Item> itemList = _itemService.GetAll();
 
             HamperDetailsViewModel vm = new HamperDetailsViewModel
             {
                 Hampers = hamList,
-                Categories = catList
+                Categories = catList,
+                Items = itemList
             };
             return View(vm);
         }
@@ -91,8 +99,9 @@ namespace Luu_DiplomaProject.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Update(int id)
         {
-            IEnumerable<Category> list = _categoryService.GetAll();
+            IEnumerable<Category> categoryList = _categoryService.GetAll();
             Hamper hamper = _hamperService.GetSingle(h => h.HamperId == id);
+            IEnumerable<Item> itemList = _itemService.GetAll().Where(i => i.HamperId == hamper.HamperId);
 
             HamperUpdateViewModel vm = new HamperUpdateViewModel
             {
@@ -102,7 +111,8 @@ namespace Luu_DiplomaProject.Controllers
                 Details = hamper.Details,
                 Discontinued = hamper.Discontinued,
                 CategoryId = hamper.CategoryId,
-                Categories = list
+                Categories = categoryList,
+                Items = itemList
             };
 
             return View(vm);

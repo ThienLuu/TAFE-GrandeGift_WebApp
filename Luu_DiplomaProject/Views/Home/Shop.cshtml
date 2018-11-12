@@ -80,9 +80,12 @@
             <div class="col-md-3 m-2 text-center border border-dark" style="height: 400px; width:300px">
                 <img src="#" alt="@hamper.HamperId" />
                 <h3>@hamper.Name</h3>
-                <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="200px"/>
+                <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="200"/>
                 <h5>@hamper.Price</h5>
                 <p>@hamper.Details</p>
+                @*<form asp-controller="Shop" asp-action="Create" method="post">
+
+                </form>*@
                 <button class="btn btn-primary">Add to Cart</button>
             </div>
         }
