@@ -31,10 +31,10 @@
             <span asp-validation-for="CategoryId" class="text-danger"></span>
         </div>
         @*<div>
-            <label asp-for="Search">Search Hamper:</label>
-            <input asp-for="Search" class="form-control" placeholder="Hamper Name" />
-            <span asp-validation-for="Search" class="text-danger"></span>
-        </div>*@
+                <label asp-for="Search">Search Hamper:</label>
+                <input asp-for="Search" class="form-control" placeholder="Hamper Name" />
+                <span asp-validation-for="Search" class="text-danger"></span>
+            </div>*@
         <div>
             <input type="submit" value="Filter Hampers" class="btn" />
         </div>
@@ -78,39 +78,50 @@
         @foreach (var hamper in Model.Hampers)
         {
             <div class="col-md-3 m-2 text-center border border-dark" style="height: 400px; width:300px">
-                <img src="#" alt="@hamper.HamperId" />
-                <h3>@hamper.Name</h3>
-                <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="200"/>
+                <a href="@Url.Action("Details", "Home", new { id = hamper.HamperId })">
+                    <h3>@hamper.Name</h3>
+                </a>
+                <a href="@Url.Action("Details", "Home", new { id = hamper.HamperId })">
+                    <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="200" />
+                </a>
                 <h5>@hamper.Price</h5>
-                <p>@hamper.Details</p>
+                <ul>
+                    @foreach (var item in Model.Items)
+                    {
+                        if (hamper.HamperId == item.HamperId)
+                        {
+                            <li>@item.Name @item.Size</li>
+                        }
+                    }
+                </ul>
                 @*<form asp-controller="Shop" asp-action="Create" method="post">
 
-                </form>*@
+                    </form>*@
                 <button class="btn btn-primary">Add to Cart</button>
             </div>
         }
     }
     @*@{
-        int col = 1;
-        int row = 0;
+            int col = 1;
+            int row = 0;
 
-        for (int i = 0; i <= row; i++)
-        {
-            <div class="row">
-                @if (col == 3)
-                {
-                    col = 0;
-                    row++;
-                }
-                else
-                {
-                    @foreach (var item in Model.Hampers)
+            for (int i = 0; i <= row; i++)
+            {
+                <div class="row">
+                    @if (col == 3)
                     {
-                        <div class="col-4">TEST</div>
-                        col++;
+                        col = 0;
+                        row++;
                     }
-                }
-            </div>
-        }
-    }*@
+                    else
+                    {
+                        @foreach (var item in Model.Hampers)
+                        {
+                            <div class="col-4">TEST</div>
+                            col++;
+                        }
+                    }
+                </div>
+            }
+        }*@
 </div>

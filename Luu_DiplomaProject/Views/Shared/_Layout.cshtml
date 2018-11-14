@@ -15,6 +15,10 @@
         .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
             background-color: grey;
         }
+        /*THIS IS THE DROP DOWN *NOT WORKING**/
+        ul.nav li.dropdown:hover ul.dropdown-menu {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -67,15 +71,27 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="d-flex justify-content-center">
-                <a href="#">
-                    <img src="#" alt="Truck image" />
-                </a>
-                <h6>$7.50 Flat delivery rate</h6>
-                <a href="#">
-                    <img src="#" alt="Time image" />
-                </a>
-                <h6>Same day delivery option</h6>
+            <div class="d-flex justify-content-center text-center">
+                <figure class="px-3">
+                    <img src="~/Images/delivery-truck.png" alt="Truck Image" width="50" />
+                    <figcaption>
+                        <h6>$7.50 Flat delivery rate</h6>
+                    </figcaption>
+                </figure>
+                <figure class="px-3">
+                    <img src="~/Images/24-hours-delivery.png" alt="Time Image" width="50" />
+                    <figcaption>
+                        <h6>Same day delivery option</h6>
+                    </figcaption>
+                </figure>
+                @*<a href="#">
+                        <img src="~/Images/delivery-truck.png" alt="Truck Image" width="50"/>
+                    </a>
+                    <h6>$7.50 Flat delivery rate</h6>
+                    <a href="#">
+                        <img src="~/Images/24-hours-delivery.png" alt="Time Image" width="50"/>
+                    </a>
+                    <h6>Same day delivery option</h6>*@
             </div>
         </div>
 
@@ -114,7 +130,7 @@
                 </div>
             </div>*@
     </div>
-    <div class="row bg-info">
+    <div class="row bg-info" style="height: 250px">
         <h1 class="mx-auto">Grande Gift</h1>
     </div>
 
@@ -197,30 +213,37 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <!--Top 10 Categories-->
                         <a class="dropdown-item" href="@Url.Action("","")">Test</a>
-                        @*<div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">LOGOUT</a>*@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("About","Home")">About Us</a> <!--Which folder does this page fall under-->
+                    <a class="nav-link" href="@Url.Action("About","Home")">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a> <!--Which folder does this page fall under-->
+                    <a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a>
                 </li>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li class="nav-item dropdown d-inline bg-danger">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Account
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="@Url.Action("Update","Account")">Profile</a>
-                            <a class="dropdown-item disabled" href="#">Change Password</a>
-                            <a class="dropdown-item disabled" href="#">Payment Details</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="@Url.Action("Logout", "Account")">Logout</a>
-                        </div>
-                    </li>
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link bg-danger" href="@Url.Action("Admin","Home")">Admin Interface</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item dropdown d-inline bg-danger">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Account
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Update","Account")">Profile</a>
+                                <a class="dropdown-item disabled" href="#">Change Password</a>
+                                <a class="dropdown-item disabled" href="#">Payment Details</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Logout", "Account")">Logout</a>
+                            </div>
+                        </li>
+                    }
                 }
                 else
                 {
@@ -235,8 +258,8 @@
             <!--SHOPPING CART-->
             <!--SHOPPING CART PICTURE-->
             @*<ul class="float-md-none">
-                <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><!--COUNT NUMBER OF ITEMS-->0<!--COUNT NUMBER OF ITEMS--></span></a></li>
-            </ul>*@
+                    <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><!--COUNT NUMBER OF ITEMS-->0<!--COUNT NUMBER OF ITEMS--></span></a></li>
+                </ul>*@
         </div>
     </nav>
     <!--SHOPPING CART LIST-->
@@ -244,43 +267,43 @@
         @if (User.Identity.IsAuthenticated)
         {
             @*<div class="shopping-cart">
-                <div class="shopping-cart-header">
-                    <i class="fa fa-shopping-cart"></i><span class="badge"><!--COUNT NUMBER OF ITEMS-->0<!--COUNT NUMBER OF ITEMS--></span>
-                    <div class="shopping-cart-total">
-                        <span class="lighter-text">Total:</span>
-                        <span class="main-color-text"><!--TOTAL PRICE-->0<!--TOTAL PRICE--></span>
-                    </div>
-                </div> <!--end shopping-cart-header -->
+                    <div class="shopping-cart-header">
+                        <i class="fa fa-shopping-cart"></i><span class="badge"><!--COUNT NUMBER OF ITEMS-->0<!--COUNT NUMBER OF ITEMS--></span>
+                        <div class="shopping-cart-total">
+                            <span class="lighter-text">Total:</span>
+                            <span class="main-color-text"><!--TOTAL PRICE-->0<!--TOTAL PRICE--></span>
+                        </div>
+                    </div> <!--end shopping-cart-header -->
 
-                <ul class="shopping-cart-items" style="list-style-type: none;">
-                    <!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
-                    @foreach (var item in collection)
-                        {
+                    <ul class="shopping-cart-items" style="list-style-type: none;">
+                        <!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
+                        @foreach (var item in collection)
+                            {
 
-                        }
-                    <!--SAMPLE-->
-                    <li class="clearfix">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                            <span class="item-name">Sony DSC-RX100M III</span>
-                            <span class="item-price">$849.99</span>
-                            <span class="item-quantity">Quantity: 01</span>
-                        </li>
-                    <!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
-                </ul>
+                            }
+                        <!--SAMPLE-->
+                        <li class="clearfix">
+                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
+                                <span class="item-name">Sony DSC-RX100M III</span>
+                                <span class="item-price">$849.99</span>
+                                <span class="item-quantity">Quantity: 01</span>
+                            </li>
+                        <!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
+                    </ul>
 
-                <a href="#" class="cart-button">Checkout</a>
-            </div>*@
+                    <a href="#" class="cart-button">Checkout</a>
+                </div>*@
         }
         else
         {
             @*<div class="shopping-cart">
-                <i class="fa fa-shopping-cart"></i><span class="badge">0</span>
-                <div class="shopping-cart-total">
-                    <span class="lighter-text">Total:</span>
-                    <span class="main-color-text">0</span>
-                </div>
-                <a href="@Url.Action("Register", "Account")" class="cart-button">Register to use Shopping Cart</a>
-            </div>*@
+                    <i class="fa fa-shopping-cart"></i><span class="badge">0</span>
+                    <div class="shopping-cart-total">
+                        <span class="lighter-text">Total:</span>
+                        <span class="main-color-text">0</span>
+                    </div>
+                    <a href="@Url.Action("Register", "Account")" class="cart-button">Register to use Shopping Cart</a>
+                </div>*@
         }
     </div>
     <!--SHOPPING CART LIST-->

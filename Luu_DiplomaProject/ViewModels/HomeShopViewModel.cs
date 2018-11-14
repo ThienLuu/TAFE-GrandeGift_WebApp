@@ -15,7 +15,6 @@ namespace Luu_DiplomaProject.ViewModels
         public decimal Max { get; set; }
         public IEnumerable<Hamper> Hampers { get; set; }
         public IEnumerable<Category> Categories { get; set; }
-
-        //..
+        public IEnumerable<Item> Items { get; set; }
     }
 }

@@ -56,7 +56,6 @@ namespace Luu_DiplomaProject.Controllers
                 {
                     Name = vm.Name,
                     Price = vm.Price,
-                    Details = vm.Details,
                     Discontinued = vm.Discontinued,
                     CategoryId = vm.CategoryId,
                     //Image
@@ -108,7 +107,6 @@ namespace Luu_DiplomaProject.Controllers
                 HamperId = hamper.HamperId,
                 Name = hamper.Name,
                 Price = hamper.Price,
-                Details = hamper.Details,
                 Discontinued = hamper.Discontinued,
                 CategoryId = hamper.CategoryId,
                 Categories = categoryList,
@@ -130,7 +128,6 @@ namespace Luu_DiplomaProject.Controllers
                 hamper.HamperId = vm.HamperId;
                 hamper.Name = vm.Name;
                 hamper.Price = vm.Price;
-                hamper.Details = vm.Details;
                 hamper.Discontinued = vm.Discontinued;
                 hamper.CategoryId = vm.CategoryId;
 

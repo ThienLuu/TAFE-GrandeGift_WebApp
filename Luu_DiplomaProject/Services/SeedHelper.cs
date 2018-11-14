@@ -40,15 +40,14 @@ namespace Luu_DiplomaProject.Services
                 {
                     await roleManager.CreateAsync(new IdentityRole("Customer"));
                 }
-                //add default customer
-                if (await userManager.FindByNameAsync("customer1") == null)
-                {
-                    IdentityUser cust = new IdentityUser("customer1");
-                    cust.Email = "customer1@yahoo.com";
-                    await userManager.CreateAsync(cust, "Apple#333");//add user to Users tabel
-                    await userManager.AddToRoleAsync(cust, "Customer"); //add customer1 to role Customer
-                }
-
+                ////add default customer
+                //if (await userManager.FindByNameAsync("customer1") == null)
+                //{
+                //    IdentityUser cust = new IdentityUser("customer1");
+                //    cust.Email = "customer1@yahoo.com";
+                //    await userManager.CreateAsync(cust, "Apple#333");//add user to Users tabel
+                //    await userManager.AddToRoleAsync(cust, "Customer"); //add customer1 to role Customer
+                //}
             }
         }
     }

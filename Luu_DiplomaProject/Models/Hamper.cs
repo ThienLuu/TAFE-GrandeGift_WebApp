@@ -10,7 +10,6 @@ namespace Luu_DiplomaProject.Models
         public int HamperId { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public string Details { get; set; }
         public bool Discontinued { get; set; }
 
         //Picture/Image

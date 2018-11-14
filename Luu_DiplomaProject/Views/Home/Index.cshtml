@@ -5,10 +5,22 @@
 
 <h2>Home</h2>
 
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue purus, feugiat ut pretium sed, posuere a lacus. Vestibulum urna libero, ornare eget dolor a, facilisis facilisis nulla. Praesent tristique ac odio in efficitur. Praesent tempus lacus faucibus ligula lobortis tempus. Morbi euismod, nunc at vestibulum convallis, tortor purus cursus nunc, vitae sagittis ante risus ut ex. Nunc id ipsum eget velit mattis vestibulum. Curabitur fermentum ex at libero mollis auctor. Fusce vitae blandit urna. Quisque viverra quis ligula fermentum elementum. Phasellus velit mi, fringilla ac ante vel, rutrum mollis leo.
-
-    Sed sit amet mi bibendum ex euismod blandit sit amet a elit. Phasellus aliquet fermentum hendrerit. Vestibulum placerat varius vehicula. Fusce malesuada enim sit amet enim eleifend vulputate. Quisque eu ex ut massa venenatis rutrum eget id urna. Aenean pellentesque, nibh sit amet commodo sollicitudin, justo orci molestie erat, ac malesuada eros elit in urna. Praesent porta metus quis sem gravida, sit amet egestas eros varius. Suspendisse massa est, vulputate sit amet tortor at, commodo blandit felis. Etiam semper vehicula nisl sit amet finibus. In pretium tincidunt laoreet. Nulla aliquet imperdiet justo, at ullamcorper nunc dapibus a. Aenean eget dapibus ligula. Aenean auctor quam bibendum, vestibulum dui sit amet, pretium ex.
-
-    Etiam placerat lobortis posuere. Vestibulum lectus neque, tempus eu ante tempus, porta faucibus sem. Suspendisse dui eros, ultricies vitae felis id, sagittis imperdiet ligula. Pellentesque ac ipsum sit amet neque lacinia venenatis. Vestibulum eleifend nunc nec elit commodo luctus. Aenean in lectus velit. Nunc enim nisi, convallis ut nulla eget, vulputate aliquet risus. Nulla est nunc, molestie eu ipsum eu, consequat aliquet metus. Nunc sit amet fringilla massa. Ut fringilla augue lectus, et bibendum ante bibendum eget.
-</p>
+<div class="row justify-content-center">
+    @{
+        for (int i = 0; i < 3; i++)
+        {
+            <div class="col-md-3 m-2 text-center border border-dark" style="height: 400px; width:300px">
+                <h3>Hamper @i</h3>
+                <img src="#" alt="@i" />
+                <h5>$10000</h5>
+                <ul>
+                    @for (int n = 0; n < 5; n++)
+                    {
+                        <li>@n</li>
+                    }
+                </ul>
+                <button class="btn btn-primary">Add to Cart</button>
+            </div>
+        }
+    }
+</div>

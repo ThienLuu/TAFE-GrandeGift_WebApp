@@ -16,6 +16,7 @@ namespace Luu_DiplomaProject.Controllers
     {
         private IDataService<Category> _categoryService;
         private IDataService<Hamper> _hamperService;
+        private IDataService<Item> _itemService;
         //..
         //private UserManager<IdentityUser> _userManagerService;
         //private SignInManager<IdentityUser> _signInManagerService;
@@ -23,7 +24,8 @@ namespace Luu_DiplomaProject.Controllers
         //private IDataService<Address> _addressService;
 
         public HomeController(IDataService<Category> categoryService,
-                                IDataService<Hamper> hamperService
+                                IDataService<Hamper> hamperService,
+                                IDataService<Item> itemService
                                 //..
                                 //,UserManager<IdentityUser> userManager,
                                 //SignInManager<IdentityUser> signinManger,
@@ -33,6 +35,7 @@ namespace Luu_DiplomaProject.Controllers
         {
             _categoryService = categoryService;
             _hamperService = hamperService;
+            _itemService = itemService;
             //..
             //_userManagerService = userManager;
             //_signInManagerService = signinManger;
@@ -81,67 +84,95 @@ namespace Luu_DiplomaProject.Controllers
             return View();
         }
 
-        #region Attempt 1
-
         [HttpGet]
         public IActionResult Shop(int categoryId, string search, decimal min, decimal max)
         {
             IEnumerable<Category> catList = _categoryService.GetAll();
-            IEnumerable<Hamper> hamList = _hamperService.GetAll();
+            IEnumerable<Hamper> hamList = _hamperService.GetAll().Where(h => h.Discontinued != true);
+            IEnumerable<Item> itemList = _itemService.GetAll();
 
-            IEnumerable<Hamper> hamSearch = _hamperService.Query(h => h.Name == search);
-            IEnumerable<Hamper> hamMinMax = _hamperService.Query(h => h.Price >= min && h.Price <= max);
-            IEnumerable<Hamper> hamCat = _hamperService.Query(h => h.CategoryId == categoryId);
+            #region Individual Filter
 
-            if (min < max && max != 0)
-            {
-                HomeShopViewModel vm = new HomeShopViewModel
-                {
-                    Hampers = hamMinMax,
-                    Categories = catList
-                };
-                return View(vm);
-            }
+            ////IEnumerable<Hamper> hamSearch = _hamperService.Query(h => h.Name == search && h.Discontinued != true);
+            //IEnumerable<Hamper> hamMinMax = _hamperService.Query(h => h.Price >= min && h.Price <= max && h.Discontinued != true);
+            //IEnumerable<Hamper> hamCat = _hamperService.Query(h => h.CategoryId == categoryId && h.Discontinued != true);
 
-            if (categoryId != 0)
-            {
-                HomeShopViewModel vm = new HomeShopViewModel
-                {
-                    Hampers = hamCat,
-                    Categories = catList
-                };
-                return View(vm);
-            }
-
-            //else if (search != null)
+            //if (min < max && max != 0)
             //{
             //    HomeShopViewModel vm = new HomeShopViewModel
             //    {
-            //        Hampers = hamSearch,
-            //        Categories = catList
+            //        Hampers = hamMinMax,
+            //        Categories = catList,
+            //        Items = itemList
             //    };
             //    return View(vm);
             //}
 
+            //else if (categoryId != 0)
+            //{
+            //    HomeShopViewModel vm = new HomeShopViewModel
+            //    {
+            //        Hampers = hamCat,
+            //        Categories = catList,
+            //        Items = itemList
+            //    };
+            //    return View(vm);
+            //}
+
+            ////else if (search != null)
+            ////{
+            ////    HomeShopViewModel vm = new HomeShopViewModel
+            ////    {
+            ////        Hampers = hamSearch,
+            ////        Categories = catList
+            ////    };
+            ////    return View(vm);
+            ////}
+
+            //else
+            //{
+            //    HomeShopViewModel vm = new HomeShopViewModel
+            //    {
+            //        Hampers = hamList,
+            //        Categories = catList,
+            //        Items = itemList
+            //    };
+            //    return View(vm);
+            //}
+
+            #endregion
+
+            #region Combined Filter
+
+            IEnumerable<Hamper> hamFilter = _hamperService.Query(h =>
+                                                                    h.Price >= min && h.Price <= max &&
+                                                                    h.CategoryId == categoryId &&
+                                                                    h.Discontinued != true
+                                                                );
+
+            if (min < max && max != 0 && categoryId != 0)
+            {
+                HomeShopViewModel vm = new HomeShopViewModel
+                {
+                    Hampers = hamFilter,
+                    Categories = catList,
+                    Items = itemList
+                };
+                return View(vm);
+            }
             else
             {
                 HomeShopViewModel vm = new HomeShopViewModel
                 {
                     Hampers = hamList,
-                    Categories = catList
+                    Categories = catList,
+                    Items = itemList
                 };
                 return View(vm);
             }
 
-            //HomeShopViewModel vm = new HomeShopViewModel
-            //{
-            //    Hampers = hamList,
-            //    Categories = catList
-            //};
-            //return View(vm);
+            #endregion
         }
-
-        #endregion
 
         [HttpGet("images/{fileName}")]
         public IActionResult Read(string fileName)
@@ -155,52 +186,26 @@ namespace Luu_DiplomaProject.Controllers
 
             return File(hamper.FileContent, hamper.ContentType);
         }
-        #region Attempt 2
 
-        //[HttpPost]
-        //public IActionResult Shop(int CatId, /*string search,*/ decimal min, decimal max)
-        //{
-        //    IEnumerable<Category> catList = _categoryService.GetAll();
-        //    IEnumerable<Hamper> hamList = _hamperService.GetAll();
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            IEnumerable<Category> categoryList = _categoryService.GetAll();
+            Hamper hamper = _hamperService.GetSingle(h => h.HamperId == id);
+            IEnumerable<Item> itemList = _itemService.GetAll().Where(i => i.HamperId == hamper.HamperId);
 
-        //    //IEnumerable<Hamper> hamSearch = _hamperService.Query(h => h.Name == search);
-        //    IEnumerable<Hamper> hamCat = _hamperService.Query(h => h.CategoryId == CatId);
-        //    IEnumerable<Hamper> hamMinMax = _hamperService.Query(h => h.Price >= min && h.Price <= max);
-
-        //    if (CatId > 0)
-        //    {
-        //        HomeShopViewModel vm = new HomeShopViewModel
-        //        {
-        //            Hampers = hamCat,
-        //            Categories = catList
-        //        };
-        //        return View(vm);
-        //    }
-        //    else if (min < max)
-        //    {
-        //        HomeShopViewModel vm = new HomeShopViewModel
-        //        {
-        //            Hampers = hamMinMax,
-        //            Categories = catList
-        //        };
-        //        return View(vm);
-        //    }
-        //    else
-        //    {
-        //        HomeShopViewModel vm = new HomeShopViewModel
-        //        {
-        //            Hampers = hamList,
-        //            Categories = catList
-        //        };
-        //        return View(vm);
-        //    }
-        //}
-
-        //[HttpGet]
-        //public IActionResult Shop()
-        //{
-        //    return RedirectToAction("Shop", "Home", new {  });
-        //}
-        #endregion
+            HomeDetailsViewModel vm = new HomeDetailsViewModel
+            {
+                HamperId = hamper.HamperId,
+                Name = hamper.Name,
+                Price = hamper.Price,
+                Discontinued = hamper.Discontinued,
+                CategoryId = hamper.CategoryId,
+                Categories = categoryList,
+                FileName = hamper.FileName,
+                Items = itemList
+            };
+            return View(vm);
+        }
     }
 }
