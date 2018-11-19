@@ -31,10 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\JS\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="compilerconfig.json" />
     <None Include="wwwroot\node_modules\bootstrap\dist\.DS_Store" />
     <None Include="wwwroot\node_modules\bootstrap\dist\css\.DS_Store" />

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 //..
 using System.ComponentModel.DataAnnotations;
 using Luu_DiplomaProject.Models;
+
 namespace Luu_DiplomaProject.ViewModels
 {
     public class HamperUpdateViewModel

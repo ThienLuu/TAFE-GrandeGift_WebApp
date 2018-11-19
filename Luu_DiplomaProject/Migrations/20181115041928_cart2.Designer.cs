@@ -4,14 +4,16 @@ using Luu_DiplomaProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Luu_DiplomaProject.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181115041928_cart2")]
+    partial class cart2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,11 +61,9 @@ namespace Luu_DiplomaProject.Migrations
 
                     b.Property<int?>("CustomerId");
 
-                    b.Property<int>("HamperId");
-
                     b.Property<int>("Quantity");
 
-                    b.Property<string>("SessionId");
+                    b.Property<int>("SessionId");
 
                     b.Property<decimal>("TotalPrice");
 
@@ -71,9 +71,7 @@ namespace Luu_DiplomaProject.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("HamperId");
-
-                    b.ToTable("TblCart");
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("Luu_DiplomaProject.Models.Category", b =>
@@ -130,6 +128,8 @@ namespace Luu_DiplomaProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CartId");
+
                     b.Property<int>("CategoryId");
 
                     b.Property<long>("ContentSize");
@@ -144,9 +144,13 @@ namespace Luu_DiplomaProject.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("OrderDetails");
+
                     b.Property<decimal>("Price");
 
                     b.HasKey("HamperId");
+
+                    b.HasIndex("CartId");
 
                     b.HasIndex("CategoryId");
 
@@ -170,44 +174,6 @@ namespace Luu_DiplomaProject.Migrations
                     b.HasIndex("HamperId");
 
                     b.ToTable("Item");
-                });
-
-            modelBuilder.Entity("Luu_DiplomaProject.Models.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId");
-
-                    b.Property<DateTime>("OrderDateTime");
-
-                    b.Property<decimal>("OrderPrice");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("TblOrder");
-                });
-
-            modelBuilder.Entity("Luu_DiplomaProject.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("HamperId");
-
-                    b.Property<int>("OrderId");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<decimal>("TotalPrice");
-
-                    b.HasKey("OrderDetailId");
-
-                    b.HasIndex("HamperId");
-
-                    b.ToTable("TblOrderDetail");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -384,15 +350,15 @@ namespace Luu_DiplomaProject.Migrations
                     b.HasOne("Luu_DiplomaProject.Models.Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId");
-
-                    b.HasOne("Luu_DiplomaProject.Models.Hamper")
-                        .WithMany("Carts")
-                        .HasForeignKey("HamperId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Luu_DiplomaProject.Models.Hamper", b =>
                 {
+                    b.HasOne("Luu_DiplomaProject.Models.Cart")
+                        .WithMany("Hampers")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Luu_DiplomaProject.Models.Category")
                         .WithMany("Hampers")
                         .HasForeignKey("CategoryId")
@@ -403,14 +369,6 @@ namespace Luu_DiplomaProject.Migrations
                 {
                     b.HasOne("Luu_DiplomaProject.Models.Hamper")
                         .WithMany("Items")
-                        .HasForeignKey("HamperId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Luu_DiplomaProject.Models.OrderDetail", b =>
-                {
-                    b.HasOne("Luu_DiplomaProject.Models.Hamper")
-                        .WithMany("OrderDetails")
                         .HasForeignKey("HamperId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

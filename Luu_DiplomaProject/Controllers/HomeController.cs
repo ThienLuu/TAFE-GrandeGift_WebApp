@@ -8,64 +8,53 @@ using Luu_DiplomaProject.ViewModels;
 using Luu_DiplomaProject.Models;
 using Luu_DiplomaProject.Services;
 using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace Luu_DiplomaProject.Controllers
 {
     public class HomeController : Controller
     {
+        private UserManager<IdentityUser> _userManagerService;
+        private SignInManager<IdentityUser> _signInManagerService;
         private IDataService<Category> _categoryService;
         private IDataService<Hamper> _hamperService;
         private IDataService<Item> _itemService;
-        //..
-        //private UserManager<IdentityUser> _userManagerService;
-        //private SignInManager<IdentityUser> _signInManagerService;
-        //private IDataService<Customer> _customerService;
-        //private IDataService<Address> _addressService;
+        //private IDataService<Cart> _cartService;
+        private IDataService<Customer> _customerService;
+        private IDataService<OrderDetail> _orderDetailService;
+        private IDataService<Order> _orderService;
 
-        public HomeController(IDataService<Category> categoryService,
+        public HomeController(UserManager<IdentityUser> userManager,
+                                SignInManager<IdentityUser> signinManger,
+                                IDataService<Category> categoryService,
                                 IDataService<Hamper> hamperService,
-                                IDataService<Item> itemService
-                                //..
-                                //,UserManager<IdentityUser> userManager,
-                                //SignInManager<IdentityUser> signinManger,
-                                //IDataService<Customer> customerService,
-                                //IDataService<Address> addressService
+                                IDataService<Item> itemService,
+                                //IDataService<Cart> cartService
+                                IDataService<OrderDetail> orderDetailService,
+                                IDataService<Order> orderService
                                 )
         {
+            _userManagerService = userManager;
+            _signInManagerService = signinManger;
             _categoryService = categoryService;
             _hamperService = hamperService;
             _itemService = itemService;
-            //..
-            //_userManagerService = userManager;
-            //_signInManagerService = signinManger;
-            //_customerService = customerService;
-            //_addressService = addressService;
+            //_cartService = cartService;
+            _orderDetailService = orderDetailService;
+            _orderService = orderService;
         }
         public IActionResult Index()
         {
-            //string id = _userManagerService.GetUserId(User);
-            //Customer customer = _customerService.GetSingle(c => c.UserId == id);
-            //IEnumerable<Address> list = _addressService.GetAll().Where(a => a.CustomerId == customer.CustomerId);
+            IEnumerable<Hamper> hampers = _hamperService.GetAll().Take(3);
+            IEnumerable<Item> items = _itemService.GetAll();
 
-            //if (customer != null)
-            //{
-            //    AccountUpdateViewModel vm = new AccountUpdateViewModel
-            //    {
-            //        FirstName = customer.FirstName,
-            //        LastName = customer.LastName,
-            //        DOB = customer.DOB,
-            //        Addresses = list,
-            //        CustomerId = customer.CustomerId
-            //    };
+            HomeIndexViewModel vm = new HomeIndexViewModel
+            {
+                Hampers = hampers,
+                Items = items
+            };
 
-            //    return View(vm);
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            return View();
+            return View(vm);
         }
 
         [Authorize(Roles = "Admin")]
@@ -145,9 +134,9 @@ namespace Luu_DiplomaProject.Controllers
             #region Combined Filter
 
             IEnumerable<Hamper> hamFilter = _hamperService.Query(h =>
-                                                                    h.Price >= min && h.Price <= max &&
-                                                                    h.CategoryId == categoryId &&
-                                                                    h.Discontinued != true
+                                                                    (h.Price >= min && h.Price <= max) &&
+                                                                    (h.CategoryId == categoryId) &&
+                                                                    (h.Discontinued != true)
                                                                 );
 
             if (min < max && max != 0 && categoryId != 0)
@@ -205,6 +194,50 @@ namespace Luu_DiplomaProject.Controllers
                 FileName = hamper.FileName,
                 Items = itemList
             };
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult Create(HomeShopViewModel vm)
+        {
+            //string sessionId = this.HttpContext.Session.Id;
+
+            //decimal total = vm.Quantity * vm.Price;
+
+            //if (ModelState.IsValid)
+            //{
+            //    Cart cart = new Cart
+            //    {
+            //        SessionId = sessionId,
+            //        Quantity = vm.Quantity,
+            //        TotalPrice = total,
+            //        HamperId = vm.HamperId
+            //    };
+
+            //    _cartService.Create(cart);
+            //}
+            //return RedirectToAction("Shop", "Home");
+            decimal total = vm.Quantity * vm.Price;
+
+            string id = _userManagerService.GetUserId(User);
+            Customer customer = _customerService.GetSingle(c => c.UserId == id);
+            Order order = _orderService.GetSingle(o => o.CustomerId == customer.CustomerId);
+
+            if (ModelState.IsValid)
+            {
+                OrderDetail orderDetail = new OrderDetail
+                {
+                    OrderId = order.OrderId,
+                    Quantity = vm.Quantity,
+                    TotalPrice = total,
+                    HamperId = vm.HamperId
+                };
+
+                _orderDetailService.Create(orderDetail);
+
+                return RedirectToAction("Shop", "Home");
+            }
+
             return View(vm);
         }
     }

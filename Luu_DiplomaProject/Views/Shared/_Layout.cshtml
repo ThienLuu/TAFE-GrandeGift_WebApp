@@ -1,6 +1,4 @@
-﻿@*@model*@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
@@ -9,8 +7,12 @@
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/CSS/SocialMediaButtons.css" rel="stylesheet" />
-    <link href="~/SCSS/ShoppingCart.css" rel="stylesheet" />
+    <link href="~/CSS/SpecialCarousel.css" rel="stylesheet" />
+    <link href="~/CSS/ShoppingCart.css" rel="stylesheet" />
     <style>
+        body {
+            background-color: grey
+        }
         /*table stripe background*/
         .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
             background-color: grey;
@@ -22,46 +24,7 @@
     </style>
 </head>
 <body>
-    @*<div class="row bg-dark">
-            <div class="col-md-4 justify-content-start justify-content-md-center">
-                <a href="#" class="fa fa-facebook"></a>
-                <a href="#" class="fa fa-twitter"></a>
-                <a href="#" class="fa fa-youtube"></a>
-                <a href="#" class="fa fa-instagram"></a>
-            </div>
-            <div class="col-md-4">
-                <a href="#">
-                    <img src="#" alt="Truck image" />
-                </a>
-                <h6>Free Delivery for over $99 Australia wide</h6>
-                <a href="#">
-                    <img src="#" alt="Time image" />
-                </a>
-                <h6>Same day delivery option</h6>
-            </div>
-            <div class="col-md-4 justify-content-end justify-content-md-center">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="content-text float-right">
-                        <h6>Welcome: @User.Identity.Name</h6>
-                    </div>
-                    <div class="content-text float-right">
-                        <span id="content-text">
-                            <a href="@Url.Action("Logout", "Logout", "Account")">Logout</a>
-                        </span>
-                    </div>
-                }
-                else
-                {
-                    <a class="nav-link float-right" href="@Url.Action("Login", "Account")">Login</a>
-                    <h6 class="float-right py-2">|</h6>
-                    <a class="nav-link float-right" href="@Url.Action("Register", "Account")">Register</a>
-                }
-            </div>
-        </div>*@
-
-
-    <div class="row bg-dark text-light">
+    <div class="row bg-dark text-light pt-3">
         <div class="col-md-4">
             <div class="d-flex justify-content-md-start justify-content-center p-2">
                 <a href="#" class="fa fa-facebook"></a>
@@ -84,55 +47,46 @@
                         <h6>Same day delivery option</h6>
                     </figcaption>
                 </figure>
-                @*<a href="#">
-                        <img src="~/Images/delivery-truck.png" alt="Truck Image" width="50"/>
-                    </a>
-                    <h6>$7.50 Flat delivery rate</h6>
-                    <a href="#">
-                        <img src="~/Images/24-hours-delivery.png" alt="Time Image" width="50"/>
-                    </a>
-                    <h6>Same day delivery option</h6>*@
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="float-right justify-content-md-end justify-content-center pt-3">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <h4>Welcome: @User.Identity.Name</h4>
-                    <a class="nav-link float-right" href="@Url.Action("Logout", "Account")">Logout</a>
-                }
-                else
-                {
-                    <a class="nav-link float-right" href="@Url.Action("Login", "Account")">Login</a>
-                    <h6 class="float-right py-2">|</h6>
-                    <a class="nav-link float-right" href="@Url.Action("Register", "Account")">Register</a>
-                }
+            @*<div class="float-right justify-content-md-end justify-content-center pt-3">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <h4>Welcome: @User.Identity.Name</h4>
+                <a class="nav-link float-right" href="@Url.Action("Logout", "Account")">Logout</a>
+            }
+            else
+            {
+                <a class="nav-link float-right" href="@Url.Action("Login", "Account")">Login</a>
+                <h6 class="float-right py-2">|</h6>
+                <a class="nav-link float-right" href="@Url.Action("Register", "Account")">Register</a>
+            }
+        </div>*@
+            @if (User.Identity.IsAuthenticated)
+            {
+            <div class="d-flex justify-content-center">
+                <h1>Welcome: @User.Identity.Name</h1>
             </div>
+            <div class="d-flex justify-content-center">
+                <a class="nav-link float-right h5 text-info" href="@Url.Action("Logout", "Account")">Logout</a>
+            </div>
+            }
+            else
+            {
+            <div class="d-flex justify-content-md-end justify-content-center pt-md-3">
+                <span>
+                    <a class="nav-link float-right h5 text-info" href="@Url.Action("Login", "Account")">Login</a>
+                    <a class="nav-link float-right h5 text-info" href="@Url.Action("Register", "Account")">Register</a>
+                </span>
+            </div>
+            }
         </div>
-        @*<div class="col-md-4">
-                <div class="col d-flex justify-content-md-end justify-content-center pt-3">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div class="row float-right float-md-none">
-                            <h6>Welcome: @User.Identity.Name</h6>
-                        </div>
-                        <div class="row float-right float-md-none">
-                                <a href="@Url.Action("Logout", "Logout", "Account")">Logout</a>
-                        </div>
-                    }
-                    else
-                    {
-                        <a class="nav-link float-right" href="@Url.Action("Login", "Account")">Login</a>
-                        <h6 class="float-right py-2">|</h6>
-                        <a class="nav-link float-right" href="@Url.Action("Register", "Account")">Register</a>
-                    }
-                </div>
-            </div>*@
     </div>
-    <div class="row bg-info" style="height: 250px">
-        <h1 class="mx-auto">Grande Gift</h1>
-    </div>
+    @*<div class="row bg-info" style="height: 250px">
+            <h1 class="mx-auto">Grande Gift</h1>
+        </div>*@
 
     @*<div class="col-md-4">
                     <div class="d-flex justify-content-md-end justify-content-center pt-3">
@@ -159,44 +113,42 @@
                 </div>
         </div>*@
 
-    <!--CAROUSEL-->
-    @*<div style="height:250px; z-index:-1" id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="mx-auto d-block" style="object-fit: cover;" width="500" src="~/Images/hamperSample.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="mx-auto d-block" style="object-fit: cover;" width="500" src="~/Images/hamperSample.jpg" alt="First slide">
-                </div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="d-flex h-50 align-items-center justify-content-center" style="position:absolute; z-index:100; width: 100%; padding-top: 80px">
+                <h1 class="text-warning">Grande Gift</h1>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>*@
-    @*<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="mx-auto d-block img-fluid" width="220" src="~/Images/hamperSample.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="mx-auto d-block img-fluid" width="220" src="~/Images/hamperSample.jpg" alt="Second slide">
-                </div>
+            <div class="d-flex h-50 align-items-center justify-content-center" style="position:absolute; z-index:100; width: 100%; padding-top: 165px">
+                <a class="btn btn-info" href="@Url.Action("Shop", "Home")">Shop Hampers</a>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>*@
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/Images/nursery-decoration-1963815_1920.jpg" data-color="lightblue" alt="First Image">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/Images/christmas-1911637_1920.jpg" data-color="firebrick" alt="Second Image">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/Images/food-1932466_1920.jpg" data-color="violet" alt="Third Image">
+            </div>
+        </div>
+    </div>
+
+    <!--SHOPPING CART LIST-->
+    <div class="row" style="position: absolute; right: 20px; z-index: 100">
+        <div class="dropdown-shop">
+            @await Component.InvokeAsync("CartSummary")
+        </div>
+    </div>
+    <!--SHOPPING CART LIST-->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -206,48 +158,53 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="@Url.Action("Index", "Home")">Home <!--<span class="sr-only">(current)</span>--></a>
                 </li>
-                <li class="nav-item dropdown d-inline bg-info">
-                    <a class="nav-link dropdown-toggle" href="@Url.Action("Shop","Home")" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Shop
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <!--Top 10 Categories-->
-                        <a class="dropdown-item" href="@Url.Action("","")">Test</a>
-                    </div>
+                @*<li class="nav-item dropdown d-inline bg-info">
+                        <a class="nav-link dropdown-toggle" href="@Url.Action("Shop","Home")" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Shop
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <!--Top 10 Categories-->
+                            <a class="dropdown-item" href="@Url.Action("","")">Test</a>
+                        </div>
+                    </li>*@
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Shop", "Home")">Shop</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("About","Home")">About Us</a>
+                    <a class="nav-link" href="@Url.Action("About", "Home")">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a>
+                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact Us</a>
                 </li>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    if (User.IsInRole("Admin"))
+                @{
+                    if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item">
-                            <a class="nav-link bg-danger" href="@Url.Action("Admin","Home")">Admin Interface</a>
-                        </li>
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link bg-danger" href="@Url.Action("Admin", "Home")">Admin Interface</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item dropdown d-inline bg-danger">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Account
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="@Url.Action("Update", "Account")">Profile</a>
+                                    <a class="dropdown-item disabled" href="#">Change Password</a>
+                                    <a class="dropdown-item disabled" href="#">Payment Details</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("Logout", "Account")">Logout</a>
+                                </div>
+                            </li>
+                        }
                     }
                     else
                     {
-                        <li class="nav-item dropdown d-inline bg-danger">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Account
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="@Url.Action("Update","Account")">Profile</a>
-                                <a class="dropdown-item disabled" href="#">Change Password</a>
-                                <a class="dropdown-item disabled" href="#">Payment Details</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("Logout", "Account")">Logout</a>
-                            </div>
-                        </li>
-                    }
-                }
-                else
-                {
 
+                    }
                 }
             </ul>
             <!--SEARCH-->
@@ -255,58 +212,9 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>*@
-            <!--SHOPPING CART-->
-            <!--SHOPPING CART PICTURE-->
-            @*<ul class="float-md-none">
-                    <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><!--COUNT NUMBER OF ITEMS-->0<!--COUNT NUMBER OF ITEMS--></span></a></li>
-                </ul>*@
         </div>
     </nav>
-    <!--SHOPPING CART LIST-->
-    <div class="container" style="position:absolute; right: 0">
-        @if (User.Identity.IsAuthenticated)
-        {
-            @*<div class="shopping-cart">
-                    <div class="shopping-cart-header">
-                        <i class="fa fa-shopping-cart"></i><span class="badge"><!--COUNT NUMBER OF ITEMS-->0<!--COUNT NUMBER OF ITEMS--></span>
-                        <div class="shopping-cart-total">
-                            <span class="lighter-text">Total:</span>
-                            <span class="main-color-text"><!--TOTAL PRICE-->0<!--TOTAL PRICE--></span>
-                        </div>
-                    </div> <!--end shopping-cart-header -->
 
-                    <ul class="shopping-cart-items" style="list-style-type: none;">
-                        <!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
-                        @foreach (var item in collection)
-                            {
-
-                            }
-                        <!--SAMPLE-->
-                        <li class="clearfix">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                                <span class="item-name">Sony DSC-RX100M III</span>
-                                <span class="item-price">$849.99</span>
-                                <span class="item-quantity">Quantity: 01</span>
-                            </li>
-                        <!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
-                    </ul>
-
-                    <a href="#" class="cart-button">Checkout</a>
-                </div>*@
-        }
-        else
-        {
-            @*<div class="shopping-cart">
-                    <i class="fa fa-shopping-cart"></i><span class="badge">0</span>
-                    <div class="shopping-cart-total">
-                        <span class="lighter-text">Total:</span>
-                        <span class="main-color-text">0</span>
-                    </div>
-                    <a href="@Url.Action("Register", "Account")" class="cart-button">Register to use Shopping Cart</a>
-                </div>*@
-        }
-    </div>
-    <!--SHOPPING CART LIST-->
     <!--CONTENT-->
     <div class="container bg-light p-4">
         @RenderBody()
@@ -348,17 +256,7 @@
     <script src="~/node_modules/jquery/dist/jquery.js"></script>
     <script src="~/node_modules/popper.js/dist/umd/popper.js"></script>
     <script src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script>
-        (function () {
-            $("#cart").ready(function () {
-                $(".shopping-cart").hide();
-            });
-
-            $("#cart").on("click", function () {
-                $(".shopping-cart").fadeToggle("fast");
-            });
-
-        })();
-    </script>
+    <script src="~/JS/SpecialCarousel.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

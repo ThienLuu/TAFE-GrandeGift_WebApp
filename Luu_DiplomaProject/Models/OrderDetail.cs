@@ -12,5 +12,6 @@ namespace Luu_DiplomaProject.Models
         public int HamperId { get; set; }
         public int Quantity { get; set; }
         public decimal TotalPrice { get; set; }
+        //public ICollection<Hamper> Hampers { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using Luu_DiplomaProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Luu_DiplomaProject.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181115054847_cart4")]
+    partial class cart4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +65,7 @@ namespace Luu_DiplomaProject.Migrations
 
                     b.Property<int>("Quantity");
 
-                    b.Property<string>("SessionId");
+                    b.Property<int>("SessionId");
 
                     b.Property<decimal>("TotalPrice");
 
@@ -144,11 +146,17 @@ namespace Luu_DiplomaProject.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("OrderDetailId");
+
+                    b.Property<int>("OrderDetails");
+
                     b.Property<decimal>("Price");
 
                     b.HasKey("HamperId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrderDetailId");
 
                     b.ToTable("TblHamper");
                 });
@@ -204,8 +212,6 @@ namespace Luu_DiplomaProject.Migrations
                     b.Property<decimal>("TotalPrice");
 
                     b.HasKey("OrderDetailId");
-
-                    b.HasIndex("HamperId");
 
                     b.ToTable("TblOrderDetail");
                 });
@@ -397,20 +403,16 @@ namespace Luu_DiplomaProject.Migrations
                         .WithMany("Hampers")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Luu_DiplomaProject.Models.OrderDetail")
+                        .WithMany("Hampers")
+                        .HasForeignKey("OrderDetailId");
                 });
 
             modelBuilder.Entity("Luu_DiplomaProject.Models.Item", b =>
                 {
                     b.HasOne("Luu_DiplomaProject.Models.Hamper")
                         .WithMany("Items")
-                        .HasForeignKey("HamperId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Luu_DiplomaProject.Models.OrderDetail", b =>
-                {
-                    b.HasOne("Luu_DiplomaProject.Models.Hamper")
-                        .WithMany("OrderDetails")
                         .HasForeignKey("HamperId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

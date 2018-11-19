@@ -21,6 +21,6 @@ namespace Luu_DiplomaProject.Models
         //public string Country { get; set; }
         //public ICollection<CustomerHamper> CustomerHampers { get; set; }
         public ICollection<Address> Addresses { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Cart> Orders { get; set; }
     }
 }

@@ -45,33 +45,57 @@ namespace Luu_DiplomaProject.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create(IFormFile upload, HamperCreateViewModel vm)
         {
-            BinaryReader binaryReader = new BinaryReader(upload.OpenReadStream());
-            byte[] fileData = binaryReader.ReadBytes((int)upload.Length);
-            var fileName = Path.GetFileName(upload.FileName);
             IEnumerable<Category> list = _categoryService.GetAll();
 
-            if (ModelState.IsValid)
+            if (upload != null)
             {
-                Hamper hamper = new Hamper
+                if (ModelState.IsValid)
                 {
-                    Name = vm.Name,
-                    Price = vm.Price,
-                    Discontinued = vm.Discontinued,
-                    CategoryId = vm.CategoryId,
-                    //Image
-                    FileName = fileName,
-                    ContentSize = upload.Length,
-                    ContentType = upload.ContentType,
-                    FileContent = fileData
-                };
+                    BinaryReader binaryReader = new BinaryReader(upload.OpenReadStream());
+                    byte[] fileData = binaryReader.ReadBytes((int)upload.Length);
+                    var fileName = Path.GetFileName(upload.FileName);
 
-                _hamperService.Create(hamper);
+                    Hamper hamper = new Hamper
+                    {
+                        Name = vm.Name,
+                        Price = vm.Price,
+                        Discontinued = vm.Discontinued,
+                        CategoryId = vm.CategoryId,
+                        //Image
+                        FileName = fileName,
+                        ContentSize = upload.Length,
+                        ContentType = upload.ContentType,
+                        FileContent = fileData
+                    };
 
-                //IEnumerable<Hamper> hamperId = _hamperService.GetSingle(h => h.HamperId == );
+                    _hamperService.Create(hamper);
 
-                //return RedirectToAction("Details", "Hamper");
-                return RedirectToAction("Create", "Item", new { id = hamper.HamperId });
+                    vm.Categories = list;
+
+                    return RedirectToAction("Create", "Item", new { id = hamper.HamperId });
+                }
             }
+
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    Hamper hamper = new Hamper
+                    {
+                        Name = vm.Name,
+                        Price = vm.Price,
+                        Discontinued = vm.Discontinued,
+                        CategoryId = vm.CategoryId,
+                    };
+
+                    _hamperService.Create(hamper);
+
+                    vm.Categories = list;
+
+                    return RedirectToAction("Create", "Item", new { id = hamper.HamperId });
+                }
+            }
+
             vm.Categories = list;
 
             return View(vm);
@@ -118,24 +142,55 @@ namespace Luu_DiplomaProject.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult Update(HamperUpdateViewModel vm)
+        public IActionResult Update(IFormFile upload, HamperUpdateViewModel vm)
         {
             IEnumerable<Category> list = _categoryService.GetAll();
             Hamper hamper = _hamperService.GetSingle(h => h.HamperId == vm.HamperId);
 
-            if (ModelState.IsValid && hamper != null)
+            if (upload != null)
             {
-                hamper.HamperId = vm.HamperId;
-                hamper.Name = vm.Name;
-                hamper.Price = vm.Price;
-                hamper.Discontinued = vm.Discontinued;
-                hamper.CategoryId = vm.CategoryId;
+                if (ModelState.IsValid)
+                {
+                    BinaryReader binaryReader = new BinaryReader(upload.OpenReadStream());
+                    byte[] fileData = binaryReader.ReadBytes((int)upload.Length);
+                    var fileName = Path.GetFileName(upload.FileName);
 
-                _hamperService.Update(hamper);
+                    hamper.HamperId = vm.HamperId;
+                    hamper.Name = vm.Name;
+                    hamper.Price = vm.Price;
+                    hamper.Discontinued = vm.Discontinued;
+                    hamper.CategoryId = vm.CategoryId;
 
-                return RedirectToAction("Details", "Hamper");
+                    //Image
+                    hamper.FileName = fileName;
+                    hamper.ContentSize = upload.Length;
+                    hamper.ContentType = upload.ContentType;
+                    hamper.FileContent = fileData;
+
+                    _hamperService.Update(hamper);
+
+                    return RedirectToAction("Details", "Hamper");
+                }
+                vm.Categories = list;
             }
-            vm.Categories = list;
+
+            else
+            {
+                if (ModelState.IsValid && hamper != null)
+                {
+                    hamper.HamperId = vm.HamperId;
+                    hamper.Name = vm.Name;
+                    hamper.Price = vm.Price;
+                    hamper.Discontinued = vm.Discontinued;
+                    hamper.CategoryId = vm.CategoryId;
+
+                    _hamperService.Update(hamper);
+
+                    return RedirectToAction("Details", "Hamper");
+                }
+                vm.Categories = list;
+            }
+            
 
             return View(vm);
         }

@@ -1,0 +1,47 @@
+﻿@model CartDetailViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Cart Details</h2>
+
+
+@{
+    int totalItems = 0;
+    decimal totalPrice = 0;
+}
+
+@foreach (var item in Model.Carts)
+{
+    foreach (var hamper in Model.Hampers)
+    {
+        @if (hamper.HamperId == item.HamperId)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    @if (hamper.FileName == null)
+                    {
+                        <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
+                    }
+                    else
+                    {
+                        <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
+                    }
+                </div>
+                <div class="col-md-4">
+                    <h5 class="item-name">@hamper.Name</h5>
+                </div>
+                <div class="col-md-4">
+                    <h4>@item.Quantity</h4>
+                </div>
+            </div>
+            totalItems++;
+            totalPrice += item.TotalPrice;
+        }
+    }
+}
+
+<div class="row">
+    <h2>Total: @totalPrice</h2>
+</div>

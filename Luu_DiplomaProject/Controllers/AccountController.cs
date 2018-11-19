@@ -19,16 +19,19 @@ namespace Luu_DiplomaProject.Controllers
         private SignInManager<IdentityUser> _signInManagerService;
         private IDataService<Customer> _customerService;
         private IDataService<Address> _addressService;
+        private IDataService<Order> _orderService;
 
         public AccountController(UserManager<IdentityUser> userManager,
                                  SignInManager<IdentityUser> signinManger,
                                  IDataService<Customer> customerService,
-                                 IDataService<Address> addressService)
+                                 IDataService<Address> addressService,
+                                 IDataService<Order> orderService)
         {
             _userManagerService = userManager;
             _signInManagerService = signinManger;
             _customerService = customerService;
             _addressService = addressService;
+            _orderService = orderService;
         }
 
         #region Register
@@ -87,6 +90,7 @@ namespace Luu_DiplomaProject.Controllers
             {
                 ReturnUrl = returnUrl
             };
+
             return View(vm);
         }
 
@@ -110,6 +114,18 @@ namespace Luu_DiplomaProject.Controllers
                         }
                         else
                         {
+                            //NOT ABLE TO GET USER ID, IS NULL
+
+                            //string id = _userManagerService.GetUserId(User);
+                            //Customer customer = _customerService.GetSingle(c => c.UserId == id);
+
+                            //Order order = new Order
+                            //{
+                            //    CustomerId = customer.CustomerId,
+                            //    //OrderDateTime = new DateTime(0000, 00, 00),
+                            //    //OrderPrice = 0
+                            //};
+                            //_orderService.Create(order);
                             return RedirectToAction("Index", "Home");
                         }
                     }

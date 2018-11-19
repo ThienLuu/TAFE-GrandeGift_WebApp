@@ -22,9 +22,26 @@
     <tr>
         <td>@hamper.Name</td>
         <td>@hamper.Price</td>
-        <td>[Images]</td>
-        <td>@hamper.Discontinued</td>
-        @*-=- OVER HERE -=-*@
+        <td>
+            @if (hamper.FileName == null)
+            {
+                <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="200" />
+            }
+            else
+            {
+                <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="200" />
+            }
+        </td>
+        <td>
+            @if (hamper.Discontinued == true)
+            {
+            <p>Discontinued</p>
+            }
+            else
+            {
+                <p></p>
+            }
+        </td>
         @foreach (var category in Model.Categories)
         {
             if (hamper.CategoryId == category.CategoryId)

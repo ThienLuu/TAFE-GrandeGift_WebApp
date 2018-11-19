@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+//..
+using Luu_DiplomaProject.Models;
 
 namespace Luu_DiplomaProject.Models
 {
@@ -9,10 +11,10 @@ namespace Luu_DiplomaProject.Models
     {
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
-        //public int MyProperty { get; set; } shopping cart id???
         public DateTime OrderDateTime { get; set; }
         //public int AddressId { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        //ORDER TOTAL PRICE
         public decimal OrderPrice { get; set; }
+        ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

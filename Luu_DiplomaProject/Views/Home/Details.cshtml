@@ -7,7 +7,14 @@
 <h2>Hamper Details</h2>
 
 <div class="col-9">
-    <img src="~/Images/@Model.FileName" alt="@Model.FileName" height="500" />
+    @if (Model.FileName == null)
+    {
+        <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="200" />
+    }
+    else
+    {
+        <img src="~/Images/@Model.FileName" alt="@Model.FileName" height="200" />
+    }
 </div>
 <div class="col-3">
     <h2>@Model.Name</h2>

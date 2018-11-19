@@ -21,13 +21,15 @@ namespace Luu_DiplomaProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSession();
             services.AddScoped<IDataService<Customer>, DataService<Customer>>();
             services.AddScoped<IDataService<Category>, DataService<Category>>();
             services.AddScoped<IDataService<Hamper>, DataService<Hamper>>();
             services.AddScoped<IDataService<Address>, DataService<Address>>();
-            services.AddScoped<IDataService<Order>, DataService<Order>>();
-            services.AddScoped<IDataService<OrderDetail>, DataService<OrderDetail>>();
             services.AddScoped<IDataService<Item>, DataService<Item>>();
+            services.AddScoped<IDataService<Order>,DataService<Order>>();
+            services.AddScoped<IDataService<OrderDetail>, DataService<OrderDetail>>();
+            services.AddScoped<IDataService<Cart>, DataService<Cart>>();
 
             services.AddIdentity<IdentityUser, IdentityRole>
             (
@@ -53,6 +55,7 @@ namespace Luu_DiplomaProject
             }
 
             app.UseStaticFiles();
+            app.UseSession();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
 
