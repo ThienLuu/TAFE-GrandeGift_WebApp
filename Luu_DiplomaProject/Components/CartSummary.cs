@@ -55,7 +55,8 @@ namespace Luu_DiplomaProject.Components
 
             return View(vm);
 
-            //string sessionId = this.HttpContext.Session.Id;
+
+            string sessionId = this.HttpContext.Session.Id;
             //IEnumerable<Cart> carts = _cartService.GetAll();
             //IEnumerable<Hamper> hampers = _hamperService.GetAll();
             ////IEnumerable<Cart> carts = _cartService.GetAll().Where(c => c.SessionId == sessionId);

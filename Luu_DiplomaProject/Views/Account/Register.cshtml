@@ -4,56 +4,59 @@
     ViewData["Title"] = "Register";
 }
 
-<h2>Register</h2>
-
-<form asp-controller="Account" asp-action="Register" method="post">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" placeholder="Username"/>
-        <span asp-validation-for="Username" class="text-danger"></span>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label asp-for="FirstName"></label>
-            <input asp-for="FirstName" class="form-control" placeholder="First name"/>
-            <span asp-validation-for="FirstName" class="text-danger"></span>
+<div class="mx-auto" style="width: 500px">
+    <h2>Register</h2>
+    <form asp-controller="Account" asp-action="Register" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" placeholder="Username" />
+            <span asp-validation-for="Username" class="text-danger"></span>
         </div>
-        <div class="col">
-            <label asp-for="LastName"></label>
-            <input asp-for="LastName" class="form-control" placeholder="Last name"/>
-            <span asp-validation-for="LastName" class="text-danger"></span>
+        <div class="row">
+            <div class="col">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" placeholder="First name" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" placeholder="Last name" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div>
-        <label asp-for="DOB"></label>
-        <input asp-for="DOB" type="date" class="form-control" />
-        <span asp-validation-for="DOB" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="ConfirmEmail"></label>
-        <input asp-for="ConfirmEmail" class="form-control" />
-        <span asp-validation-for="ConfirmEmail" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" />
+        <div>
+            <label asp-for="DOB"></label>
+            <input asp-for="DOB" type="date" class="form-control" />
+            <span asp-validation-for="DOB" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="ConfirmEmail"></label>
+            <input asp-for="ConfirmEmail" class="form-control" />
+            <span asp-validation-for="ConfirmEmail" class="text-danger"></span>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="ConfirmPassword">Confirm Password</label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
         <small class="form-text text-muted">
             Your password must be 6+ characters long, contain 1 capital and lowercase letters, numbers and special characters.
         </small>
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="ConfirmPassword">Confirm Password</label>
-        <input asp-for="ConfirmPassword" class="form-control" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
-    <div>
-        <input type="submit" value="Register" class="btn" />
-    </div>
-</form>
+        <div class="text-center pt-3">
+            <input type="submit" value="Register" class="btn w-100" />
+        </div>
+    </form>
+</div>

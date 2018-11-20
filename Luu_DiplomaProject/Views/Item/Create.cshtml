@@ -3,7 +3,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create Item</h2>
+<h2>Add Item</h2>
 
 <form asp-controller="Item" asp-action="Create" method="post">
     <div asp-validation-summary="ModelOnly"></div>
@@ -11,17 +11,17 @@
     <div class="row">
         <div>
             <label asp-for="Name">Name:</label>
-            <input asp-for="Name" class="form-control" placeholder="City" />
+            <input asp-for="Name" class="form-control" placeholder="Item Name" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Size">Size:</label>
-            <input asp-for="Size" class="form-control" placeholder="State" />
+            <input asp-for="Size" class="form-control" placeholder="Item Size" />
             <span asp-validation-for="Size" class="text-danger"></span>
         </div>
     </div>
     <div>
-        <input type="submit" value="Add Address" class="btn" />
+        <input type="submit" value="Add Item" class="btn" />
     </div>
 </form>
 

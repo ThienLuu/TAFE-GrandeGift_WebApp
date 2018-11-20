@@ -9,14 +9,17 @@
     <link href="~/CSS/SocialMediaButtons.css" rel="stylesheet" />
     <link href="~/CSS/SpecialCarousel.css" rel="stylesheet" />
     <link href="~/CSS/ShoppingCart.css" rel="stylesheet" />
+    <link href="~/CSS/ReadableTable.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+    <link href="~/CSS/Font.css" rel="stylesheet" />
     <style>
+        /*PAGE BACK BACKGROUND COLOR*/
         body {
             background-color: grey
         }
-        /*table stripe background*/
-        .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-            background-color: grey;
-        }
+        /*PAGE BACK BACKGROUND COLOR*/
+
+
         /*THIS IS THE DROP DOWN *NOT WORKING**/
         ul.nav li.dropdown:hover ul.dropdown-menu {
             display: block;
@@ -24,6 +27,7 @@
     </style>
 </head>
 <body>
+    <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=HEADER=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
     <div class="row bg-dark text-light pt-3">
         <div class="col-md-4">
             <div class="d-flex justify-content-md-start justify-content-center p-2">
@@ -51,81 +55,38 @@
         </div>
 
         <div class="col-md-4">
-            @*<div class="float-right justify-content-md-end justify-content-center pt-3">
             @if (User.Identity.IsAuthenticated)
             {
-                <h4>Welcome: @User.Identity.Name</h4>
-                <a class="nav-link float-right" href="@Url.Action("Logout", "Account")">Logout</a>
+                <div class="d-flex justify-content-center">
+                    <h1>Welcome: @User.Identity.Name</h1>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="nav-link float-right h5 text-info" href="@Url.Action("Logout", "Account")">Logout</a>
+                </div>
             }
             else
             {
-                <a class="nav-link float-right" href="@Url.Action("Login", "Account")">Login</a>
-                <h6 class="float-right py-2">|</h6>
-                <a class="nav-link float-right" href="@Url.Action("Register", "Account")">Register</a>
-            }
-        </div>*@
-            @if (User.Identity.IsAuthenticated)
-            {
-            <div class="d-flex justify-content-center">
-                <h1>Welcome: @User.Identity.Name</h1>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a class="nav-link float-right h5 text-info" href="@Url.Action("Logout", "Account")">Logout</a>
-            </div>
-            }
-            else
-            {
-            <div class="d-flex justify-content-md-end justify-content-center pt-md-3">
-                <span>
-                    <a class="nav-link float-right h5 text-info" href="@Url.Action("Login", "Account")">Login</a>
-                    <a class="nav-link float-right h5 text-info" href="@Url.Action("Register", "Account")">Register</a>
-                </span>
-            </div>
+                <div class="d-flex justify-content-md-end justify-content-center pt-md-3">
+                    <span>
+                        <a class="nav-link float-right h5 text-info" href="@Url.Action("Login", "Account")">Login</a>
+                        <a class="nav-link float-right h5 text-info" href="@Url.Action("Register", "Account")">Register</a>
+                    </span>
+                </div>
             }
         </div>
     </div>
-    @*<div class="row bg-info" style="height: 250px">
-            <h1 class="mx-auto">Grande Gift</h1>
-        </div>*@
-
-    @*<div class="col-md-4">
-                    <div class="d-flex justify-content-md-end justify-content-center pt-3">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                        <div class="col">
-                            <div class="content-text float-right">
-                                <h6>Welcome: @User.Identity.Name</h6>
-                            </div>
-                            <div class="content-text">
-                                <span id="content-text">
-                                    <a href="@Url.Action("Logout", "Logout", "Account")">Logout</a>
-                                </span>
-                            </div>
-                        </div>
-                        }
-                        else
-                        {
-                            <a class="nav-link float-right" href="@Url.Action("Login", "Account")">Login</a>
-                            <h6 class="float-right py-2">|</h6>
-                            <a class="nav-link float-right" href="@Url.Action("Register", "Account")">Register</a>
-                        }
-                    </div>
-                </div>
-        </div>*@
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
-        <!-- Wrapper for slides -->
         <div class="carousel-inner">
-            <div class="d-flex h-50 align-items-center justify-content-center" style="position:absolute; z-index:100; width: 100%; padding-top: 80px">
-                <h1 class="text-warning">Grande Gift</h1>
+            <div class="d-flex h-50 align-items-center justify-content-center" style="position:absolute; z-index:100; width: 100%; padding-top: 45px">
+                <h1 id="grandeGift">Grande Gift</h1>
             </div>
-            <div class="d-flex h-50 align-items-center justify-content-center" style="position:absolute; z-index:100; width: 100%; padding-top: 165px">
+            <div class="d-flex h-50 align-items-center justify-content-center" style="position:absolute; z-index:100; width: 100%; padding-top: 175px">
                 <a class="btn btn-info" href="@Url.Action("Shop", "Home")">Shop Hampers</a>
             </div>
             <div class="carousel-item">
@@ -139,14 +100,15 @@
             </div>
         </div>
     </div>
-
-    <!--SHOPPING CART LIST-->
+    <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=HEADER=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
+    <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=NAVBAR=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
+    <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=SHOPPING CART LIST=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
     <div class="row" style="position: absolute; right: 20px; z-index: 100">
         <div class="dropdown-shop">
             @await Component.InvokeAsync("CartSummary")
         </div>
     </div>
-    <!--SHOPPING CART LIST-->
+    <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=SHOPPING CART LIST=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -214,12 +176,13 @@
                 </form>*@
         </div>
     </nav>
-
-    <!--CONTENT-->
+    <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=NAVBAR=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
+    <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CONTENT=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
     <div class="container bg-light p-4">
         @RenderBody()
     </div>
-    <!--FOOTER-->
+    <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CONTENT=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
+    <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=FOOTER=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
     <div class="container-fluid bg-dark">
         <div class="row p-3">
             <div class="col-3">
@@ -253,10 +216,16 @@
             <h6 class="mx-auto">Copyright 2018</h6>
         </div>
     </div>
+    <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=FOOTER=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
+
     <script src="~/node_modules/jquery/dist/jquery.js"></script>
     <script src="~/node_modules/popper.js/dist/umd/popper.js"></script>
     <script src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+    <!--OTHER SCRIPTS-->
     <script src="~/JS/SpecialCarousel.js"></script>
+    <!--OTHER SCRIPTS-->
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -9,32 +9,38 @@ namespace Luu_DiplomaProject.ViewModels
 {
     public class AccountRegisterViewModel
     {
-        [Required, MaxLength(256)]
+        [Required(ErrorMessage = "Username cannot be blank.")]
+        [MaxLength(256, ErrorMessage = "Username cannot exceed 256 characters.")]
         public string Username { get; set; }
 
-        [Required, MaxLength(256)]
+        [Required(ErrorMessage = "First Name cannot be blank.")]
+        [MaxLength(256, ErrorMessage = "First name cannot exceed 256 characters.")]
         public string FirstName { get; set; }
 
-        [Required, MaxLength(256)]
+        [Required(ErrorMessage = "Last Name cannot be blank.")]
+        [MaxLength(256, ErrorMessage = "Last name cannot exceed 256 characters.")]
         public string LastName { get; set; }
 
-        [Required]
+        //VALIDATION FOR DOB 18+
+        [Required (ErrorMessage = "Date Of Birth is Required.")]
         public DateTime DOB { get; set; }
 
-        [Required, DataType(DataType.EmailAddress)]
+        [Required (ErrorMessage = "Email cannot be blank.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Invalid Email Address.")]
         public string Email { get; set; }
 
-        [Required, DataType(DataType.EmailAddress), Compare(nameof(Email))]
+        [Required (ErrorMessage = "Please confirm Email Address.")]
+        [Compare(nameof(Email), ErrorMessage = "Email Address does not match.")]
         public string ConfirmEmail { get; set; }
 
         //[DataType(DataType.PhoneNumber)]
         //public string Phone { get; set; }
 
-        [Required, DataType(DataType.Password)]
+        [Required (ErrorMessage = "Password cannot be blank."), DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required, DataType(DataType.Password)]
-        [Compare(nameof(Password))]
+        [Required(ErrorMessage = "Please confirm Password."), DataType(DataType.Password)]
+        [Compare(nameof(Password), ErrorMessage = "Password does not match")]
         public string ConfirmPassword { get; set; }
     }
 }

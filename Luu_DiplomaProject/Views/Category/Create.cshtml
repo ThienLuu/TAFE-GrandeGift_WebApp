@@ -4,24 +4,27 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create Category</h2>
 
-<form asp-controller="Category" asp-action="Create" method="post">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div class="row">
-        <div class="col">
+<div class="mx-auto text-center" style="width:500px">
+    <h2>Create Category</h2>
+
+    <form asp-controller="Category" asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
             <label asp-for="Name">Category Name</label>
             <input asp-for="Name" class="form-control" placeholder="Category Name" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div class="col">
+        <div>
             <label asp-for="Description"></label>
             <textarea asp-for="Description" class="form-control" placeholder="Description" rows="3" cols="100"></textarea>
         </div>
-    </div>
-    <div>
-        <input type="submit" value="Create Category" class="btn" />
-    </div>
-</form>
+        <div>
+            <input type="submit" value="Create Category" class="btn w-75 m-3" />
+        </div>
+    </form>
 
-<a class="btn btn-primary w-100" role="button" href="@Url.Action("Admin", "Home")">Admin Home</a>
+    <a class="btn btn-primary w-75 m-3" role="button" href="@Url.Action("Admin", "Home")">Admin Home</a>
+</div>
+
+

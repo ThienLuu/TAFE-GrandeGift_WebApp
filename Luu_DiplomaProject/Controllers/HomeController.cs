@@ -200,6 +200,7 @@ namespace Luu_DiplomaProject.Controllers
         [HttpPost]
         public IActionResult Create(HomeShopViewModel vm)
         {
+            //ATTEMPT 1
             //string sessionId = this.HttpContext.Session.Id;
 
             //decimal total = vm.Quantity * vm.Price;
@@ -217,26 +218,44 @@ namespace Luu_DiplomaProject.Controllers
             //    _cartService.Create(cart);
             //}
             //return RedirectToAction("Shop", "Home");
-            decimal total = vm.Quantity * vm.Price;
 
-            string id = _userManagerService.GetUserId(User);
-            Customer customer = _customerService.GetSingle(c => c.UserId == id);
-            Order order = _orderService.GetSingle(o => o.CustomerId == customer.CustomerId);
+            //ATTEMP 2
+            //decimal total = vm.Quantity * vm.Price;
 
-            if (ModelState.IsValid)
-            {
-                OrderDetail orderDetail = new OrderDetail
-                {
-                    OrderId = order.OrderId,
-                    Quantity = vm.Quantity,
-                    TotalPrice = total,
-                    HamperId = vm.HamperId
-                };
+            //string id = _userManagerService.GetUserId(User);
+            //Customer customer = _customerService.GetSingle(c => c.UserId == id);
+            //Order order = _orderService.GetSingle(o => o.CustomerId == customer.CustomerId);
 
-                _orderDetailService.Create(orderDetail);
+            //if (ModelState.IsValid)
+            //{
+            //    OrderDetail orderDetail = new OrderDetail
+            //    {
+            //        OrderId = order.OrderId,
+            //        Quantity = vm.Quantity,
+            //        TotalPrice = total,
+            //        HamperId = vm.HamperId
+            //    };
 
-                return RedirectToAction("Shop", "Home");
-            }
+            //    _orderDetailService.Create(orderDetail);
+
+            //    return RedirectToAction("Shop", "Home");
+            //}
+
+            //return View(vm);
+
+            //string sessionId = this.HttpContext.Session.Id;
+            //decimal total = vm.Quantity * vm.Price;
+
+            //if (ModelState.IsValid)
+            //{
+            //    Cart cart = new Cart
+            //    {
+            //        SessionId = sessionId,
+            //        HamperId = vm.HamperId,
+            //        Quantity = vm.Quantity,
+            //        TotalPrice = total,
+            //    };
+            //}
 
             return View(vm);
         }

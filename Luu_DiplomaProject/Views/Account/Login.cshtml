@@ -4,32 +4,34 @@
     ViewData["Title"] = "Login";
 }
 
-<h2 class="text-center">Login</h2>
+<div class="mx-auto" style="width: 500px">
+    <h2>Login</h2>
 
-<form asp-controller="Account" asp-action="Login" method="post">
+    <form asp-controller="Account" asp-action="Login" method="post">
 
-    <div asp-validation-summary="ModelOnly"></div>
+        <div asp-validation-summary="ModelOnly"></div>
 
-    @*<div>
-            <label asp-for="Email"></label>
-            <input asp-for="Email" />
-            <span asp-validation-for="Email"></span>
-        </div>*@
-    <div>
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" placeholder="Username"/>
-        <span class="text-danger" asp-validation-for="Username"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" placeholder="Password" type="password" />
-        <span class="text-danger" asp-validation-for="Password"></span>
-    </div>
-    <div class="mt-2">
-        <label asp-for="RememberMe">Remember me</label>
-        <input asp-for="RememberMe" />
-    </div>
-    <div>
-        <input class="btn" type="submit" value="Login" />
-    </div>
-</form>
+        @*<div>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>*@
+        <div>
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" placeholder="Username" />
+            <span class="text-danger" asp-validation-for="Username"></span>
+        </div>
+        <div>
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" placeholder="Password" type="password" />
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+        <div class="mt-2">
+            <label asp-for="RememberMe">Remember me</label>
+            <input asp-for="RememberMe" />
+        </div>
+        <div>
+            <input class="btn w-100" type="submit" value="Login" />
+        </div>
+    </form>
+</div>
