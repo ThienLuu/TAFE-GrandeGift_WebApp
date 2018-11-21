@@ -47,7 +47,7 @@
     @{
         @foreach (var hamper in Model.Hampers)
         {
-            <div class="col-md-3 m-2 text-center" style="height: 450px; width:300px">
+            <div class="col-md-3 m-2 text-center" style="height: 500px; width:300px">
 
                 <div class="row justify-content-center" style="height: 100px">
                     <a href="@Url.Action("Details", "Home", new { id = hamper.HamperId })">
@@ -70,21 +70,31 @@
                     <h5>$@hamper.Price</h5>
                 </div>
                 <div class="row justify-content-center">
+                    <div class="row" style="height: 110px">
+                        <ul style="list-style-type: none; padding-left: 0; float: left;">
+                            @{
+                                int count = 0;
+                            }
+                            @foreach (var item in Model.Items)
+                            {
+                                if (hamper.HamperId == item.HamperId)
+                                {
+                                    if (count < 3)
+                                    {
+                                        <li>@item.Name | @item.Size</li>
+                                        count++;
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        </ul>
+                    </div>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <div class="row justify-content-center">
-                            <ul>
-                                @foreach (var item in Model.Items)
-                                {
-                                    if (hamper.HamperId == item.HamperId)
-                                    {
-                                        <li>@item.Name @item.Size</li>
-                                    }
-                                }
-                            </ul>
-                        </div>
-                        <div class="row justify-content-center">
-
                             <form asp-controller="Home" asp-action="Create" method="post">
                                 <div asp-validation-summary="ModelOnly"></div>
                                 <div>
@@ -93,9 +103,9 @@
                                 <div>
                                     <input asp-for="Price" value="@hamper.Price" hidden="hidden" />
                                 </div>
-                                <div class="form-row" style="margin-top: 50px">
-                                    <div class="col">
-                                        <input class="form-control" value="1" asp-for="Quantity" type="number" name="quantity" min="1" max="5">
+                                <div class="form-row">
+                                    <div class="col quantity">
+                                        <input style="width: 68px" asp-for="Quantity" type="number" min="1" max="5" step="1" value="1">
                                     </div>
                                     <div class="col">
                                         <input class="btn btn-primary" type="submit" value="Add to Cart" />
@@ -103,11 +113,10 @@
                                 </div>
                             </form>
                         </div>
-
                     }
                     else
                     {
-                        <a class="btn btn-primary w-80" style="margin-top: 100px" role="button" href="@Url.Action("Register", "Account")">Register to add to cart</a>
+                        <a class="btn btn-primary w-80" role="button" href="@Url.Action("Register", "Account")">Register to add to cart</a>
                     }
                 </div>
             </div>

@@ -11,6 +11,8 @@ namespace Luu_DiplomaProject.Models
     {
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
+        //OR USERID?
+        //public int UserId { get; set; }
         public DateTime OrderDateTime { get; set; }
         //public int AddressId { get; set; }
         //ORDER TOTAL PRICE

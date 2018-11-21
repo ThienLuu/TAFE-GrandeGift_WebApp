@@ -12,10 +12,12 @@
     <link href="~/CSS/ReadableTable.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
     <link href="~/CSS/Font.css" rel="stylesheet" />
+    <link href="~/CSS/QuantityButton.css" rel="stylesheet" />
     <style>
         /*PAGE BACK BACKGROUND COLOR*/
         body {
-            background-color: grey
+            background-color: grey;
+            overflow-x: hidden;
         }
         /*PAGE BACK BACKGROUND COLOR*/
 
@@ -57,8 +59,8 @@
         <div class="col-md-4">
             @if (User.Identity.IsAuthenticated)
             {
-                <div class="d-flex justify-content-center">
-                    <h1>Welcome: @User.Identity.Name</h1>
+                <div class="d-flex justify-content-center text-center">
+                    <h1 id="welcomeUser">Welcome: @User.Identity.Name</h1>
                 </div>
                 <div class="d-flex justify-content-center">
                     <a class="nav-link float-right h5 text-info" href="@Url.Action("Logout", "Account")">Logout</a>
@@ -83,7 +85,7 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="d-flex h-50 align-items-center justify-content-center" style="position:absolute; z-index:100; width: 100%; padding-top: 45px">
+            <div class="d-flex h-50 align-items-center justify-content-center text-center" style="position:absolute; z-index:100; width: 100%; padding-top: 45px">
                 <h1 id="grandeGift">Grande Gift</h1>
             </div>
             <div class="d-flex h-50 align-items-center justify-content-center" style="position:absolute; z-index:100; width: 100%; padding-top: 175px">
@@ -117,7 +119,7 @@
 
         <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("Index", "Home")">Home <!--<span class="sr-only">(current)</span>--></a>
                 </li>
                 @*<li class="nav-item dropdown d-inline bg-info">
@@ -144,7 +146,7 @@
                         if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link bg-danger" href="@Url.Action("Admin", "Home")">Admin Interface</a>
+                                <a class="nav-link bg-danger d-inline-block" href="@Url.Action("Admin", "Home")">Admin Interface</a>
                             </li>
                         }
                         else
@@ -179,6 +181,7 @@
     <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=NAVBAR=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
     <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CONTENT=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
     <div class="container bg-light p-4">
+
         @RenderBody()
     </div>
     <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CONTENT=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
@@ -187,24 +190,33 @@
         <div class="row p-3">
             <div class="col-3">
                 <h4 class="text-light">Information</h4>
-                <a class="nav-link px-0 py-1" href="#">FAQ</a>
+                <a class="nav-link px-0 py-1 disabled" href="#">FAQ</a>
                 <a class="nav-link px-0 py-1" href="#">Contact Us</a>
                 <a class="nav-link px-0 py-1" href="#">About Us</a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 justify-content-md-center">
                 <h4 class="text-light">The Fine Print</h4>
                 <a class="nav-link px-0 py-1" href="#">Security & Privacy</a>
-                <a class="nav-link px-0 py-1" href="#">Returns & Refunds</a>
+                <a class="nav-link px-0 py-1 disabled" href="#">Returns & Refunds</a>
                 <a class="nav-link px-0 py-1" href="#">Terms & Conditions</a>
-                <a class="nav-link px-0 py-1" href="#">Delivery</a>
+                <a class="nav-link px-0 py-1 disabled" href="#">Delivery</a>
             </div>
             <div class="col-md-3">
                 <h4 class="text-light">Account</h4>
-                <a class="nav-link px-0 py-1" href="#">Register</a>
-                <a class="nav-link px-0 py-1" href="#">Subscribe</a>
-                <a class="nav-link px-0 py-1" href="#">Login</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="nav-link px-0 py-1 disabled" href="#">Delete Account</a>
+                    <a class="nav-link px-0 py-1 disabled" href="#">Subscribe</a>
+                    <a class="nav-link px-0 py-1" href="@Url.Action("Logout", "Account")">Logout</a>
+                }
+                else
+                {
+                    <a class="nav-link px-0 py-1" href="@Url.Action("Register", "Account")">Register</a>
+                    <a class="nav-link px-0 py-1 disabled" href="#">Subscribe</a>
+                    <a class="nav-link px-0 py-1" href="@Url.Action("Login", "Account")">Login</a>
+                }
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 text-sm-center">
                 <h4 class="text-light">Connect With Us</h4>
                 <a href="#" class="fa fa-facebook"></a>
                 <a href="#" class="fa fa-twitter"></a>
@@ -224,6 +236,7 @@
 
     <!--OTHER SCRIPTS-->
     <script src="~/JS/SpecialCarousel.js"></script>
+    <script src="~/JS/QuantityButton.js"></script>
     <!--OTHER SCRIPTS-->
 
     @RenderSection("Scripts", required: false)

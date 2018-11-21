@@ -21,20 +21,20 @@ namespace Luu_DiplomaProject.Controllers
             _cartService = cartService;
             _hamperService = hamperService;
         }
-        //public IActionResult Details()
-        //{
-        //    string sessionId = this.HttpContext.Session.Id;
-        //    IEnumerable<Cart> carts = _cartService.GetAll();
-        //    IEnumerable<Hamper> hampers = _hamperService.GetAll();
-        //    //IEnumerable<Cart> carts = _cartService.GetAll().Where(c => c.SessionId == sessionId);
+        public IActionResult Details()
+        {
+            string sessionId = this.HttpContext.Session.Id;
+            IEnumerable<Cart> carts = _cartService.GetAll();
+            IEnumerable<Hamper> hampers = _hamperService.GetAll();
+            //IEnumerable<Cart> carts = _cartService.GetAll().Where(c => c.SessionId == sessionId);
 
-        //    ViewComponentViewModel vm = new ViewComponentViewModel
-        //    {
-        //        Carts = carts,
-        //        Hampers = hampers
-        //    };
+            CartDetailViewModel vm = new CartDetailViewModel
+            {
+                Carts = carts,
+                Hampers = hampers
+            };
 
-        //    return View(vm);
-        //}
+            return View(vm);
+        }
     }
 }

@@ -29,14 +29,22 @@
     </div>
     <div>
         <label>Category:</label>
-        <select asp-for="CategoryId">
-            <option value="" disabled selected>Select Category</option>
-            @foreach (var category in Model.Categories)
+        @{ if (Model.Categories == null)
             {
-                <option value="@category.CategoryId">@category.Name</option>
+                <a class="btn btn-success w-50" role="button" href="@Url.Action("Create", "Category")">Create a Category</a>
             }
-        </select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
+            else
+            {
+                <select asp-for="CategoryId">
+                    <option value="" disabled selected>Select Category</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.CategoryId">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            }
+        }
     </div>
     <div>
         <input type="submit" value="Create Hamper" class="btn" />

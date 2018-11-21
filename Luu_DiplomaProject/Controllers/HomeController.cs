@@ -19,7 +19,7 @@ namespace Luu_DiplomaProject.Controllers
         private IDataService<Category> _categoryService;
         private IDataService<Hamper> _hamperService;
         private IDataService<Item> _itemService;
-        //private IDataService<Cart> _cartService;
+        private IDataService<Cart> _cartService;
         private IDataService<Customer> _customerService;
         private IDataService<OrderDetail> _orderDetailService;
         private IDataService<Order> _orderService;
@@ -29,7 +29,7 @@ namespace Luu_DiplomaProject.Controllers
                                 IDataService<Category> categoryService,
                                 IDataService<Hamper> hamperService,
                                 IDataService<Item> itemService,
-                                //IDataService<Cart> cartService
+                                IDataService<Cart> cartService,
                                 IDataService<OrderDetail> orderDetailService,
                                 IDataService<Order> orderService
                                 )
@@ -39,7 +39,7 @@ namespace Luu_DiplomaProject.Controllers
             _categoryService = categoryService;
             _hamperService = hamperService;
             _itemService = itemService;
-            //_cartService = cartService;
+            _cartService = cartService;
             _orderDetailService = orderDetailService;
             _orderService = orderService;
         }
@@ -200,26 +200,26 @@ namespace Luu_DiplomaProject.Controllers
         [HttpPost]
         public IActionResult Create(HomeShopViewModel vm)
         {
-            //ATTEMPT 1
-            //string sessionId = this.HttpContext.Session.Id;
+            ////ATTEMPT 1 - CREATES TO CART
+            string sessionId = this.HttpContext.Session.Id;
 
-            //decimal total = vm.Quantity * vm.Price;
+            decimal total = vm.Quantity * vm.Price;
 
-            //if (ModelState.IsValid)
-            //{
-            //    Cart cart = new Cart
-            //    {
-            //        SessionId = sessionId,
-            //        Quantity = vm.Quantity,
-            //        TotalPrice = total,
-            //        HamperId = vm.HamperId
-            //    };
+            if (ModelState.IsValid)
+            {
+                Cart cart = new Cart
+                {
+                    SessionId = sessionId,
+                    Quantity = vm.Quantity,
+                    TotalPrice = total,
+                    HamperId = vm.HamperId
+                };
 
-            //    _cartService.Create(cart);
-            //}
-            //return RedirectToAction("Shop", "Home");
+                _cartService.Create(cart);
+            }
+            return RedirectToAction("Shop", "Home");
 
-            //ATTEMP 2
+            ////ATTEMP 2 - CREATES TO ORDER DETAILS
             //decimal total = vm.Quantity * vm.Price;
 
             //string id = _userManagerService.GetUserId(User);

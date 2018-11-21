@@ -36,3 +36,28 @@ $('.carousel').carousel({
 //        }
 //    }).resize(); // This will simulate a resize to trigger the initial run.
 //});
+
+//$(window).on('resize', function () {
+//    if ($(window).width() < 740) {
+//        $('#grandeGift').css({ "font-size": "60px" });
+//    }
+//    else {
+//        $('#grandeGift').css({ "font-size": "100px" });
+//    }
+//})
+
+$(document).ready(function () {
+    $(window).on('resize', function () {
+        if ($(window).width() < 740) {
+            $('#grandeGift').css({ "font-size": "60px" });
+            $('#welcomeUser').css({ "font-size": "30px" });
+        }
+        else if ($(window).width() < 1480) {
+            $('#welcomeUser').css({ "font-size": "30px" });
+        }
+        else {
+            $('#grandeGift').css({ "font-size": "100px" });
+            $('#welcomeUser').css({ "font-size": "40px" });
+        }
+    });
+});

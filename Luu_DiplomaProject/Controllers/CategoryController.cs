@@ -34,7 +34,19 @@ namespace Luu_DiplomaProject.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create(CategoryCreateViewModel vm)
         {
+            IEnumerable<Category> list = _categoryService.GetAll();
+
             if (ModelState.IsValid)
+            {
+                foreach (var name in list)
+                {
+                    if (vm.Name == name.Name.ToLower())
+                    {
+                        ModelState.AddModelError("", "Category already exists.");
+                    }
+                }
+            }
+            else
             {
                 Category category = new Category
                 {
