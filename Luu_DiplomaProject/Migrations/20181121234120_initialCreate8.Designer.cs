@@ -4,14 +4,16 @@ using Luu_DiplomaProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Luu_DiplomaProject.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181121234120_initialCreate8")]
+    partial class initialCreate8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,8 +180,6 @@ namespace Luu_DiplomaProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AddressId");
-
                     b.Property<int>("CustomerId");
 
                     b.Property<DateTime>("OrderDateTime");
@@ -208,8 +208,6 @@ namespace Luu_DiplomaProject.Migrations
                     b.HasKey("OrderDetailId");
 
                     b.HasIndex("HamperId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("TblOrderDetail");
                 });
@@ -416,11 +414,6 @@ namespace Luu_DiplomaProject.Migrations
                     b.HasOne("Luu_DiplomaProject.Models.Hamper")
                         .WithMany("OrderDetails")
                         .HasForeignKey("HamperId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Luu_DiplomaProject.Models.Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -12,38 +12,109 @@
     decimal totalPrice = 0;
 }
 
-@foreach (var item in Model.Carts)
-{
-    foreach (var hamper in Model.Hampers)
+@*<div class="row">
+        <div class="col-3">
+
+        </div>
+        <div class="col-3">
+            <h3>Name</h3>
+        </div>
+        <div class="col-3">
+            <h3>Quantity</h3>
+        </div>
+        <div class="col-3">
+
+        </div>
+    </div>
+
+    @foreach (var item in Model.Carts)
     {
-        @if (hamper.HamperId == item.HamperId)
+        foreach (var hamper in Model.Hampers)
         {
-            <div class="row">
-                <div class="col-md-4">
-                    @if (hamper.FileName == null)
-                    {
-                        <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
-                    }
-                    else
-                    {
-                        <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
-                    }
-                </div>
-                <div class="col-md-4">
-                    <h5 class="item-name">@hamper.Name</h5>
-                </div>
-                <div class="col-md-4">
-                    <h4>@item.Quantity</h4>
-                </div>
-            </div>
-            totalItems++;
-            totalPrice += item.TotalPrice;
+            @if (hamper.HamperId == item.HamperId)
+            {
+                <div class="row">
+                        <div class="col-3 text-center">
+                            @if (hamper.FileName == null)
+                            {
+                                <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
+                            }
+                            else
+                            {
+                                <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
+                            }
+                        </div>
+                        <div class="col-3 pt-4">
+                            <h6 class="item-name">@hamper.Name</h6>
+                        </div>
+                        <div class="col-3 text-center pt-4">
+                            <h6>@item.Quantity</h6>
+                        </div>
+                        <div class="col-3">
+                            <button>ADD FUNCTIONING REMOVE BUTTON</button>
+                        </div>
+                    </div>
+                totalItems++;
+                totalPrice += item.TotalPrice;
+            }
         }
     }
-}
+
+    <div class="row">
+        <h2>Total: @totalPrice</h2>
+    </div>
+
+    <a class="btn btn-primary" role="button" href="@Url.Action("Create", "Order")">Checkout</a>*@
+
+<table class="col">
+    <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Quantity <br/> Not functioning</th>
+            <th scope="col">Action <br /> Not functioning</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Carts)
+        {
+            foreach (var hamper in Model.Hampers)
+            {
+                @if (hamper.HamperId == item.HamperId)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @if (hamper.FileName == null)
+                            {
+                                <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="150" />
+                            }
+                            else
+                            {
+                                <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="150" />
+                            }
+                        </td>
+                        <td>@hamper.Name</td>
+                        <td class="text-center">
+                            <div class="col quantity">
+                                @*<input style="width: 68px" asp-for="Quantity" type="number" min="1" max="5" step="1" value="1">*@
+                                <input style="width: 68px" type="number" min="1" max="5" step="1" value="@item.Quantity">
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <button style="width:60">X</button>
+                        </td>
+                    </tr>
+                    totalItems++;
+                    totalPrice += item.TotalPrice;
+                }
+            }
+        }
+    </tbody>
+</table>
 
 <div class="row">
     <h2>Total: @totalPrice</h2>
 </div>
 
-<a href="@Url.Action("Details", "Cart")">Place Order</a>
+<a class="btn btn-primary" role="button" href="@Url.Action("Create", "Order")">Checkout</a>

@@ -38,16 +38,14 @@ namespace Luu_DiplomaProject.Controllers
 
             if (ModelState.IsValid)
             {
-                foreach (var name in list)
+                foreach (var cat in list)
                 {
-                    if (vm.Name == name.Name.ToLower())
+                    if (vm.Name.ToLower() == cat.Name.ToLower())
                     {
                         ModelState.AddModelError("", "Category already exists.");
+                        return View(vm);
                     }
                 }
-            }
-            else
-            {
                 Category category = new Category
                 {
                     Name = vm.Name,

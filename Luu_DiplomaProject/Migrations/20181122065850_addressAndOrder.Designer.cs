@@ -4,14 +4,16 @@ using Luu_DiplomaProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Luu_DiplomaProject.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181122065850_addressAndOrder")]
+    partial class addressAndOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,6 +189,8 @@ namespace Luu_DiplomaProject.Migrations
                     b.Property<decimal>("OrderPrice");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("TblOrder");
                 });
@@ -408,6 +412,14 @@ namespace Luu_DiplomaProject.Migrations
                     b.HasOne("Luu_DiplomaProject.Models.Hamper")
                         .WithMany("Items")
                         .HasForeignKey("HamperId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Luu_DiplomaProject.Models.Order", b =>
+                {
+                    b.HasOne("Luu_DiplomaProject.Models.Address")
+                        .WithMany("Orders")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

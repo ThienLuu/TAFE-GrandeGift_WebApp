@@ -38,14 +38,6 @@ namespace Luu_DiplomaProject.Controllers.API
             return catList;
         }
 
-        //[HttpGet("{id}")]
-        //public Hamper GetId(int id)
-        //{
-        //    Hamper hamper = _hamperService.GetSingle(h => h.HamperId == id);
-
-        //    return hamper;
-        //}
-
         [HttpGet("searchByCategory/{categoryId}")]
         public IEnumerable<Hamper> HampersByCategory(int categoryId)
         {

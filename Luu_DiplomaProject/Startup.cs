@@ -21,7 +21,11 @@ namespace Luu_DiplomaProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSession();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromHours(1);
+                options.Cookie.HttpOnly = true;
+                }
+            );
             services.AddScoped<IDataService<Customer>, DataService<Customer>>();
             services.AddScoped<IDataService<Category>, DataService<Category>>();
             services.AddScoped<IDataService<Hamper>, DataService<Hamper>>();

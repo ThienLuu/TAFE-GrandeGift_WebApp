@@ -8,11 +8,15 @@ using Luu_DiplomaProject.Models;
 using Luu_DiplomaProject.ViewModels;
 using Luu_DiplomaProject.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Luu_DiplomaProject.Components
 {
     public class CartSummary : ViewComponent
     {
+        private const string CartSessionKey = "_cart";
+
         private UserManager<IdentityUser> _userManagerService;
         private SignInManager<IdentityUser> _signInManagerService;
         private IDataService<Customer> _customerService;
@@ -38,25 +42,27 @@ namespace Luu_DiplomaProject.Components
             _orderService = orderService;
         }
 
+        public object JsonConverter { get; private set; }
+
         public IViewComponentResult Invoke()
         {
-            string id = _userManagerService.GetUserId(UserClaimsPrincipal);
-            Customer customer = _customerService.GetSingle(c => c.UserId == id);
-            Order order = _orderService.GetSingle(o => o.CustomerId == customer.CustomerId);
-            IEnumerable<OrderDetail> orderDetails = _orderDetailService.Query(od => od.OrderId == order.OrderId);
+            //string id = _userManagerService.GetUserId(UserClaimsPrincipal);
+            //Customer customer = _customerService.GetSingle(c => c.UserId == id);
+            //Order order = _orderService.GetSingle(o => o.CustomerId == customer.CustomerId);
+            //IEnumerable<OrderDetail> orderDetails = _orderDetailService.Query(od => od.OrderId == order.OrderId);
 
-            IEnumerable<Hamper> hampers = _hamperService.GetAll();
+            //IEnumerable<Hamper> hampers = _hamperService.GetAll();
 
-            ViewComponentViewModel vm = new ViewComponentViewModel
-            {
-                OrderDetails = orderDetails,
-                Hampers = hampers
-            };
+            //ViewComponentViewModel vm = new ViewComponentViewModel
+            //{
+            //    OrderDetails = orderDetails,
+            //    Hampers = hampers
+            //};
 
-            return View(vm);
+            //return View(vm);
 
 
-            string sessionId = this.HttpContext.Session.Id;
+            //string sessionId = this.HttpContext.Session.Id;
             //IEnumerable<Cart> carts = _cartService.GetAll();
             //IEnumerable<Hamper> hampers = _hamperService.GetAll();
             ////IEnumerable<Cart> carts = _cartService.GetAll().Where(c => c.SessionId == sessionId);
@@ -65,6 +71,30 @@ namespace Luu_DiplomaProject.Components
             //{
             //    Carts = carts,
             //    Hampers = hampers
+            //};
+
+            return View();
+
+            //string id = _userManagerService.GetUserId(User);
+            //Customer customer = _customerService.GetSingle(c => c.UserId == id);
+            //Order order = _orderService.GetSingle(o => o.CustomerId == customer.CustomerId);
+            //IEnumerable<OrderDetail> orderDetails = _orderDetailService.Query(od => od.OrderId == order.OrderId);
+            //IEnumerable<Hamper> hampers = _hamperService.GetAll();
+
+            //var serializedCart = HttpContext.Session.GetString(CartSessionKey);
+
+            //if (serializedCart == null)
+            //{
+            //    //REDIRECT TO WHERE IF SESSION TIMES OUT/OR DISPLAY MESSAGE
+            //}
+
+            //var carts = JsonConvert.DeserializeObject<List<Cart>>(serializedCart);
+
+            //ViewComponentViewModel vm = new ViewComponentViewModel
+            //{
+            //    OrderDetails = orderDetails,
+            //    Hampers = hampers,
+            //    Carts = carts
             //};
 
             //return View(vm);

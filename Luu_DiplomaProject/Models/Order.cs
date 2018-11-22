@@ -14,9 +14,9 @@ namespace Luu_DiplomaProject.Models
         //OR USERID?
         //public int UserId { get; set; }
         public DateTime OrderDateTime { get; set; }
-        //public int AddressId { get; set; }
+        public int AddressId { get; set; }
         //ORDER TOTAL PRICE
         public decimal OrderPrice { get; set; }
-        ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

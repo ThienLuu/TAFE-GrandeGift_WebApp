@@ -9,7 +9,7 @@ namespace Luu_DiplomaProject.ViewModels
 {
     public class ViewComponentViewModel
     {
-        //public IEnumerable<Cart> Carts { get; set; }
+        public IEnumerable<Cart> Carts { get; set; }
         public IEnumerable<OrderDetail> OrderDetails { get; set; }
         public IEnumerable<Hamper> Hampers { get; set; }
     }

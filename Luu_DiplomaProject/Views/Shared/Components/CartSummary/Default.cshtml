@@ -25,30 +25,30 @@
 
 
             <!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
-            @foreach (var item in Model.OrderDetails)
+            @foreach (var item in Model.Carts)
             {
                 foreach (var hamper in Model.Hampers)
                 {
                     @if (hamper.HamperId == item.HamperId)
                     {
 
-                            <div class="row cart-detail">
-                                <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-                                    <!--IMAGE-->
-                                    @if (hamper.FileName == null)
-                                    {
-                                        <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
-                                    }
-                                    else
-                                    {
-                                        <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
-                                    }
-                                </div>
-                                <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-                                    <p><!--ITEM NAME-->@hamper.Name<!--ITEM NAME--></p>
-                                    <span class="price text-info"><!--ITEM PRICE-->@item.TotalPrice<!--ITEM PRICE--></span> <span class="count"> Quantity: <!--QUANTITY-->@item.Quantity<!--QUANTITY--></span>
-                                </div>
+                        <div class="row cart-detail">
+                            <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+                                <!--IMAGE-->
+                                @if (hamper.FileName == null)
+                                {
+                                    <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
+                                }
+                                else
+                                {
+                                    <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
+                                }
                             </div>
+                            <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+                                <p><!--ITEM NAME-->@hamper.Name<!--ITEM NAME--></p>
+                                <span class="price text-info"><!--ITEM PRICE-->@item.TotalPrice<!--ITEM PRICE--></span> <span class="count"> Quantity: <!--QUANTITY-->@item.Quantity<!--QUANTITY--></span>
+                            </div>
+                        </div>
                         totalItems++;
                         totalPrice += item.TotalPrice;
                     }

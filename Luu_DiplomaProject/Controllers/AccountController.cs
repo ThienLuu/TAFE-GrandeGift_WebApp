@@ -52,6 +52,7 @@ namespace Luu_DiplomaProject.Controllers
 
                 user.Email = vm.Email;
                 IdentityResult result = await _userManagerService.CreateAsync(user, vm.Password);
+
                 if (result.Succeeded)
                 {
                     //create customer object
@@ -63,6 +64,8 @@ namespace Luu_DiplomaProject.Controllers
                         UserId = user.Id,
                     };
                     _customerService.Create(customer);
+
+                    var signIn = await _signInManagerService.PasswordSignInAsync(vm.Username, vm.Password, false, false);
 
                     //go to Home/Index
                     return RedirectToAction("Index", "Home");

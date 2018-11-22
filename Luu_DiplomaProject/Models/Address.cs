@@ -22,5 +22,7 @@ namespace Luu_DiplomaProject.Models
         public string StreetAddress { get; set; }
         public bool Favourite { get; set; }
         public int CustomerId { get; set; }
+
+        //public ICollection<Order> Orders { get; set; }
     }
 }

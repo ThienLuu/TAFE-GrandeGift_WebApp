@@ -9,11 +9,15 @@ using Luu_DiplomaProject.Models;
 using Luu_DiplomaProject.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Luu_DiplomaProject.Controllers
 {
     public class HomeController : Controller
     {
+        private const string CartSessionKey = "_cart";
+
         private UserManager<IdentityUser> _userManagerService;
         private SignInManager<IdentityUser> _signInManagerService;
         private IDataService<Category> _categoryService;
@@ -31,7 +35,8 @@ namespace Luu_DiplomaProject.Controllers
                                 IDataService<Item> itemService,
                                 IDataService<Cart> cartService,
                                 IDataService<OrderDetail> orderDetailService,
-                                IDataService<Order> orderService
+                                IDataService<Order> orderService,
+                                IDataService<Customer> customerService
                                 )
         {
             _userManagerService = userManager;
@@ -42,6 +47,7 @@ namespace Luu_DiplomaProject.Controllers
             _cartService = cartService;
             _orderDetailService = orderDetailService;
             _orderService = orderService;
+            _customerService = customerService;
         }
         public IActionResult Index()
         {
@@ -197,28 +203,32 @@ namespace Luu_DiplomaProject.Controllers
             return View(vm);
         }
 
+        //ADDS TO CART
         [HttpPost]
         public IActionResult Create(HomeShopViewModel vm)
         {
+            #region ATTEMPT 1 - CREATES TO CART
             ////ATTEMPT 1 - CREATES TO CART
-            string sessionId = this.HttpContext.Session.Id;
+            //string sessionId = this.HttpContext.Session.Id;
 
-            decimal total = vm.Quantity * vm.Price;
+            //decimal total = vm.Quantity * vm.Price;
 
-            if (ModelState.IsValid)
-            {
-                Cart cart = new Cart
-                {
-                    SessionId = sessionId,
-                    Quantity = vm.Quantity,
-                    TotalPrice = total,
-                    HamperId = vm.HamperId
-                };
+            //if (ModelState.IsValid)
+            //{
+            //    Cart cart = new Cart
+            //    {
+            //        SessionId = sessionId,
+            //        Quantity = vm.Quantity,
+            //        TotalPrice = total,
+            //        HamperId = vm.HamperId
+            //    };
 
-                _cartService.Create(cart);
-            }
-            return RedirectToAction("Shop", "Home");
+            //    _cartService.Create(cart);
+            //}
+            //return RedirectToAction("Shop", "Home");
+            #endregion
 
+            #region ATTEMP 2 - CREATES TO ORDER DETAILS
             ////ATTEMP 2 - CREATES TO ORDER DETAILS
             //decimal total = vm.Quantity * vm.Price;
 
@@ -256,8 +266,48 @@ namespace Luu_DiplomaProject.Controllers
             //        TotalPrice = total,
             //    };
             //}
+            #endregion
 
-            return View(vm);
+            #region ATTEMPT 3 - SESSIONS
+
+            decimal total = vm.Quantity * vm.Price;
+
+            if (String.IsNullOrEmpty(HttpContext.Session.GetString(CartSessionKey)))
+            {
+                List<Cart> carts = new List<Cart>();
+
+                carts.Add(new Cart()
+                {
+                    //SessionId = sessionId,
+                    Quantity = vm.Quantity,
+                    TotalPrice = total,
+                    HamperId = vm.HamperId
+                });
+
+                var serializedCart = JsonConvert.SerializeObject(carts);
+
+                HttpContext.Session.SetString(CartSessionKey, serializedCart);
+            }
+            else
+            {
+                var serializedCart = HttpContext.Session.GetString(CartSessionKey);
+
+                var carts = JsonConvert.DeserializeObject<List<Cart>>(serializedCart);
+
+                carts.Add(new Cart()
+                {
+                    //SessionId = sessionId,
+                    Quantity = vm.Quantity,
+                    TotalPrice = total,
+                    HamperId = vm.HamperId
+                });
+
+                serializedCart = JsonConvert.SerializeObject(carts);
+
+                HttpContext.Session.SetString(CartSessionKey, serializedCart);
+            }
+            #endregion
+            return RedirectToAction("Details", "Cart");
         }
     }
 }
