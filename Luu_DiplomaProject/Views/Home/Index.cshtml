@@ -7,6 +7,19 @@
 @*<div class="text-center">
         <h1>This project is still in building. Please register to use features. Not all features available to guests</h1>
     </div>*@
+
+<div class="text-center">
+    <h1>Browse our categories</h1>
+</div>
+<div class="row justify-content-center">
+    @foreach (var item in Model.Categories)
+    {
+        <a class="btn btn-primary m-2" role="button" href="@Url.Action("Shop", "Home", new { categoryId = item.CategoryId })">@item.Name</a>
+    }
+</div>
+
+<hr />
+
 <div class="text-center">
     <h1>Our top 3 Hampers</h1>
 </div>

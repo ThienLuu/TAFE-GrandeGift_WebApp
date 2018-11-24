@@ -53,11 +53,13 @@ namespace Luu_DiplomaProject.Controllers
         {
             IEnumerable<Hamper> hampers = _hamperService.GetAll().Take(3);
             IEnumerable<Item> items = _itemService.GetAll();
+            IEnumerable<Category> categories = _categoryService.GetAll();
 
             HomeIndexViewModel vm = new HomeIndexViewModel
             {
                 Hampers = hampers,
-                Items = items
+                Items = items,
+                Categories = categories
             };
 
             return View(vm);
@@ -144,8 +146,30 @@ namespace Luu_DiplomaProject.Controllers
                                                                     (h.CategoryId == categoryId) &&
                                                                     (h.Discontinued != true)
                                                                 );
+            IEnumerable<Hamper> hamPrice = _hamperService.Query(h => (h.Price >= min && h.Price <= max) && (h.Discontinued != true));
+            IEnumerable<Hamper> hamCat = _hamperService.Query(h => (h.CategoryId == categoryId) && (h.Discontinued != true));
 
-            if (min < max && max != 0 && categoryId != 0)
+            if (min == 0 && max == 0 && categoryId != 0)
+            {
+                HomeShopViewModel vm = new HomeShopViewModel
+                {
+                    Hampers = hamCat,
+                    Categories = catList,
+                    Items = itemList
+                };
+                return View(vm);
+            }
+            else if (min < max && categoryId == 0)
+            {
+                HomeShopViewModel vm = new HomeShopViewModel
+                {
+                    Hampers = hamPrice,
+                    Categories = catList,
+                    Items = itemList
+                };
+                return View(vm);
+            }
+            else if (min < max && max != 0 && categoryId != 0)
             {
                 HomeShopViewModel vm = new HomeShopViewModel
                 {

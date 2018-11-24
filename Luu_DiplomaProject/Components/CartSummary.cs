@@ -46,6 +46,8 @@ namespace Luu_DiplomaProject.Components
 
         public IViewComponentResult Invoke()
         {
+            return View();
+
             //string id = _userManagerService.GetUserId(UserClaimsPrincipal);
             //Customer customer = _customerService.GetSingle(c => c.UserId == id);
             //Order order = _orderService.GetSingle(o => o.CustomerId == customer.CustomerId);
@@ -73,7 +75,7 @@ namespace Luu_DiplomaProject.Components
             //    Hampers = hampers
             //};
 
-            return View();
+            //return View(vm);
 
             //string id = _userManagerService.GetUserId(User);
             //Customer customer = _customerService.GetSingle(c => c.UserId == id);

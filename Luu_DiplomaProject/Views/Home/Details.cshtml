@@ -4,54 +4,56 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Hamper Details</h2>
-
-<div class="col-9">
-    @if (Model.FileName == null)
-    {
-        <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="200" />
-    }
-    else
-    {
-        <img src="~/Images/@Model.FileName" alt="@Model.FileName" height="200" />
-    }
-</div>
-<div class="col-3">
-    <h2>@Model.Name</h2>
-    <h5>@Model.Price</h5>
-    <ul>
-        @foreach (var item in Model.Items)
+<div class="row">
+    <div class="col-md-7 text-center">
+        @if (Model.FileName == null)
         {
-            if (Model.HamperId == item.HamperId)
-            {
-                <li>@item.Name @item.Size</li>
-            }
+            <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="300" />
         }
-    </ul>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div class="row justify-content-center">
-            <form asp-controller="Home" asp-action="Create" method="post">
-                <div asp-validation-summary="ModelOnly"></div>
-                <div>
-                    <input asp-for="HamperId" value="@Model.HamperId" hidden="hidden" />
-                </div>
-                <div>
-                    <input asp-for="Price" value="@Model.Price" hidden="hidden" />
-                </div>
-                <div class="form-row">
-                    <div class="col quantity">
-                        <input style="width: 68px" asp-for="Quantity" type="number" min="1" max="5" step="1" value="1">
+        else
+        {
+            <img src="~/Images/@Model.FileName" alt="@Model.FileName" height="300" />
+        }
+    </div>
+    <div class="col-md-5">
+        <h1 class="text-center">@Model.Name</h1>
+        <h3>$@Model.Price</h3>
+        <h5>Details:</h5>
+        <ul>
+            @foreach (var item in Model.Items)
+            {
+                if (Model.HamperId == item.HamperId)
+                {
+                    <li>@item.Name @item.Size</li>
+                }
+            }
+        </ul>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="row justify-content-center">
+                <form asp-controller="Home" asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div>
+                        <input asp-for="HamperId" value="@Model.HamperId" hidden="hidden" />
                     </div>
-                    <div class="col">
-                        <input class="btn btn-primary" type="submit" value="Add to Cart" />
+                    <div>
+                        <input asp-for="Price" value="@Model.Price" hidden="hidden" />
                     </div>
-                </div>
-            </form>
-        </div>
-    }
-    else
-    {
-        <a class="btn btn-primary w-80" role="button" href="@Url.Action("Register", "Account")">Register to add to cart</a>
-    }
+                    <div class="form-row">
+                        <div class="col quantity d-flex justify-content-end">
+                            <input style="width: 68px" asp-for="Quantity" type="number" min="1" max="5" step="1" value="1">
+                        </div>
+                        <div class="col" style="width: 200px">
+                            <input class="btn btn-primary float-left" style="width: 200px" type="submit" value="Add to Cart" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+        else
+        {
+            @*<a class="btn btn-primary w-80" role="button" href="@Url.Action("Register", "Account")">Register to add to cart</a>*@
+            <a class="btn btn-primary w-80" role="button" href="@Url.Action("Shop", "Home")">Register to add to cart</a>
+        }
+    </div>
 </div>

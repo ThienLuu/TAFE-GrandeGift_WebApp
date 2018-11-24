@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!--Social Media Buttons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/CSS/SocialMediaButtons.css" rel="stylesheet" />
     <link href="~/CSS/SpecialCarousel.css" rel="stylesheet" />
     <link href="~/CSS/ShoppingCart.css" rel="stylesheet" />
     <link href="~/CSS/ReadableTable.css" rel="stylesheet" />
-    <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+    <!--HEADING FONT-->
+    @*<link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>*@
     <link href="~/CSS/Font.css" rel="stylesheet" />
     <link href="~/CSS/QuantityButton.css" rel="stylesheet" />
     <style>
@@ -33,10 +35,10 @@
     <div class="row bg-dark text-light pt-3">
         <div class="col-md-4">
             <div class="d-flex justify-content-md-start justify-content-center p-2">
-                <a href="#" class="fa fa-facebook"></a>
-                <a href="#" class="fa fa-twitter"></a>
-                <a href="#" class="fa fa-youtube"></a>
-                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-facebook" style="text-decoration: none"></a>
+                <a href="#" class="fa fa-twitter" style="text-decoration: none"></a>
+                <a href="#" class="fa fa-youtube" style="text-decoration: none"></a>
+                <a href="#" class="fa fa-instagram" style="text-decoration: none"></a>
             </div>
         </div>
         <div class="col-md-4">
@@ -107,7 +109,7 @@
     <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=SHOPPING CART LIST=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
     <div class="row" style="position: absolute; right: 20px; z-index: 100">
         <div class="dropdown-shop">
-            @*@await Component.InvokeAsync("CartSummary")*@
+            @await Component.InvokeAsync("CartSummary")
         </div>
     </div>
     <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=SHOPPING CART LIST=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
@@ -218,10 +220,10 @@
             </div>
             <div class="col-md-3 text-sm-center">
                 <h4 class="text-light">Connect With Us</h4>
-                <a href="#" class="fa fa-facebook"></a>
-                <a href="#" class="fa fa-twitter"></a>
-                <a href="#" class="fa fa-youtube"></a>
-                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-facebook" style="text-decoration: none"></a>
+                <a href="#" class="fa fa-twitter" style="text-decoration: none"></a>
+                <a href="#" class="fa fa-youtube" style="text-decoration: none"></a>
+                <a href="#" class="fa fa-instagram" style="text-decoration: none"></a>
             </div>
         </div>
         <div class="row bg-info p-1">

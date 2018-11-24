@@ -65,7 +65,7 @@ namespace Luu_DiplomaProject.Controllers
 
             if (serializedCart == null)
             {
-                //REDIRECT TO WHERE IF SESSION TIMES OUT/OR DISPLAY MESSAGE
+                return RedirectToAction("Index", "Home");
             }
 
             var carts = JsonConvert.DeserializeObject<List<Cart>>(serializedCart);

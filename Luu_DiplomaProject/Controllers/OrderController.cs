@@ -172,6 +172,12 @@ namespace Luu_DiplomaProject.Controllers
             //string sessionId = this.HttpContext.Session.Id;
             //IEnumerable<Cart> cartList = _cartService.GetAll();
 
+            //IF ADDRESS IS 0 = NO ADDRESS SELECTED [IMPORTANT]
+            //if (vm.AddressId == 0)
+            //{
+            //    ModelState.AddModelError("", "Please select Address");
+            //    return View(vm);
+            //}
 
             //1. Creates an Order without OrderDetails and assigns to a customer
             Order order = new Order

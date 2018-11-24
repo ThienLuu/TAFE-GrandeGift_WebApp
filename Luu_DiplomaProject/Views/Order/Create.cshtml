@@ -20,7 +20,7 @@
                 else
                 {
                     <select asp-for="AddressId">
-                        <option value="" disabled selected>Select favourite addresses:</option>
+                        <option disabled selected>Select favourite addresses:</option>
                         @foreach (var address in Model.Addresses)
                         {
                             <option value="@address.AddressId">@address.StreetAddress</option>

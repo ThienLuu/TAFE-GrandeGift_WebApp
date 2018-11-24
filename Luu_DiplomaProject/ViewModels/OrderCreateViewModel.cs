@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 //..
 using Luu_DiplomaProject.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Luu_DiplomaProject.ViewModels
 {
@@ -15,6 +16,7 @@ namespace Luu_DiplomaProject.ViewModels
         public IEnumerable<Address> Addresses { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        //[Required (ErrorMessage = "Address Required")]
         public int AddressId { get; set; }
         public decimal OrderPrice { get; set; }
         //public string Email { get; set; }

@@ -1,4 +1,4 @@
-﻿@model ViewComponentViewModel
+﻿@*@model ViewComponentViewModel*@
 
 @{
     int totalItems = 0;
@@ -24,7 +24,7 @@
 
 
 
-            <!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
+            @*<!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
             @foreach (var item in Model.Carts)
             {
                 foreach (var hamper in Model.Hampers)
@@ -53,12 +53,15 @@
                         totalPrice += item.TotalPrice;
                     }
                 }
-            }
-
+            }*@
+            <!--TEMPORARY TILL ORDER ITEMS DISPLAY IN CART-->
+            <div class="row">
+                <h3>Please click checkout to see cart</h3>
+            </div>
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
                     <!--DIRECT TO WHERE?-->
-                    <a class="btn btn-primary btn-block" href="@Url.Action("", "Home")">Checkout</a>
+                    <a class="btn btn-primary btn-block" href="@Url.Action("Details", "Cart")">Checkout</a>
                 </div>
             </div>
         }
