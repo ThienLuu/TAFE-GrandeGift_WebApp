@@ -229,6 +229,7 @@ namespace Luu_DiplomaProject.Controllers
 
         //ADDS TO CART
         [HttpPost]
+        [Authorize]
         public IActionResult Create(HomeShopViewModel vm)
         {
             #region ATTEMPT 1 - CREATES TO CART

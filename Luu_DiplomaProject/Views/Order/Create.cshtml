@@ -4,14 +4,22 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Order Details</h2>
+<div class="text-center">
+    <h1 class="text-primary">Order Details</h1>
+</div>
 
 <form asp-controller="Order" asp-action="Create" method="post">
     <div asp-validation-summary="ModelOnly"></div>
     <div class="row">
-        <div>
+        <div class="col-md-6">
             <h4>First Name: @Model.FirstName</h4>
+        </div>
+        <div class="col-md-6">
             <h4>Last Name: @Model.LastName</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             <h4>Address:</h4>
             @{ if (Model.Addresses == null)
                 {
@@ -20,7 +28,7 @@
                 else
                 {
                     <select asp-for="AddressId">
-                        <option disabled selected>Select favourite addresses:</option>
+                        <option disabled selected hidden>Select favourite addresses:</option>
                         @foreach (var address in Model.Addresses)
                         {
                             <option value="@address.AddressId">@address.StreetAddress</option>
@@ -69,10 +77,10 @@
         <div class="row">
             <h2>Total: @totalPrice</h2>
         </div>*@
-    <h1>Selected Items</h1>
+    <h2>Selected Items</h2>
 
-    <table class="col">
-        <thead>
+    <table class="col table table-bordered">
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">Image</th>
                 <th scope="col">Title</th>
@@ -107,7 +115,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <button style="width:60">X</button>
+                                <button style="width:60px">X</button>
                             </td>
                         </tr>
                         totalItems++;
@@ -117,11 +125,13 @@
             }
         </tbody>
     </table>
-    <div>
+    <div class="text-center">
         <input asp-for="OrderPrice" hidden="hidden" value="@totalPrice" />
         <!--PAYMENT DETAILS NEXT PAGE IDEA-->
-        <input type="submit" value="Place Order" class="btn" />
+        <input type="submit" value="Place Order" class="btn btn-success border-info text-primary w-25" />
     </div>
 </form>
 
-<a class="btn btn-primary w-100" role="button" href="@Url.Action("Shop", "Home")">Continue Shopping</a>
+<div class="text-center mt-3">
+    <a class="btn btn-light border-info text-primary w-50" role="button" href="@Url.Action("Shop", "Home")">Continue Shopping</a>
+</div>

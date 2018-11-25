@@ -65,6 +65,7 @@ namespace Luu_DiplomaProject.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             string id = _userManagerService.GetUserId(User);
@@ -92,8 +93,8 @@ namespace Luu_DiplomaProject.Controllers
             return View(vm);
         }
 
-        [Authorize]
         [HttpPost]
+        [Authorize]
         public IActionResult Create(OrderCreateViewModel vm)
         {
             //[IMPORTANT] DO NOT ALLOW USER TO CLICK 'BACK' AND CREATE DUPLICATE
@@ -225,6 +226,8 @@ namespace Luu_DiplomaProject.Controllers
 
                     _orderDetailService.Create(orderDetail);
             }
+
+            HttpContext.Session.Clear();
 
             return RedirectToAction("Details", "Order", new { id = order.OrderId });
 

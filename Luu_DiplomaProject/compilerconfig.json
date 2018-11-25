@@ -2,5 +2,13 @@
   {
     "outputFile": "wwwroot/SCSS/ShoppingCart.css",
     "inputFile": "wwwroot/SCSS/ShoppingCart.scss"
+  },
+  {
+    "outputFile": "wwwroot/SCSS/ColorTheme.css",
+    "inputFile": "wwwroot/SCSS/ColorTheme.scss"
+  },
+  {
+    "outputFile": "wwwroot/JS/SpecialCarousel.es5.js",
+    "inputFile": "wwwroot/JS/SpecialCarousel.js"
   }
 ]

@@ -9,41 +9,43 @@
     </div>*@
 
 <div class="text-center">
-    <h1>Browse our categories</h1>
+    <h1 class="text-primary">Browse our categories</h1>
 </div>
-<div class="row justify-content-center">
+<div class="row justify-content-center text-info">
     @foreach (var item in Model.Categories)
     {
-        <a class="btn btn-primary m-2" role="button" href="@Url.Action("Shop", "Home", new { categoryId = item.CategoryId })">@item.Name</a>
+        <a class="btn btn-light border-info text-primary m-2" role="button" href="@Url.Action("Shop", "Home", new { categoryId = item.CategoryId })">@item.Name</a>
     }
 </div>
 
 <hr />
 
 <div class="text-center">
-    <h1>Our top 3 Hampers</h1>
+    <h1 class="text-primary">Our top 3 Hampers</h1>
 </div>
+
+<hr />
 
 <div class="row justify-content-center">
     @{
         @foreach (var hamper in Model.Hampers)
         {
-            <div class="col-md-3 m-2 text-center" style="height: 500px; width:300px">
+            <div class="col-md-3 m-2 text-center" style="height: 540px; width:300px">
 
                 <div class="row justify-content-center" style="height: 100px">
                     <a href="@Url.Action("Details", "Home", new { id = hamper.HamperId })">
-                        <h3>@hamper.Name</h3>
+                        <h3 class="text-info">@hamper.Name</h3>
                     </a>
                 </div>
                 <div class="row justify-content-center">
                     <a href="@Url.Action("Details", "Home", new { id = hamper.HamperId })">
                         @if (hamper.FileName == null)
                         {
-                            <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="200" style="border-radius: 25px" />
+                            <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="200" style="border-radius: 25px; border: 1px solid black" />
                         }
                         else
                         {
-                            <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="200" style="border-radius: 25px" />
+                            <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="200" style="border-radius: 25px; border: 1px solid black" />
                         }
                     </a>
                 </div>
@@ -51,7 +53,7 @@
                     <h5>$@hamper.Price</h5>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="row" style="height: 110px">
+                    <div class="row" style="height: 150px">
                         <ul style="list-style-type: none; padding-left: 0; float: left;">
                             @{
                                 int count = 0;
@@ -97,7 +99,7 @@
                     }
                     else
                     {
-                        <a class="btn btn-primary w-80" role="button" href="@Url.Action("Register", "Account")">Register to add to cart</a>
+                        <a class="btn btn-light border-info text-primary w-80" role="button" href="@Url.Action("Register", "Account")">Register to add to cart</a>
                     }
                 </div>
             </div>

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Cart Details</h2>
+<h2 class="text-primary">Cart Details</h2>
 
 
 @{
@@ -66,8 +66,8 @@
 
     <a class="btn btn-primary" role="button" href="@Url.Action("Create", "Order")">Checkout</a>*@
 
-<table class="col">
-    <thead>
+<table class="col table table-bordered">
+    <thead class="thead-dark">
         <tr>
             <th scope="col">Image</th>
             <th scope="col">Title</th>
@@ -114,7 +114,11 @@
 </table>
 
 <div class="row">
-    <h2>Total: $@totalPrice</h2>
+    <div class="col-12">
+        <h2>Total: $@totalPrice</h2>
+    </div>
 </div>
 
-<a class="btn btn-primary" role="button" href="@Url.Action("Create", "Order")">Proceed to Order</a>
+<div class="text-center mt-3">
+    <a class="btn btn-light border-info text-primary" style="height: 50px; padding: 11px" role="button" href="@Url.Action("Create", "Order")">Proceed to Order</a>
+</div>

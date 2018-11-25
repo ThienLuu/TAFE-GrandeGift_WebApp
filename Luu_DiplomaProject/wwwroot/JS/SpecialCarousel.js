@@ -48,15 +48,15 @@ $('.carousel').carousel({
 
 $(document).ready(function () {
     $(window).on('resize', function () {
-        if ($(window).width() < 740) {
-            $('#grandeGift').css({ "font-size": "60px" });
+        if ($(window).width() < 500) {
+            $('#grandeGift').css({ "font-size": "100px" });
             $('#welcomeUser').css({ "font-size": "30px" });
         }
         else if ($(window).width() < 1480) {
             $('#welcomeUser').css({ "font-size": "30px" });
         }
         else {
-            $('#grandeGift').css({ "font-size": "100px" });
+            $('#grandeGift').css({ "font-size": "150px" });
             $('#welcomeUser').css({ "font-size": "40px" });
         }
     });

@@ -7,18 +7,22 @@
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <!--Social Media Buttons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--HEADING FONT-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <!--Social Media Buttons Styling-->
     <link href="~/CSS/SocialMediaButtons.css" rel="stylesheet" />
     <link href="~/CSS/SpecialCarousel.css" rel="stylesheet" />
     <link href="~/CSS/ShoppingCart.css" rel="stylesheet" />
     <link href="~/CSS/ReadableTable.css" rel="stylesheet" />
-    <!--HEADING FONT-->
-    @*<link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>*@
+    <!--SCSS COLOR THEME-->
+    <link href="~/SCSS/ColorTheme.css" rel="stylesheet" />
     <link href="~/CSS/Font.css" rel="stylesheet" />
     <link href="~/CSS/QuantityButton.css" rel="stylesheet" />
+    <link href="~/CSS/Password.css" rel="stylesheet" />
     <style>
         /*PAGE BACK BACKGROUND COLOR*/
         body {
-            background-color: grey;
+            background-color: #BAB2B5;
             overflow-x: hidden;
         }
         /*PAGE BACK BACKGROUND COLOR*/
@@ -32,7 +36,7 @@
 </head>
 <body>
     <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=HEADER=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
-    <div class="row bg-dark text-light pt-3">
+    <div class="row bg-light text-info pt-3">
         <div class="col-md-4">
             <div class="d-flex justify-content-md-start justify-content-center p-2">
                 <a href="#" class="fa fa-facebook" style="text-decoration: none"></a>
@@ -65,22 +69,22 @@
                     <h1 id="welcomeUser">Welcome: @User.Identity.Name</h1>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <a class="nav-link float-right h5 text-info" href="@Url.Action("Logout", "Account")">Logout</a>
+                    <a class="nav-link float-right h5 text-primary" href="@Url.Action("Logout", "Account")">Logout</a>
                 </div>
             }
             else
             {
                 <div class="d-flex justify-content-md-end justify-content-center pt-md-3">
                     <span>
-                        <a class="nav-link float-right h5 text-info" href="@Url.Action("Login", "Account")">Login</a>
-                        <a class="nav-link float-right h5 text-info" href="@Url.Action("Register", "Account")">Register</a>
+                        <a class="nav-link float-right h5 text-primary" href="@Url.Action("Login", "Account")">Login</a>
+                        <a class="nav-link float-right h5 text-primary" href="@Url.Action("Register", "Account")">Register</a>
                     </span>
                 </div>
             }
         </div>
     </div>
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide border-top border-info" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -88,10 +92,10 @@
         </ol>
         <div class="carousel-inner">
             <div class="d-flex h-50 align-items-center justify-content-center text-center" style="position:absolute; z-index:100; width: 100%; padding-top: 45px">
-                <h1 id="grandeGift">Grande Gift</h1>
+                <h1 id="grandeGift" class="text-primary">Grande Gift</h1>
             </div>
             <div class="d-flex h-50 align-items-center justify-content-center" style="position:absolute; z-index:100; width: 100%; padding-top: 175px">
-                <a class="btn btn-info" href="@Url.Action("Shop", "Home")">Shop Hampers</a>
+                <a class="btn btn-primary border-info text-secondary" href="@Url.Action("Shop", "Home")">Shop Hampers</a>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="~/Images/nursery-decoration-1963815_1920.jpg" data-color="lightblue" alt="First Image">
@@ -114,7 +118,7 @@
     </div>
     <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=SHOPPING CART LIST=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light border-bottom border-top border-info" style="font-size: 18px; font-weight: bold;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -122,7 +126,7 @@
         <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "Home")">Home <!--<span class="sr-only">(current)</span>--></a>
+                    <a class="nav-link text-primary" href="@Url.Action("Index", "Home")">Home <!--<span class="sr-only">(current)</span>--></a>
                 </li>
                 @*<li class="nav-item dropdown d-inline bg-info">
                         <a class="nav-link dropdown-toggle" href="@Url.Action("Shop","Home")" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -134,13 +138,13 @@
                         </div>
                     </li>*@
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Shop", "Home")">Shop</a>
+                    <a class="nav-link text-primary" href="@Url.Action("Shop", "Home")">Shop</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("About", "Home")">About Us</a>
+                    <a class="nav-link text-primary" href="@Url.Action("About", "Home")">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact Us</a>
+                    <a class="nav-link text-primary" href="@Url.Action("Contact", "Home")">Contact Us</a>
                 </li>
                 @{
                     if (User.Identity.IsAuthenticated)
@@ -182,63 +186,95 @@
     </nav>
     <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=NAVBAR=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
     <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CONTENT=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
-    <div class="container bg-light p-4">
-
+    <div class="container bg-secondary p-4">
         @RenderBody()
     </div>
     <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CONTENT=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
     <!--START=-=-=-=-=-=-=-=-=-=-=-=-=-=-=FOOTER=-=-=-=-=-=-=-=-=-=-=-=-=-=-=START-->
-    <div class="container-fluid bg-dark">
+    <div class="container-fluid bg-light border-top border-info">
         <div class="row p-3">
             <div class="col-3">
-                <h4 class="text-light">Information</h4>
+                <h4 class="text-primary">Information</h4>
                 <a class="nav-link px-0 py-1 disabled" href="#">FAQ</a>
-                <a class="nav-link px-0 py-1" href="#">Contact Us</a>
-                <a class="nav-link px-0 py-1" href="#">About Us</a>
+                <a class="nav-link px-0 py-1 text-info" href="#">Contact Us</a>
+                <a class="nav-link px-0 py-1 text-info" href="#">About Us</a>
             </div>
             <div class="col-md-3 justify-content-md-center">
-                <h4 class="text-light">The Fine Print</h4>
-                <a class="nav-link px-0 py-1" href="#">Security & Privacy</a>
+                <h4 class="text-primary">The Fine Print</h4>
+                <a class="nav-link px-0 py-1 text-info" href="#">Security & Privacy</a>
                 <a class="nav-link px-0 py-1 disabled" href="#">Returns & Refunds</a>
-                <a class="nav-link px-0 py-1" href="#">Terms & Conditions</a>
+                <a class="nav-link px-0 py-1 text-info" href="#">Terms & Conditions</a>
                 <a class="nav-link px-0 py-1 disabled" href="#">Delivery</a>
             </div>
             <div class="col-md-3">
-                <h4 class="text-light">Account</h4>
+                <h4 class="text-primary">Account</h4>
                 @if (User.Identity.IsAuthenticated)
                 {
                     <a class="nav-link px-0 py-1 disabled" href="#">Delete Account</a>
                     <a class="nav-link px-0 py-1 disabled" href="#">Subscribe</a>
-                    <a class="nav-link px-0 py-1" href="@Url.Action("Logout", "Account")">Logout</a>
+                    <a class="nav-link px-0 py-1 text-info" href="@Url.Action("Logout", "Account")">Logout</a>
                 }
                 else
                 {
-                    <a class="nav-link px-0 py-1" href="@Url.Action("Register", "Account")">Register</a>
+                    <a class="nav-link px-0 py-1 text-info" href="@Url.Action("Register", "Account")">Register</a>
                     <a class="nav-link px-0 py-1 disabled" href="#">Subscribe</a>
-                    <a class="nav-link px-0 py-1" href="@Url.Action("Login", "Account")">Login</a>
+                    <a class="nav-link px-0 py-1 text-info" href="@Url.Action("Login", "Account")">Login</a>
                 }
             </div>
             <div class="col-md-3 text-sm-center">
-                <h4 class="text-light">Connect With Us</h4>
+                <h4 class="text-primary">Connect With Us</h4>
                 <a href="#" class="fa fa-facebook" style="text-decoration: none"></a>
                 <a href="#" class="fa fa-twitter" style="text-decoration: none"></a>
                 <a href="#" class="fa fa-youtube" style="text-decoration: none"></a>
                 <a href="#" class="fa fa-instagram" style="text-decoration: none"></a>
             </div>
         </div>
-        <div class="row bg-info p-1">
-            <h6 class="mx-auto">Copyright 2018</h6>
+        <div class="row bg-secondary p-1 border-top border-info">
+            <h6 class="mx-auto">
+                <img src="~/Images/TAFENSW_logo_without-waratah_RGB_padding top and bottom.png" alt="Truck Image" height="18" />
+                - Thien Luu -
+                <img src="~/Images/Copyright-Symbol-PNG-File.png" alt="Truck Image" width="20" />opyright 2018
+            </h6>
         </div>
     </div>
     <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=FOOTER=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
+    <!-- Modal -->
+    @*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Welcome to Grande Gift</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <b>This is a project currently in build and for testing.</b> Not all features/pages are available. Please <b>register</b> or <b>log in</b> to use extra features
+                </div>
+                <div class="modal-footer mx-auto">
+                    <a class="btn btn-light border-info text-primary" style="width: 100px" href="@Url.Action("Register", "Account")">Register</a>
+                    <a class="btn btn-light border-info text-primary" style="width: 100px" href="@Url.Action("Login", "Account")">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>*@
 
     <script src="~/node_modules/jquery/dist/jquery.js"></script>
     <script src="~/node_modules/popper.js/dist/umd/popper.js"></script>
     <script src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 
     <!--OTHER SCRIPTS-->
+    <script src="~/JS/bootstrap-show-password.js"></script>
     <script src="~/JS/SpecialCarousel.js"></script>
     <script src="~/JS/QuantityButton.js"></script>
+    @if (User.Identity.IsAuthenticated)
+    {
+
+    }
+    else
+    {
+        <script src="~/JS/Modal.js"></script>
+    }
     <!--OTHER SCRIPTS-->
 
     @RenderSection("Scripts", required: false)

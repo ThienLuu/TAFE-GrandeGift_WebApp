@@ -1,5 +1,5 @@
 ﻿#grandeGift {
-    font-style: oblique;
-    font-size: 100px;
-    color: aquamarine;
+    font-family: 'Cookie', serif;
+    font-size: 150px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

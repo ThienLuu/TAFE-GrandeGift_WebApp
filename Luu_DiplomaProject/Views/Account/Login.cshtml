@@ -12,20 +12,30 @@
         <div asp-validation-summary="ModelOnly"></div>
 
         @*<div>
-                <label asp-for="Email"></label>
-                <input asp-for="Email" />
-                <span asp-validation-for="Email"></span>
-            </div>*@
+            <label asp-for="Email"></label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>*@
         <div>
             <label asp-for="Username"></label>
             <input asp-for="Username" class="form-control" placeholder="Username" />
             <span class="text-danger" asp-validation-for="Username"></span>
         </div>
-        <div>
+        <label asp-for="Password"></label>
+        <div class="input-group">
+            <input asp-for="Password" placeholder="Password" type="password" name="password" id="password" class="form-control" data-toggle="password">
+            <div class="input-group-append">
+                <span class="input-group-text">
+                    <i id="passwordEye" class="fa fa-eye"></i>
+                </span>
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+        </div>
+        @*<div>
             <label asp-for="Password"></label>
             <input asp-for="Password" class="form-control" placeholder="Password" type="password" />
             <span class="text-danger" asp-validation-for="Password"></span>
-        </div>
+        </div>*@
         <div class="mt-2">
             <label asp-for="RememberMe">Remember me</label>
             <input asp-for="RememberMe" />
