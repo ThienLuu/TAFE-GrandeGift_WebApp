@@ -42,10 +42,10 @@ namespace Luu_DiplomaProject.Controllers
                 Address address = new Address
                 {
                     CustomerId = vm.CustomerId,
-                    City = vm.City,
-                    State = vm.State,
+                    City = vm.City.First().ToString().ToUpper(),
+                    State = vm.State.ToUpper(),
                     Postcode = vm.Postcode,
-                    Country = vm.Country,
+                    Country = vm.Country.First().ToString().ToUpper(),
                     StreetAddress = vm.StreetAddress,
                     Favourite = vm.Favourite
                 };

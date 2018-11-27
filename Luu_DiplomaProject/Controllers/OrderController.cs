@@ -51,17 +51,34 @@ namespace Luu_DiplomaProject.Controllers
             //string sessionId = this.HttpContext.Session.Id;
             //IEnumerable<OrderDetail> orderDetails = _orderDetailService.GetAll().Where(od => od.OrderId == id);
             //IEnumerable<Hamper> hampers = _hamperService.GetAll();
-            ////IEnumerable<Cart> carts = _cartService.GetAll().Where(c => c.SessionId == sessionId);
+            ////IEnumerable<Cart> carts = _cartService.GetAll().Where(c => c.SessionId == sessionId);            
 
-            //OrderDetailsViewModel vm = new OrderDetailsViewModel
-            //{
-            //    OrderDetails = orderDetails,
-            //    Hampers = hampers
-            //};
+            string customerId = _userManagerService.GetUserId(User);
+            //string customerEmail = _userManagerService.GetEmailAsync(User);
+            Customer customer = _customerService.GetSingle(c => c.UserId == customerId);
+            Order order = _orderService.GetSingle(o => o.OrderId == id);
+            Address address = _addressService.GetSingle(a => a.AddressId == order.AddressId);
+            IEnumerable<OrderDetail> orderDetails = _orderDetailService.GetAll().Where(od => od.OrderId == id);
+            IEnumerable<Hamper> hampers = _hamperService.GetAll();
 
-            //return View(vm);
+            OrderDetailsViewModel vm = new OrderDetailsViewModel
+            {
+                OrderId = id,
+                OrderDateTime = order.OrderDateTime,
+                OrderDetails = orderDetails,
+                Hampers = hampers,
+                City = address.City,
+                State = address.State,
+                Postcode = address.Postcode,
+                StreetAddress = address.StreetAddress,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Email = "N/A"
+            };
 
-            return View();
+            return View(vm);
+
+            //return View();
         }
 
         [HttpGet]
@@ -238,6 +255,23 @@ namespace Luu_DiplomaProject.Controllers
 
 
             #endregion
+        }
+
+        [HttpGet]
+        public IActionResult History()
+        {
+            string id = _userManagerService.GetUserId(User);
+            Customer customer = _customerService.GetSingle(c => c.UserId == id);
+            IEnumerable<Order> order = _orderService.GetAll().Where(o => o.CustomerId == customer.CustomerId);
+            IEnumerable<Address> address = _addressService.GetAll().Where(a => a.CustomerId == customer.CustomerId);
+
+            OrderHistoryViewModel vm = new OrderHistoryViewModel
+            {
+                Orders = order,
+                Addresses = address
+            };
+
+            return View(vm);
         }
     }
 }

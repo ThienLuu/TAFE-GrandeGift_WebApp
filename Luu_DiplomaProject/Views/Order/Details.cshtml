@@ -1,51 +1,146 @@
-﻿<h1>ORDER SUMMARY?</h1>
-
-@*@model OrderDetailsViewModel
+﻿@model OrderDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Order Details" + Model.FirstName;
 }
 
-<h2>Details</h2>
-
-<h2>Cart Details</h2>
-
+<h1>Your <b>order</b> has been <b>submitted</b> and will dispatch shortly. Thank you for purchasing from Grande Gift</h1>
 
 @{
     int totalItems = 0;
     decimal totalPrice = 0;
 }
 
-@foreach (var item in Model.OrderDetails)
-{
-    foreach (var hamper in Model.Hampers)
-    {
-        @if (hamper.HamperId == item.HamperId)
-        {
+<div class="col-12 bg-white p-5">
+    <div class="row text-center">
+        <h3>Your Order Details</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
             <div class="row">
-                <div class="col-md-4">
-                    @if (hamper.FileName == null)
-                    {
-                        <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
-                    }
-                    else
-                    {
-                        <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
-                    }
-                </div>
-                <div class="col-md-4">
-                    <h5 class="item-name">@hamper.Name</h5>
-                </div>
-                <div class="col-md-4">
-                    <h4>@item.Quantity</h4>
-                </div>
+                <p>Name: @Model.FirstName @Model.LastName</p>
+                <p></p>
             </div>
-            totalItems++;
-            totalPrice += item.TotalPrice;
+            <div class="row">
+                <p><b>Email:</b>@Model.Email</p>
+                <p></p>
+            </div>
+        </div>
+        <div class="col-6">
+            <p>OrderID:@Model.OrderId</p>
+            <p>Order Time: @Model.OrderDateTime</p>
+            <p>Address:</p>
+            <pre>
+                @Model.FirstName @Model.LastName
+                @Model.StreetAddress
+                @Model.City @Model.State @Model.Postcode
+            </pre>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3>Order Summary</h3>
+        <table style="border-collapse: collapse; width: 100%;" border="1">
+            <tbody>
+                @foreach (var item in Model.OrderDetails)
+                {
+                    @foreach (var hamper in Model.Hampers)
+                    {
+                        if (item.HamperId == hamper.HamperId)
+                        {
+                            <tr>
+                                <td style="width: 25%;">
+                                    @if (hamper.FileName == null)
+                                    {
+                                        <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="150" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="150" />
+                                    }
+                                </td>
+                                <td style="width: 25%;">@hamper.Name</td>
+                                <td style="width: 25%;">@item.Quantity</td>
+                                <td style="width: 25%;">$@hamper.Price</td>
+                            </tr>
+
+                            totalItems++;
+                            totalPrice += item.TotalPrice;
+                        }
+                    }
+                }
+                <tr>
+                    <td style="width: 25%;" colspan="2"></td>
+                    <td style="width: 25%; text-align: right;">Order Total:</td>
+                    <td style="width: 25%;">$@totalPrice</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <h6>Total Items: @totalItems</h6>
+    </div>
+
+    <div class="row text-center">
+        <h3>Payment Details</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <p>Type: -=-CASH-=-</p>
+        </div>
+    </div>
+</div>
+
+<a class=" d-inline btn btn-light border-info text-primary" role="button" href="@Url.Action("Shop", "Home")">Continue Shopping</a>
+@*@model OrderDetailsViewModel
+
+    @{
+        ViewData["Title"] = "Details";
+    }
+
+    <h2>Details</h2>
+
+    <h2>Cart Details</h2>
+
+
+    @{
+        int totalItems = 0;
+        decimal totalPrice = 0;
+    }
+
+    @foreach (var item in Model.OrderDetails)
+    {
+        foreach (var hamper in Model.Hampers)
+        {
+            @if (hamper.HamperId == item.HamperId)
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        @if (hamper.FileName == null)
+                        {
+                            <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
+                        }
+                        else
+                        {
+                            <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
+                        }
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="item-name">@hamper.Name</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>@item.Quantity</h4>
+                    </div>
+                </div>
+                totalItems++;
+                totalPrice += item.TotalPrice;
+            }
         }
     }
-}
 
-<div class="row">
-    <h2>Total: @totalPrice</h2>
-</div>*@
+    <div class="row">
+        <h2>Total: @totalPrice</h2>
+    </div>*@

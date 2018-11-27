@@ -97,7 +97,7 @@
                     @if (hamper.HamperId == item.HamperId)
                     {
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center align-middle">
                                 @if (hamper.FileName == null)
                                 {
                                     <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="150" />
@@ -107,14 +107,15 @@
                                     <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="150" />
                                 }
                             </td>
-                            <td>@hamper.Name</td>
-                            <td class="text-center">
+                            <td class="align-middle">@hamper.Name</td>
+                            <td class="text-center align-middle">
                                 <div class="col quantity">
                                     @*<input style="width: 68px" asp-for="Quantity" type="number" min="1" max="5" step="1" value="1">*@
-                                    <input style="width: 68px" type="number" min="1" max="5" step="1" value="@item.Quantity">
+                                    @*<input style="width: 68px" type="number" min="1" max="5" step="1" value="@item.Quantity">*@
                                 </div>
+                                @item.Quantity
                             </td>
-                            <td class="text-center">
+                            <td class="text-center align-middle">
                                 <button style="width:60px">X</button>
                             </td>
                         </tr>
@@ -133,5 +134,6 @@
 </form>
 
 <div class="text-center mt-3">
-    <a class="btn btn-light border-info text-primary w-50" role="button" href="@Url.Action("Shop", "Home")">Continue Shopping</a>
+    <a class=" d-inline btn btn-light border-info text-primary" role="button" href="@Url.Action("Shop", "Home")">Continue Shopping</a>
+    <a class=" d-inline btn btn-warning border-info text-primary" role="button" href="@Url.Action("Details", "Cart")">Return to Cart</a>
 </div>

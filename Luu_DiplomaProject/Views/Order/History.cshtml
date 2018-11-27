@@ -1,0 +1,21 @@
+﻿@model OrderHistoryViewModel
+
+@{
+    ViewData["Title"] = "History";
+}
+
+<h2>Order History</h2>
+
+<div class="container">
+    @{
+        foreach (var order in Model.Orders)
+        {
+            <div class="row border m-3">
+                <h3>Order ID: @order.OrderId</h3>
+                <h4>Date: @order.OrderDateTime</h4>
+                <h2>Total Price: $@order.OrderPrice</h2>
+                <a class=" d-inline btn btn-light border-info text-primary" role="button" href="@Url.Action("Details", "Order", new { id = order.OrderId })">Details</a>
+            </div>
+        }
+    }
+</div>
