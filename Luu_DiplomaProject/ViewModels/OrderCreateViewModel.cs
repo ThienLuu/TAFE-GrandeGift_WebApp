@@ -21,5 +21,6 @@ namespace Luu_DiplomaProject.ViewModels
         public decimal OrderPrice { get; set; }
         //public string Email { get; set; }
         //ORDER DETAILS?
+        public int CustomerId { get; set; }
     }
 }

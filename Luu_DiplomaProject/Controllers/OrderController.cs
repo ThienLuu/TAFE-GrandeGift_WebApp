@@ -106,6 +106,7 @@ namespace Luu_DiplomaProject.Controllers
                 Addresses = address,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
+                CustomerId = customer.CustomerId
             };
             return View(vm);
         }
@@ -258,6 +259,7 @@ namespace Luu_DiplomaProject.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult History()
         {
             string id = _userManagerService.GetUserId(User);

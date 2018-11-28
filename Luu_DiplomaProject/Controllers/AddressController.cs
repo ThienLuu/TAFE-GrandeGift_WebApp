@@ -42,10 +42,10 @@ namespace Luu_DiplomaProject.Controllers
                 Address address = new Address
                 {
                     CustomerId = vm.CustomerId,
-                    City = vm.City.First().ToString().ToUpper(),
+                    City = vm.City,
                     State = vm.State.ToUpper(),
                     Postcode = vm.Postcode,
-                    Country = vm.Country.First().ToString().ToUpper(),
+                    Country = vm.Country,
                     StreetAddress = vm.StreetAddress,
                     Favourite = vm.Favourite
                 };
@@ -59,13 +59,14 @@ namespace Luu_DiplomaProject.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult Update(int id)
+        public IActionResult Update(int addressId, int custId)
         {
-            Address address = _addressService.GetSingle(a => a.AddressId == id);
+            Address address = _addressService.GetSingle(a => a.AddressId == addressId);
 
             AddressUpdateViewModel vm = new AddressUpdateViewModel
             {
-                AddressId = address.AddressId,
+                CustomerId = custId,
+                AddressId = addressId,
                 City = address.City,
                 State = address.State,
                 Postcode = address.Postcode,
@@ -85,6 +86,7 @@ namespace Luu_DiplomaProject.Controllers
 
             if (ModelState.IsValid && address != null)
             {
+                address.CustomerId = vm.CustomerId;
                 address.AddressId = vm.AddressId;
                 address.City = vm.City;
                 address.State = vm.State;

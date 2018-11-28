@@ -1,7 +1,7 @@
 ﻿@model OrderCreateViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Order Details - " + Model.FirstName;
 }
 
 <div class="text-center">
@@ -21,9 +21,10 @@
     <div class="row">
         <div class="col-12">
             <h4>Address:</h4>
-            @{ if (Model.Addresses == null)
+            @{ if (Model.Addresses.Count() == 0)
                 {
-                    <a class="btn btn-success w-50" role="button" href="@Url.Action("Create", "Address")">Create a Address</a>
+                    @*<a class="btn btn-success w-50" role="button" href="@Url.Action("Create", "Address", new { id = Model.CustomerId })">Create a Address</a>*@
+                    <a class="btn btn-success w-50" role="button" href="@Url.Action("Update", "Account")">Please favourite an address or Create one</a>
                 }
                 else
                 {
@@ -31,7 +32,7 @@
                         <option disabled selected hidden>Select favourite addresses:</option>
                         @foreach (var address in Model.Addresses)
                         {
-                            <option value="@address.AddressId">@address.StreetAddress</option>
+                            <option value="@address.AddressId">@address.StreetAddress, @address.City, @address.State, @address.Postcode</option>
                         }
                     </select>
                     <span asp-validation-for="AddressId" class="text-danger"></span>
@@ -84,8 +85,9 @@
             <tr>
                 <th scope="col">Image</th>
                 <th scope="col">Title</th>
-                <th scope="col">Quantity <br /> Not functioning</th>
-                <th scope="col">Action <br /> Not functioning</th>
+                <th scope="col">Quantity <br /> <p>Not functioning</p></th>
+                <th scope="col">Action <br /> <p>Not functioning</p></th>
+                <th scope="col">Price</th>
             </tr>
         </thead>
         <tbody>
@@ -100,14 +102,14 @@
                             <td class="text-center align-middle">
                                 @if (hamper.FileName == null)
                                 {
-                                    <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="150" />
+                                    <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
                                 }
                                 else
                                 {
-                                    <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="150" />
+                                    <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
                                 }
                             </td>
-                            <td class="align-middle">@hamper.Name</td>
+                            <td class="align-middle text-center"><h6>@hamper.Name</h6></td>
                             <td class="text-center align-middle">
                                 <div class="col quantity">
                                     @*<input style="width: 68px" asp-for="Quantity" type="number" min="1" max="5" step="1" value="1">*@
@@ -118,6 +120,9 @@
                             <td class="text-center align-middle">
                                 <button style="width:60px">X</button>
                             </td>
+                            <td class="text-center align-middle">
+                                $@hamper.Price
+                            </td>
                         </tr>
                         totalItems++;
                         totalPrice += item.TotalPrice;
@@ -126,6 +131,14 @@
             }
         </tbody>
     </table>
+    <div class="row">
+        <div class="col-6">
+            <h6>Total Items: @totalItems</h6>
+        </div>
+        <div class="col-6 float-right">
+            <h4 class="float-right">Total Price: $@totalPrice</h4>
+        </div>
+    </div>
     <div class="text-center">
         <input asp-for="OrderPrice" hidden="hidden" value="@totalPrice" />
         <!--PAYMENT DETAILS NEXT PAGE IDEA-->

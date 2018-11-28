@@ -3,46 +3,48 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Add Address</h2>
+<h2 class="text-primary">Add Address</h2>
 
 <form asp-controller="Address" asp-action="Create" method="post">
     <div asp-validation-summary="ModelOnly"></div>
     <input asp-for="CustomerId" hidden="hidden" />
-    <div class="row">
-        <div>
-            <label asp-for="City">City:</label>
-            <input asp-for="City" class="form-control" placeholder="City" />
-            <span asp-validation-for="City" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="State">State:</label>
-            <input asp-for="State" class="form-control" placeholder="State" />
-            <span asp-validation-for="State" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Postcode">Postcode:</label>
-            <input asp-for="Postcode" class="form-control" placeholder="Postcode" />
-            <span asp-validation-for="Postcode" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Country">Country:</label>
-            <input asp-for="Country" class="form-control" placeholder="Country" />
-            <span asp-validation-for="Country" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="StreetAddress">Address:</label>
-            <input asp-for="StreetAddress" class="form-control" placeholder="Address" />
-            <span asp-validation-for="StreetAddress" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Favourite">Favourite</label>
-            <input asp-for="Favourite" class="form-control" />
-            <span asp-validation-for="Favourite" class="text-danger"></span>
-        </div>
+    <div>
+        <label asp-for="StreetAddress">Address:</label>
+        <input asp-for="StreetAddress" style="width: 350px" class="form-control" placeholder="Address" />
+        <span asp-validation-for="StreetAddress" class="text-danger"></span>
     </div>
     <div>
-        <input type="submit" value="Add Address" class="btn" />
+        <label asp-for="City">City:</label>
+        <input asp-for="City" style="width: 250px" class="form-control" placeholder="City" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="State">State:</label>
+        <input asp-for="State" style="width: 100px" class="form-control" placeholder="State" />
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Postcode">Postcode:</label>
+        <input asp-for="Postcode" style="width: 100px" class="form-control" placeholder="Postcode" />
+        <span asp-validation-for="Postcode" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Country">Country:</label>
+        <input asp-for="Country" style="width: 250px" class="form-control" placeholder="Country" />
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Favourite">Favourite</label>
+        <input asp-for="Favourite" class="form-control" />
+        <span asp-validation-for="Favourite" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="row justify-content-center">
+        <input type="submit" value="Add Address" class="btn btn-success border-info" style="width: 400px" />
     </div>
 </form>
-
-<a class="btn btn-primary w-100" role="button" href="@Url.Action("Update", "Account")">Back</a>
+<br />
+<div class="row justify-content-center">
+    <a class="btn btn-primary border-info text-secondary" style="width: 200px" role="button" href="@Url.Action("Update", "Account")">Back</a>
+</div>

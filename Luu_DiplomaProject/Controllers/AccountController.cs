@@ -145,6 +145,7 @@ namespace Luu_DiplomaProject.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManagerService.SignOutAsync();
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 

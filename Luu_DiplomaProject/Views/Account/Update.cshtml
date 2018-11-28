@@ -18,17 +18,17 @@
         </div>*@
     <div>
         <label asp-for="FirstName">First Name</label>
-        <input asp-for="FirstName" class="form-control" />
+        <input asp-for="FirstName" style="width: 250px" class="form-control" />
         <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="LastName">Last Name</label>
-        <input asp-for="LastName" class="form-control" />
+        <input asp-for="LastName" style="width: 250px" class="form-control" />
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="DOB"></label>
-        <input asp-for="DOB" type="date" class="form-control" />
+        <input asp-for="DOB" style="width: 170px" type="date" class="form-control" />
         <span asp-validation-for="DOB" class="text-danger"></span>
     </div>
     @*<div>
@@ -51,39 +51,55 @@
             <input asp-for="ConfirmPassword" />
             <span asp-validation-for="ConfirmPassword"></span>
         </div>*@
-    <div>
-        <input type="submit" value="Update Account" class="btn" />
+    <br />
+    <div class="form-row">
+        <input type="submit" value="Update Account" class="btn btn-primary border-info text-secondary" />
     </div>
-    <br />
-    <br />
-    <table class="table table-bordered">
-        <thead class="thead-light">
-            <tr>
-                <th>City</th>
-                <th>State</th>
-                <th>Postcode</th>
-                <th>Country</th>
-                <th>Street Address</th>
-                <th>Favourite</th>
-                <th></th>
-            </tr>
-        </thead>
-
-        @foreach (var address in Model.Addresses)
+</form>
+<br />
+<br />
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>City</th>
+            <th>State</th>
+            <th>Postcode</th>
+            <th>Country</th>
+            <th>Street Address</th>
+            <th>Favourite</th>
+            <th></th>
+        </tr>
+    </thead>
+    @{
+        if (Model.Addresses.Count() == 0)
         {
+            <tr>
+                <td colspan="7" class="text-center text-danger"><h5>No addresses added</h5></td>
+            </tr>
+        }
+        else
+        {
+            foreach (var address in Model.Addresses)
+            {
             <tr>
                 <td>@address.City</td>
                 <td>@address.State</td>
                 <td>@address.Postcode</td>
                 <td>@address.Country</td>
                 <td>@address.StreetAddress</td>
-                <td>@address.Favourite</td>
+                @{
+                    var style = (address.Favourite == true) ? "bg-success" : "bg-danger";
+                }
+                <td class="@style"></td>
                 <td>
-                    <a class="btn btn-primary w-100" role="button" href="@Url.Action("Update", "Address", new { id = address.AddressId })">Update Hamper</a>
+                    <a class="btn btn-primary w-100" role="button" href="@Url.Action("Update", "Address", new { addressId = address.AddressId, custId = Model.CustomerId })">Edit Address</a>
                 </td>
             </tr>
+            }
         }
+    }
 
-    </table>
-    <a class="btn btn-primary w-100" role="button" href="@Url.Action("Create", "Address", new { id = Model.CustomerId})">Add Address</a>
-</form>
+</table>
+<div class="row justify-content-center">
+    <a class="btn btn-primary w-50" role="button" href="@Url.Action("Create", "Address", new { id = Model.CustomerId})">Add Address</a>
+</div>

@@ -119,7 +119,7 @@
     </div>
     <!--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=SHOPPING CART LIST=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-light border-bottom border-top border-info" style="font-size: 18px; font-weight: bold;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom border-top border-info" style="font-size: 18px; font-weight: bold;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -153,20 +153,20 @@
                         if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link bg-danger d-inline-block" href="@Url.Action("Admin", "Home")">Admin Interface</a>
+                                <a class="nav-link bg-secondary d-inline-block rounded mx-auto" href="@Url.Action("Admin", "Home")">Admin Interface</a>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item dropdown d-inline bg-danger">
+                            <li class="nav-item dropdown d-inline bg-secondary rounded mx-auto" style="width: 200px">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Account
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="@Url.Action("Update", "Account")">Profile</a>
-                                    <a class="dropdown-item disabled" href="#">Change Password</a>
-                                    <a class="dropdown-item disabled" href="@Url.Action("History","Order")">Order Details</a>
-                                    <a class="dropdown-item disabled" href="#">Payment Details</a>
+                                    <a class="dropdown-item disabled not-allowed" href="#">Change Password</a>
+                                    <a class="dropdown-item" href="@Url.Action("History","Order")">Order Details</a>
+                                    <a class="dropdown-item disabled not-allowed" href="#">Payment Details</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="@Url.Action("Logout", "Account")">Logout</a>
                                 </div>
@@ -198,14 +198,14 @@
             <div class="col-3">
                 <h4 class="text-primary">Information</h4>
                 <a class="nav-link px-0 py-1 disabled not-allowed" href="#">FAQ</a>
-                <a class="nav-link px-0 py-1 text-info" href="#">Contact Us</a>
-                <a class="nav-link px-0 py-1 text-info" href="#">About Us</a>
+                <a class="nav-link px-0 py-1 text-info" href="@Url.Action("Contact","Home")">Contact Us</a>
+                <a class="nav-link px-0 py-1 text-info" href="@Url.Action("About","Home")">About Us</a>
             </div>
             <div class="col-md-3 justify-content-md-center">
                 <h4 class="text-primary">The Fine Print</h4>
-                <a class="nav-link px-0 py-1 text-info" href="#">Security & Privacy</a>
+                <a class="nav-link px-0 py-1 disabled not-allowed" href="#">Security & Privacy</a>
                 <a class="nav-link px-0 py-1 disabled not-allowed" href="#">Returns & Refunds</a>
-                <a class="nav-link px-0 py-1 text-info" href="#">Terms & Conditions</a>
+                <a class="nav-link px-0 py-1 disabled not-allowed" href="#">Terms & Conditions</a>
                 <a class="nav-link px-0 py-1 disabled not-allowed" href="#">Delivery</a>
             </div>
             <div class="col-md-3">

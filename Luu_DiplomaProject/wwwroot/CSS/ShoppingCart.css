@@ -60,7 +60,7 @@
         height: 50px;
     }
 
-.dropdown-menu:before {
+.dropdown-menu-shop:before {
     content: " ";
     position: absolute;
     top: -20px;

@@ -9,6 +9,7 @@ namespace Luu_DiplomaProject.ViewModels
 {
     public class AddressUpdateViewModel
     {
+        public int CustomerId { get; set; }
         public int AddressId { get; set; }
         [Required]
         public string City { get; set; }

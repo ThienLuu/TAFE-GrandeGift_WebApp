@@ -10,12 +10,19 @@
     @{
         foreach (var order in Model.Orders)
         {
-            <div class="row border m-3">
-                <h3>Order ID: @order.OrderId</h3>
-                <h4>Date: @order.OrderDateTime</h4>
-                <h2>Total Price: $@order.OrderPrice</h2>
-                <a class=" d-inline btn btn-light border-info text-primary" role="button" href="@Url.Action("Details", "Order", new { id = order.OrderId })">Details</a>
-            </div>
+    <div class="row border border-dark m-2 p-2">
+        <div class="col-3">
+            <h3>Order ID: @order.OrderId</h3>
+        </div>
+        <div class="col-5">
+            <h2>Total Price: $@order.OrderPrice</h2>
+            <h4>Date: @order.OrderDateTime.ToString("dd/MM/yyyy")</h4>
+            <h4>Time: @order.OrderDateTime.TimeOfDay</h4>
+        </div>
+        <div class="col-4 text-center">
+            <a class="d-inline btn btn-light border-info text-primary" style="width: 200px;" role="button" href="@Url.Action("Details", "Order", new { id = order.OrderId })">Details</a>
+        </div>
+    </div>
         }
     }
 </div>
