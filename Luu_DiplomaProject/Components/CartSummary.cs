@@ -46,7 +46,7 @@ namespace Luu_DiplomaProject.Components
 
         public IViewComponentResult Invoke()
         {
-            return View();
+            //return View();
 
             //string id = _userManagerService.GetUserId(UserClaimsPrincipal);
             //Customer customer = _customerService.GetSingle(c => c.UserId == id);
@@ -81,25 +81,44 @@ namespace Luu_DiplomaProject.Components
             //Customer customer = _customerService.GetSingle(c => c.UserId == id);
             //Order order = _orderService.GetSingle(o => o.CustomerId == customer.CustomerId);
             //IEnumerable<OrderDetail> orderDetails = _orderDetailService.Query(od => od.OrderId == order.OrderId);
-            //IEnumerable<Hamper> hampers = _hamperService.GetAll();
+            IEnumerable<Hamper> hampers = _hamperService.GetAll();
 
-            //var serializedCart = HttpContext.Session.GetString(CartSessionKey);
+            var serializedCart = HttpContext.Session.GetString(CartSessionKey);
 
-            //if (serializedCart == null)
-            //{
-            //    //REDIRECT TO WHERE IF SESSION TIMES OUT/OR DISPLAY MESSAGE
-            //}
+            if (serializedCart == null)
+            {
+                //REDIRECT TO WHERE IF SESSION TIMES OUT/OR DISPLAY MESSAGE
+                ViewComponentViewModel vm1 = new ViewComponentViewModel
+                {
+                    //OrderDetails = orderDetails,
+                    Hampers = null,
+                    Carts = null
+                };
 
-            //var carts = JsonConvert.DeserializeObject<List<Cart>>(serializedCart);
+                return View(vm1);
+            }
 
-            //ViewComponentViewModel vm = new ViewComponentViewModel
-            //{
-            //    OrderDetails = orderDetails,
-            //    Hampers = hampers,
-            //    Carts = carts
-            //};
+            var carts = JsonConvert.DeserializeObject<List<Cart>>(serializedCart);
 
-            //return View(vm);
+            int totalItem = carts.Count();
+
+            decimal totalPrice = 0;
+
+            foreach (var item in carts)
+            {
+                totalPrice += item.TotalPrice;
+            }
+
+            ViewComponentViewModel vm2 = new ViewComponentViewModel
+            {
+                //OrderDetails = orderDetails,
+                Hampers = hampers,
+                Carts = carts,
+                TotalItem = totalItem,
+                TotalPrice = totalPrice
+            };
+
+            return View(vm2);
         }
     }
 }

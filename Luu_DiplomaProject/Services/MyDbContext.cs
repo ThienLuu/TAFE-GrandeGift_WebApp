@@ -11,6 +11,12 @@ namespace Luu_DiplomaProject.Services
 {
     public class MyDbContext : IdentityDbContext
     {
+        //public MyDbContext(DbContextOptions<MyDbContext> options)
+        //    : base(options)
+        //{
+
+        //}
+
         public DbSet<Customer> TblCustomer { get; set; }
         public DbSet<Hamper> TblHamper { get; set; }
         public DbSet<Category> TblCategory { get; set; }

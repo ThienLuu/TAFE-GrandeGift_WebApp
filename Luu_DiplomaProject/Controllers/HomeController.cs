@@ -332,7 +332,7 @@ namespace Luu_DiplomaProject.Controllers
                 HttpContext.Session.SetString(CartSessionKey, serializedCart);
             }
             #endregion
-            return RedirectToAction("Details", "Cart");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

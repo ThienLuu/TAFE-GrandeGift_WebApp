@@ -12,5 +12,7 @@ namespace Luu_DiplomaProject.ViewModels
         public IEnumerable<Cart> Carts { get; set; }
         public IEnumerable<OrderDetail> OrderDetails { get; set; }
         public IEnumerable<Hamper> Hampers { get; set; }
+        public int TotalItem { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

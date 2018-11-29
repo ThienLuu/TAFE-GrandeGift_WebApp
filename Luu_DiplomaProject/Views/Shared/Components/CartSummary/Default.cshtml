@@ -1,63 +1,64 @@
 ﻿@*@model ViewComponentViewModel*@
 
-@{
-    int totalItems = 0;
-    decimal totalPrice = 0;
-}
-
 <button type="button" id="btn-shop" class="bg-light rounded pt-1 mt-1" style="height:50px; width:140px" data-toggle="dropdown">
-    <i class="fa fa-shopping-cart p-0" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger ml-1"><!--TOTAL ITEMS-->@totalItems<!--TOTAL ITEMS--></span>
+    <i class="fa fa-shopping-cart p-0" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger ml-1"><!--TOTAL ITEMS-->@Model.TotalItem<!--TOTAL ITEMS--></span>
 </button>
 <div class="dropdown-menu dropdown-menu-shop">
     <div class="row total-header-section">
         <div class="col-lg-6 col-sm-6 col-6">
             <!--COMMENTED IS CART IMAGE-->
-            @*<i class="fa fa-shopping-cart p-0" aria-hidden="true"></i>*@ <span class="badge badge-pill badge-danger"><!--TOTAL ITEMS-->@totalItems<!--TOTAL ITEMS--></span>
+            @*<i class="fa fa-shopping-cart p-0" aria-hidden="true"></i>*@ <span class="badge badge-pill badge-danger"><!--TOTAL ITEMS-->@Model.TotalItem<!--TOTAL ITEMS--></span>
         </div>
         <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
-            <p>Total: <span class="text-info"><!--TOTAL PRICE-->$@totalPrice<!--TOTAL PRICE--></span></p>
+            <p>Total: <span class="text-info"><!--TOTAL PRICE-->$@Model.TotalPrice<!--TOTAL PRICE--></span></p>
         </div>
     </div>
     @{
         if (User.Identity.IsAuthenticated)
         {
-
-
-
-            @*<!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
-            @foreach (var item in Model.Carts)
+            <!--SHOPPING CART ITEMS - FOR LOOP HERE!!!!-->
+            if (Model.Carts == null)
             {
-                foreach (var hamper in Model.Hampers)
+                <div class="row justify-content-center">
+                    <h3>Cart is empty</h3>
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model.Carts)
                 {
-                    @if (hamper.HamperId == item.HamperId)
+                    foreach (var hamper in Model.Hampers)
                     {
+                        if (hamper.HamperId == item.HamperId)
+                        {
+                            <div class="row cart-detail">
+                                <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+                                    <a href="@Url.Action("Details", "Home", new { id = hamper.HamperId })">
 
-                        <div class="row cart-detail">
-                            <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-                                <!--IMAGE-->
-                                @if (hamper.FileName == null)
-                                {
-                                    <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
-                                }
-                                else
-                                {
-                                    <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
-                                }
+                                        <!--IMAGE-->
+                                        @if (hamper.FileName == null)
+                                        {
+                                            <img src="~/Images/Image-not-available_1.jpg" alt="N/A" height="100" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Images/@hamper.FileName" alt="@hamper.FileName" height="100" />
+                                        }
+                                    </a>
+                                </div>
+                                <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+                                    <a href="@Url.Action("Details", "Home", new { id = hamper.HamperId })">
+
+                                        <p><!--ITEM NAME-->@hamper.Name<!--ITEM NAME--></p>
+                                    </a>
+                                    <span class="price text-info"><!--ITEM PRICE-->$@item.TotalPrice<!--ITEM PRICE--></span> <span class="count"> Quantity: <!--QUANTITY-->@item.Quantity<!--QUANTITY--></span>
+                                </div>
                             </div>
-                            <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-                                <p><!--ITEM NAME-->@hamper.Name<!--ITEM NAME--></p>
-                                <span class="price text-info"><!--ITEM PRICE-->@item.TotalPrice<!--ITEM PRICE--></span> <span class="count"> Quantity: <!--QUANTITY-->@item.Quantity<!--QUANTITY--></span>
-                            </div>
-                        </div>
-                        totalItems++;
-                        totalPrice += item.TotalPrice;
+                        }
                     }
                 }
-            }*@
+            }
             <!--TEMPORARY TILL ORDER ITEMS DISPLAY IN CART-->
-            <div class="row">
-                <h3>Please click checkout to see cart</h3>
-            </div>
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
                     <a class="btn btn-primary btn-block" style="padding-top: 12px" href="@Url.Action("Details", "Cart")">Checkout</a>
@@ -66,6 +67,7 @@
         }
         else
         {
+            <br />
             <a class="btn btn-primary btn-block" role="button" href="@Url.Action("Register", "Account")">Please register to add to cart</a>
         }
     }

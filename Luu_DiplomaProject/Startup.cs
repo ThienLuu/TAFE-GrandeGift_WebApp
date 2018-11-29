@@ -10,17 +10,26 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Luu_DiplomaProject.Services;
 using Luu_DiplomaProject.Models;
-
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Luu_DiplomaProject
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; set; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddDistributedMemoryCache();
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromHours(1);
                 options.Cookie.HttpOnly = true;
@@ -48,6 +57,9 @@ namespace Luu_DiplomaProject
                 }
             ).AddEntityFrameworkStores<MyDbContext>();
             services.AddDbContext<MyDbContext>();
+
+            //Connection String
+            //services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +68,11 @@ namespace Luu_DiplomaProject
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //app.UseBrowserLink();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();
@@ -63,8 +80,8 @@ namespace Luu_DiplomaProject
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
 
-            //seed
-            SeedHelper.Seed(app.ApplicationServices).Wait();
+            //Seed - Create data upon first startup with new, empty, database 
+            //SeedHelper.Seed(app.ApplicationServices).Wait();
         }
     }
 }
