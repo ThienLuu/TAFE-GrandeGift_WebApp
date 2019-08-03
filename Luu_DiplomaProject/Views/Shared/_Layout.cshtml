@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <!--Social Media Buttons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--HEADING FONT-->
@@ -20,6 +20,7 @@
     <link href="~/CSS/QuantityButton.css" rel="stylesheet" />
     <link href="~/CSS/Password.css" rel="stylesheet" />
     <link href="~/CSS/Cursor.css" rel="stylesheet" />
+    <link href="~/CSS/Map.css" rel="stylesheet" />
     <style>
         /*PAGE BACK BACKGROUND COLOR*/
         body {
@@ -261,14 +262,29 @@
         </div>
     </div>
 
-    <script src="~/node_modules/jquery/dist/jquery.js"></script>
-    <script src="~/node_modules/popper.js/dist/umd/popper.js"></script>
-    <script src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/popper.js/dist/umd/popper.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 
     <!--OTHER SCRIPTS-->
     <script src="~/JS/bootstrap-show-password.js"></script>
     <script src="~/JS/SpecialCarousel.js"></script>
     <script src="~/JS/QuantityButton.js"></script>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            var uluru = { lat: -25.344, lng: 131.036 };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 4, center: uluru });
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({ position: uluru, map: map });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF3kTSSA_o4hsNjSon_vu301ZW6KwXunY&callback=initMap">
+    </script>
     @if (User.Identity.IsAuthenticated)
     {
 

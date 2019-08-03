@@ -14,9 +14,14 @@ namespace Luu_DiplomaProject.Services
         private DbSet<T> _dbSet;
 
         //constructor
-        public DataService()
+        public DataService(MyDbContext context) 
         {
-            _context = new MyDbContext();
+            //_context = new MyDbContext();
+
+            //AZURE
+            _context = context;
+            //AZURE
+
             _dbSet = _context.Set<T>();
         }
 

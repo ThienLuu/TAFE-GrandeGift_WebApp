@@ -11,11 +11,13 @@ namespace Luu_DiplomaProject.Services
 {
     public class MyDbContext : IdentityDbContext
     {
-        //public MyDbContext(DbContextOptions<MyDbContext> options)
-        //    : base(options)
-        //{
+        //AZURE
+        public MyDbContext(DbContextOptions<MyDbContext> options)
+            : base(options)
+        {
 
-        //}
+        }
+        //AZURE
 
         public DbSet<Customer> TblCustomer { get; set; }
         public DbSet<Hamper> TblHamper { get; set; }
@@ -26,9 +28,9 @@ namespace Luu_DiplomaProject.Services
         public DbSet<OrderDetail> TblOrderDetail { get; set; }
         public DbSet<Cart> TblCart { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder option)
-        {
-            option.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB ; Database=GrandeGift; Trusted_Connection=True");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder option)
+        //{
+        //    option.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB ; Database=GrandeGift; Trusted_Connection=True");
+        //}
     }
 }

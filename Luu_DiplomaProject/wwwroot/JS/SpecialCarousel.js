@@ -47,6 +47,10 @@ $('.carousel').carousel({
 //})
 
 $(document).ready(function () {
+    if ($(window).width() < 500) {
+        $('#grandeGift').css({ "font-size": "100px" });
+        $('#welcomeUser').css({ "font-size": "30px" });
+    }
     $(window).on('resize', function () {
         if ($(window).width() < 500) {
             $('#grandeGift').css({ "font-size": "100px" });

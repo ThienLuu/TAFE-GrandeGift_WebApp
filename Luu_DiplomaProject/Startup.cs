@@ -56,10 +56,11 @@ namespace Luu_DiplomaProject
                     config.Password.RequireNonAlphanumeric = true;
                 }
             ).AddEntityFrameworkStores<MyDbContext>();
-            services.AddDbContext<MyDbContext>();
+            //services.AddDbContext<MyDbContext>();
 
-            //Connection String
-            //services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //AZURE - Connection String
+            services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //AZURE
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,7 +82,7 @@ namespace Luu_DiplomaProject
             app.UseMvcWithDefaultRoute();
 
             //Seed - Create data upon first startup with new, empty, database 
-            //SeedHelper.Seed(app.ApplicationServices).Wait();
+            SeedHelper.Seed(app.ApplicationServices).Wait();
         }
     }
 }
